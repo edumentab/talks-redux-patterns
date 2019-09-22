@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import Highlighter from './storybookHighlighter'
 import path from 'path'
 import SourceCodePanelControls from './storybookPanel.controls'
@@ -9,23 +9,26 @@ const SourceCodePanel = props => {
   const filePath = fileState.history[fileState.idx] || ''
   const [rawSources, setRawSources] = useState(rawSourcesFromProps)
   const [showCompiled, setShowCompiled] = useState(false)
-  const handleFileChange = (path, rs) => {
-    if (rs) {
-      const actualPath = matchPathToSource(path, rs)
-      if (actualPath && actualPath !== filePath) {
-        const newHistory = fileState.history
-          .slice(0, fileState.idx + 1)
-          .concat(actualPath)
-        const newIdx = newHistory.length - 1
-        setFileState({ history: newHistory, idx: newIdx })
-      } else {
-        console.warn(
-          'WARNING! Selected source path not found among rawSources',
-          path
-        )
+  const handleFileChange = useCallback(
+    (path, rs) => {
+      if (rs) {
+        const actualPath = matchPathToSource(path, rs)
+        if (actualPath && actualPath !== filePath) {
+          const newHistory = fileState.history
+            .slice(0, fileState.idx + 1)
+            .concat(actualPath)
+          const newIdx = newHistory.length - 1
+          setFileState({ history: newHistory, idx: newIdx })
+        } else {
+          console.warn(
+            'WARNING! Selected source path not found among rawSources',
+            path
+          )
+        }
       }
-    }
-  }
+    },
+    [filePath, fileState.idx, fileState.history]
+  )
   const handleToggleCompiled = () => setShowCompiled(!showCompiled)
   useEffect(() => {
     channel.on('sourceCode/rawSources', newRawSources => {
@@ -36,7 +39,7 @@ const SourceCodePanel = props => {
       }
     })
     return () => channel.removeListener('sourceCode/rawSources')
-  }, [setRawSources])
+  }, [setRawSources, channel, handleFileChange, filePath])
   useEffect(() => {
     channel.on('sourceCode/selectedStory', p => {
       if (rawSources) {
@@ -44,14 +47,25 @@ const SourceCodePanel = props => {
       }
     })
     return () => channel.removeListener('sourceCode/selectedStory')
-  }, [rawSources])
+  }, [rawSources, channel, handleFileChange])
 
   if (!props.active) return null
   if (!rawSources) return <span>...loading...</span>
   const files = Object.keys(rawSources).sort()
   const handleLinkClick = p => {
     const rel = path.join(filePath.replace(/\/[^/]*$/, '/'), p)
-    const found = ['/index.jsx', '/index.js', '.jsx', '.js', '.css', '']
+    const found = [
+      '/index.jsx',
+      '/index.js',
+      '/index.ts',
+      '/index.tsx',
+      '.jsx',
+      '.js',
+      '.tsx',
+      '.ts',
+      '.css',
+      ''
+    ]
       .map(suff => rel + suff)
       .find(p => !!rawSources[p])
     if (found) {
