@@ -1,9 +1,11 @@
 {
   "scripts": {
-    "test:lint": "eslint src .eslintplugin --ext .js,.jsx,.mjs,.ts,.tsx",
+    "test:lint": "eslint src .eslintplugin .storybook --ext .js,.jsx,.mjs,.ts,.tsx",
     "test:ts": "res=$(tsc --noEmit --skipLibCheck | grep -v \"^node_modules\"); if [ -n \"$res\" ]; then echo $res && exit 1 ; fi",
     "test:unit": "jest",
-    "test": "npm run test:ts && npm run test:lint && npm run test:unit"
+    "test": "npm run test:ts && npm run test:lint && npm run test:unit",
+    "storybook": "start-storybook",
+    "build-storybook": "build-storybook -c .storybook -o .dist"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
@@ -13,10 +15,13 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.5",
+    "@types/storybook__react": "^4.0.2",
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
     "eslint": "^6.4.0",
     "eslint-plugin-local": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -25,5 +30,15 @@
     "jest": "^24.9.0",
     "prettier": "^1.18.2",
     "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "@blueprintjs/core": "^3.18.1",
+    "@blueprintjs/select": "^3.10.0",
+    "@storybook/react": "^5.2.1",
+    "classnames": "^2.2.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-syntax-highlighter": "^10.0.3",
+    "redux": "^4.0.4"
   }
 }
