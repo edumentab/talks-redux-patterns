@@ -6,6 +6,6 @@ export type LoadThemesInitAction = Action<
   undefined
 >
 
-export const loadThemesInit = (themeId: number): LoadThemesInitAction => ({
+export const loadThemesInit = (): LoadThemesInitAction => ({
   type: RebrickableActionNames.LOAD_THEMES_INIT
 })

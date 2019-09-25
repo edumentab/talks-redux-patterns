@@ -7,10 +7,7 @@ import {
   LoadThemesSuccessAction
 } from '../slices/rebrickable/actions'
 
-import {
-  MakeGuessAction,
-  ResetGameAction
-} from '../slices/guessingGame/actions'
+import { MakeGuessAction } from '../slices/guessingGame/actions'
 
 import {
   SetCurrentSetAction,
@@ -25,6 +22,5 @@ export type AppAction =
   | LoadThemesInitAction
   | LoadThemesSuccessAction
   | MakeGuessAction
-  | ResetGameAction
   | SetCurrentSetAction
   | SetCurrentThemeAction

@@ -19,7 +19,7 @@ addonAPI.register('edumentab/sourcecode', storybookAPI => {
       })
   }
   fetchSources()
-  setInterval(fetchSources, 1000)
+  //setInterval(fetchSources, 1000)
   addonAPI.add('edumentab/sourcecode/panel', {
     type: types.TAB,
     title: 'source',

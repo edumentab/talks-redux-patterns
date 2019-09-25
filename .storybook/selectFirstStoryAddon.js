@@ -9,7 +9,7 @@ addonAPI.register('edumentab/firstStory', storybookAPI => {
     // when you enter a story, if you are just loading storybook up, default to a specific kind/story.
     if (firstLoad) {
       firstLoad = false // make sure to set this flag to false, otherwise you will never be able to look at another story.
-      storybookAPI.selectStory('testing comp')
+      storybookAPI.selectStory('lvl01/app')
     }
   })
 })
