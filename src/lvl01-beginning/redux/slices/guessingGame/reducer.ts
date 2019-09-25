@@ -1,12 +1,11 @@
-import { MakeGuessAction, ResetGameAction } from './actions'
 import { GuessingGameState, GuessingGameActionNames } from './types'
 import { initialGuessingGameState } from './initialState'
-
-type GuessingGameAction = MakeGuessAction | ResetGameAction
+import { UIActionNames } from '../ui/types'
+import { AppAction } from '../../types'
 
 export function guessingGameReducer(
   state: GuessingGameState = initialGuessingGameState,
-  action: GuessingGameAction
+  action: AppAction
 ): GuessingGameState {
   switch (action.type) {
     case GuessingGameActionNames.MAKE_GUESS: {
@@ -16,10 +15,10 @@ export function guessingGameReducer(
         guesses: state.guesses.concat(guess)
       }
     }
-    case GuessingGameActionNames.RESET_GAME: {
-      const { maxGuesses } = action.payload
+    case UIActionNames.SET_CURRENT_SET:
+    case UIActionNames.SET_CURRENT_THEME: {
       return {
-        maxGuesses,
+        ...state,
         guesses: []
       }
     }
