@@ -1,12 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  loadThemesInit,
-  loadThemesError,
-  loadThemesSuccess,
-  AppState
-} from '../redux'
+import { useDispatch } from 'react-redux'
+import { loadThemesInit, loadThemesError, loadThemesSuccess } from '../redux'
 import { rebrickableService } from '../services'
 
 import { ThemeSelector } from './ThemeSelector'

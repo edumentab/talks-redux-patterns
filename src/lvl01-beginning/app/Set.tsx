@@ -1,12 +1,9 @@
 import React, { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
-import { AppState } from '../redux'
+import { selectCurrentSet } from '../redux'
 
 export const Set: FunctionComponent = () => {
-  const set = useSelector((state: AppState) => {
-    const { currentSetId, currentThemeId } = state.ui
-    return state.rebrickable.setsByTheme[currentThemeId!].data![currentSetId!]
-  })
+  const set = useSelector(selectCurrentSet)!
   return (
     <div>
       <h4>

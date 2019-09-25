@@ -64,7 +64,9 @@ export const ThemeSelector: FunctionComponent = () => {
             ? themes[currentThemeId].name
             : 'Select a theme'
         }
-        rightIcon="double-caret-vertical"
+        rightIcon={
+          isLoadingThemes || !themes ? 'blank' : 'double-caret-vertical'
+        }
         className="themeSelector"
       />
     </Select>

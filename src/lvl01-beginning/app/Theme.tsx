@@ -38,7 +38,7 @@ export const Theme: FunctionComponent = () => {
   }
 
   return (
-    <div>
+    <div style={{ marginTop: '10px' }}>
       <SetSelector />
       {currentSetId && <Set key={currentSetId} />}
     </div>

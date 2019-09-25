@@ -1,7 +1,12 @@
 import React, { FunctionComponent, useCallback, useState, useMemo } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentSet, AppState } from '../redux'
+import {
+  setCurrentSet,
+  AppState,
+  selectCurrentThemeSets,
+  selectCurrentTheme
+} from '../redux'
 
 import { MenuItem, Classes, Icon, Button } from '@blueprintjs/core'
 import { Select } from '@blueprintjs/select'
@@ -11,20 +16,20 @@ import { Set } from '../services/rebrickable/types'
 export const SetSelector: FunctionComponent = () => {
   const dispatch = useDispatch()
 
-  const { currentSetId, setsState, currentThemeId } = useSelector(
+  const { currentSetId, sets, currentThemeId, themeName } = useSelector(
     (state: AppState) => ({
-      currentSetId: state.ui.currentSetId,
-      currentThemeId: state.ui.currentThemeId,
-      setsState: state.rebrickable.setsByTheme[state.ui.currentThemeId!] || {}
+      ...state.ui,
+      sets: selectCurrentThemeSets(state),
+      themeName: selectCurrentTheme(state)!.name
     })
   )
 
   const setsArray = useMemo(
     () =>
-      Object.values(setsState.data || {}).sort((a, b) =>
+      Object.values((sets && sets.data) || {}).sort((a, b) =>
         a.name < b.name ? -1 : 1
       ),
-    [setsState]
+    [sets]
   )
 
   const renderItem = useCallback(
@@ -58,17 +63,19 @@ export const SetSelector: FunctionComponent = () => {
       onQueryChange={setQuery}
     >
       <Button
-        disabled={setsState.loading || !setsState.data}
+        disabled={!setsArray.length}
         text={
           !currentThemeId
             ? 'Select theme first'
-            : setsState.loading || !setsState.data
-            ? '...loading sets for theme...'
+            : !sets || sets.loading || !sets.data
+            ? `...loading sets for the ${themeName} theme...`
             : currentSetId
-            ? setsState.data[currentSetId].name
-            : 'Select a set'
+            ? sets.data[currentSetId].name
+            : setsArray.length === 0
+            ? `The ${themeName} theme has no sets!`
+            : `Select a ${themeName} set`
         }
-        rightIcon="double-caret-vertical"
+        rightIcon={setsArray.length ? 'double-caret-vertical' : 'blank'}
         className="setSelector"
       />
     </Select>
