@@ -1,5 +1,5 @@
 import { GuessingGameActionNames } from '../types/actionNames'
-import { Action } from '../../../types/util'
+import { Action } from '../../../lib/types/action'
 
 type ResetGamePayload = {
   maxGuesses: number

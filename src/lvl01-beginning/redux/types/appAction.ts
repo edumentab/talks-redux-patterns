@@ -12,6 +12,11 @@ import {
   ResetGameAction
 } from '../slices/guessingGame/actions'
 
+import {
+  SetCurrentSetAction,
+  SetCurrentThemeAction
+} from '../slices/ui/actions'
+
 export type AppAction =
   | LoadSetsErrorAction
   | LoadSetsSuccessAction
@@ -21,3 +26,5 @@ export type AppAction =
   | LoadThemesSuccessAction
   | MakeGuessAction
   | ResetGameAction
+  | SetCurrentSetAction
+  | SetCurrentThemeAction

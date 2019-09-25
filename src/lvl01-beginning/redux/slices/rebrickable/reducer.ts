@@ -1,9 +1,10 @@
 import { RebrickableState } from './types/state'
 import { AppAction } from '../../types/appAction'
 import { RebrickableActionNames } from './types/actionNames'
+import { initialRebrickableState } from './initialState'
 
-export const RebrickableReducer = (
-  state: RebrickableState,
+export const rebrickableReducer = (
+  state: RebrickableState = initialRebrickableState,
   action: AppAction
 ): RebrickableState => {
   switch (action.type) {
@@ -16,7 +17,7 @@ export const RebrickableReducer = (
           data: null
         }
       }
-    case RebrickableActionNames.LOAD_THEMES_ERROR:
+    case RebrickableActionNames.LOAD_THEMES_ERROR: {
       const { error } = action.payload
       return {
         ...state,
@@ -26,7 +27,8 @@ export const RebrickableReducer = (
           error
         }
       }
-    case RebrickableActionNames.LOAD_THEMES_SUCCESS:
+    }
+    case RebrickableActionNames.LOAD_THEMES_SUCCESS: {
       const { data } = action.payload
       return {
         ...state,
@@ -36,6 +38,7 @@ export const RebrickableReducer = (
           data
         }
       }
+    }
     case RebrickableActionNames.LOAD_SETS_INIT: {
       const { themeId } = action.payload
       return {

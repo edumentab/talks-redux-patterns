@@ -1,5 +1,6 @@
 import { RebrickableActionNames } from '../types/actionNames'
-import { Action, ById } from '../../../types/util'
+import { ById } from '../../../types/util'
+import { Action } from '../../../lib/types/action'
 import { Set } from '../../../../services/rebrickable/types'
 
 type LoadSetsSuccessPayload = {

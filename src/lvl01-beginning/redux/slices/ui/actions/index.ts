@@ -1,3 +1,2 @@
-export * from './addNotification'
-export * from './clearNotifications'
-export * from './removeNotification'
+export * from './setCurrentSet'
+export * from './setCurrentTheme'
