@@ -18,7 +18,8 @@ export const Main: FunctionComponent = () => {
   }, [dispatch])
 
   return (
-    <div>
+    <div style={{ maxWidth: '500px', margin: '0 auto' }}>
+      <h3 style={{ textAlign: 'center' }}>Super Castle Lego piece guesser</h3>
       <ThemeSelector />
       <Theme />
     </div>
