@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "downlevelIteration": true,
     "module": "es2015",
-    "moduleResolution": "classic",
+    "moduleResolution": "node",
     "newLine": "LF",
     "target": "es5",
     "outDir": ".out",
