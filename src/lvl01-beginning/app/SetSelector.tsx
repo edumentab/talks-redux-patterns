@@ -1,25 +1,12 @@
-import React, {
-  FunctionComponent,
-  useCallback,
-  useState,
-  useMemo,
-  useEffect
-} from 'react'
+import React, { FunctionComponent, useCallback, useState, useMemo } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setCurrentSet,
-  AppState,
-  loadSetsInit,
-  loadSetsSuccess,
-  loadSetsError
-} from '../redux'
+import { setCurrentSet, AppState } from '../redux'
 
 import { MenuItem, Classes, Icon, Button } from '@blueprintjs/core'
 import { Select } from '@blueprintjs/select'
 
 import { Set } from '../services/rebrickable/types'
-import { rebrickableService } from '../services'
 
 export const SetSelector: FunctionComponent = () => {
   const dispatch = useDispatch()
@@ -61,16 +48,6 @@ export const SetSelector: FunctionComponent = () => {
   )
 
   const [query, setQuery] = useState('')
-
-  useEffect(() => {
-    if (currentThemeId && !setsState.data && !setsState.loading) {
-      dispatch(loadSetsInit(currentThemeId))
-      rebrickableService
-        .getSetsForTheme(currentThemeId)
-        .then(res => dispatch(loadSetsSuccess(currentThemeId, res)))
-        .catch(err => dispatch(loadSetsError(currentThemeId, err)))
-    }
-  }, [currentThemeId, setsState, dispatch])
 
   return (
     <Select

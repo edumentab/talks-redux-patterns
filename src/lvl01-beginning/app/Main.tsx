@@ -1,11 +1,16 @@
 import React, { FunctionComponent, useEffect } from 'react'
 
-import { useDispatch } from 'react-redux'
-import { loadThemesInit, loadThemesError, loadThemesSuccess } from '../redux'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  loadThemesInit,
+  loadThemesError,
+  loadThemesSuccess,
+  AppState
+} from '../redux'
 import { rebrickableService } from '../services'
 
 import { ThemeSelector } from './ThemeSelector'
-import { SetSelector } from './SetSelector'
+import { Theme } from './Theme'
 
 export const Main: FunctionComponent = () => {
   const dispatch = useDispatch()
@@ -20,8 +25,7 @@ export const Main: FunctionComponent = () => {
   return (
     <div>
       <ThemeSelector />
-      <SetSelector />
-      <hr />
+      <Theme />
     </div>
   )
 }
