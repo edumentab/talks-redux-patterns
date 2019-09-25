@@ -1,10 +1,10 @@
 import { fetch } from '../fetch'
 import { token } from './token'
-import { Theme } from './types'
+import { Theme, ThemeRaw } from './types'
 import { ById } from '../../utilTypes'
 
 type APIthemesResult = {
-  results: Theme[]
+  results: ThemeRaw[]
 }
 
 export const getAllThemes = (): Promise<ById<Theme>> =>
@@ -13,6 +13,9 @@ export const getAllThemes = (): Promise<ById<Theme>> =>
   )
     .then((response: any) => response.json())
     .then((result: APIthemesResult) =>
-      result.results.reduce((acc, t) => ({ ...acc, [t.id]: t }), {})
+      result.results.reduce(
+        (acc, t) => ({ ...acc, [t.id]: { ...t, sets: {} } }),
+        {}
+      )
     )
     .catch(e => Promise.reject({ error: e }))

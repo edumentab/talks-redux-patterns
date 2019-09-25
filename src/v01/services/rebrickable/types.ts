@@ -1,8 +1,12 @@
-export type Theme = {
+import { ById, LoadableData } from '../../utilTypes'
+
+export type ThemeRaw = {
   id: number
   parent_id: number
   name: string
 }
+
+export type Theme = ThemeRaw & { sets: LoadableData<ById<Set>> }
 
 export type Set = {
   set_num: string

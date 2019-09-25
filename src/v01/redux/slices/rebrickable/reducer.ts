@@ -43,12 +43,18 @@ export const rebrickableReducer = (
       const { themeId } = action.payload
       return {
         ...state,
-        setsByTheme: {
-          ...state.setsByTheme,
-          [themeId]: {
-            loading: true,
-            error: null,
-            data: null
+        themes: {
+          ...state.themes,
+          data: {
+            ...state.themes.data,
+            [themeId]: {
+              ...(state.themes.data || {})[themeId],
+              sets: {
+                loading: true,
+                error: null,
+                data: null
+              }
+            }
           }
         }
       }
@@ -57,12 +63,18 @@ export const rebrickableReducer = (
       const { themeId, error } = action.payload
       return {
         ...state,
-        setsByTheme: {
-          ...state.setsByTheme,
-          [themeId]: {
-            ...state.setsByTheme[themeId],
-            loading: false,
-            error
+        themes: {
+          ...state.themes,
+          data: {
+            ...state.themes.data,
+            [themeId]: {
+              ...(state.themes.data || {})[themeId],
+              sets: {
+                ...(state.themes.data || {})[themeId].sets,
+                loading: false,
+                error
+              }
+            }
           }
         }
       }
@@ -71,12 +83,18 @@ export const rebrickableReducer = (
       const { data, themeId } = action.payload
       return {
         ...state,
-        setsByTheme: {
-          ...state.setsByTheme,
-          [themeId]: {
-            ...state.setsByTheme[themeId],
-            loading: false,
-            data
+        themes: {
+          ...state.themes,
+          data: {
+            ...state.themes.data,
+            [themeId]: {
+              ...(state.themes.data || {})[themeId],
+              sets: {
+                ...(state.themes.data || {})[themeId].sets,
+                loading: false,
+                data
+              }
+            }
           }
         }
       }

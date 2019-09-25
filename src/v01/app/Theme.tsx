@@ -5,7 +5,8 @@ import {
   AppState,
   loadSetsInit,
   loadSetsSuccess,
-  loadSetsError
+  loadSetsError,
+  selectCurrentThemeSets
 } from '../redux'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -14,24 +15,24 @@ import { rebrickableService } from '../services'
 import { Set } from './Set'
 
 export const Theme: FunctionComponent = () => {
-  const { currentThemeId, currentSetId, setsState } = useSelector(
+  const { currentThemeId, currentSetId, sets } = useSelector(
     (state: AppState) => ({
       ...state.ui,
-      setsState: state.rebrickable.setsByTheme[state.ui.currentThemeId!] || {}
+      sets: selectCurrentThemeSets(state)
     })
   )
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (currentThemeId && !setsState.data && !setsState.loading) {
-      dispatch(loadSetsInit(currentThemeId))
+    if (currentThemeId && (!sets || (!sets!.data && !sets!.loading))) {
+      dispatch(loadSetsInit(currentThemeId!))
       rebrickableService
-        .getSetsForTheme(currentThemeId)
-        .then(res => dispatch(loadSetsSuccess(currentThemeId, res)))
-        .catch(err => dispatch(loadSetsError(currentThemeId, err)))
+        .getSetsForTheme(currentThemeId!)
+        .then(res => dispatch(loadSetsSuccess(currentThemeId!, res)))
+        .catch(err => dispatch(loadSetsError(currentThemeId!, err)))
     }
-  }, [currentThemeId, setsState, dispatch])
+  }, [currentThemeId, sets, dispatch])
 
   if (!currentThemeId) {
     return null
