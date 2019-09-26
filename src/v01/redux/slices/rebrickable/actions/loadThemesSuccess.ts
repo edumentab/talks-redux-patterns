@@ -1,6 +1,6 @@
 import { RebrickableActionNames } from '../types/actionNames'
 import { Action } from '../../../lib/types/action'
-import { ById } from '../../../types/util'
+import { ById } from '../../../../utilTypes'
 import { Theme } from '../../../../services/rebrickable/types'
 
 type LoadThemesSuccessPayload = {
