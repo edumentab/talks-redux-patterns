@@ -40,6 +40,7 @@
     "@blueprintjs/select": "^3.10.0",
     "@storybook/react": "^5.2.1",
     "classnames": "^2.2.6",
+    "immer": "^4.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",

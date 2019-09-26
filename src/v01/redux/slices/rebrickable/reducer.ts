@@ -48,7 +48,7 @@ export const rebrickableReducer = (
           data: {
             ...state.themes.data,
             [themeId]: {
-              ...(state.themes.data || {})[themeId],
+              ...state.themes.data![themeId],
               sets: {
                 loading: true,
                 error: null,

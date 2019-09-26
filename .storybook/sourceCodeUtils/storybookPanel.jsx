@@ -71,7 +71,11 @@ const SourceCodePanel = props => {
     if (found) {
       handleFileChange(found, rawSources)
     } else {
-      console.warn('WARNING - could not find corresponding file in list', rel)
+      console.warn(
+        'WARNING - could not find corresponding file in list',
+        rel,
+        rawSources
+      )
     }
   }
 
