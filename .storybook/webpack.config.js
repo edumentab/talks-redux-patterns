@@ -3,25 +3,47 @@ const path = require('path')
 
 module.exports = ({ config }) => {
   // remove Storybooks default CSS rules and replace with functioning CSS modules setup
-  config.module.rules.splice(2, 1, {
-    test: /\.css$/,
-    use: [
-      {
-        loader: 'style-loader',
-        options: { sourceMap: true }
-      },
-      {
-        loader: 'css-loader',
-        options: {
-          importLoaders: 1,
-          modules: {
-            mode: 'local',
-            localIdentName: '[name]__[local]--[hash:base64:5]'
+  config.module.rules.splice(
+    2,
+    1,
+    {
+      test: /\.css$/,
+      use: [
+        {
+          loader: 'style-loader',
+          options: { sourceMap: true }
+        }
+      ]
+    },
+    {
+      test: /\.css$/,
+      exclude: /@blueprint/,
+      use: [
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            modules: {
+              mode: 'local',
+              localIdentName: '[name]__[local]--[hash:base64:5]'
+            }
           }
         }
-      }
-    ]
-  })
+      ]
+    },
+    {
+      test: /@blueprint.*\.css$/,
+      use: [
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            modules: false
+          }
+        }
+      ]
+    }
+  )
 
   // add plugin that collects the source code
   config.plugins.push(new SourcePlugin())
@@ -30,7 +52,7 @@ module.exports = ({ config }) => {
   // prevent minification
   config.optimization.minimizer = []
 
-  config.resolve.extensions.push('.ts', '.tsx')
+  config.resolve.extensions.push('.ts', '.tsx', '.css')
 
   // replace babel-loader added by storybook which doesn't handle TS
   config.module.rules.splice(
