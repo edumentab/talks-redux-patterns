@@ -27,7 +27,10 @@
   cursor: pointer;
   background-color: #f2f2fe;
 }
-[data-link-row] > span:nth-child(2) {
+[data-link-row] > :not([class]):first-child + span {
+  border-radius: 4px 0 0 4px;
+}
+[data-link-row] > [class]:first-child {
   border-radius: 4px 0 0 4px;
 }
 [data-link-row] > span:nth-last-child(2) {
