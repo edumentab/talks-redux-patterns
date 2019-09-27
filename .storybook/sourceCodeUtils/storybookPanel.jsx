@@ -3,55 +3,52 @@ import Highlighter from './storybookHighlighter'
 import path from 'path'
 import SourceCodePanelControls from './storybookPanel.controls'
 
+import fileInfo from '../../fileDiff.json'
+const fileDiff = fileInfo.files
+
 const SourceCodePanel = props => {
-  const { channel, rawSources: rawSourcesFromProps } = props
+  const { channel } = props
   const [fileState, setFileState] = useState({ history: [], idx: 0 })
-  const filePath = fileState.history[fileState.idx] || ''
-  const [rawSources, setRawSources] = useState(rawSourcesFromProps)
-  const [showCompiled, setShowCompiled] = useState(false)
+  const { filePath, version } = fileState.history[fileState.idx] || {
+    filePath: '',
+    version: 'v01'
+  }
+  const handleVersionChange = useCallback(
+    newVersion => {
+      const newHistory = fileState.history
+        .slice(0, fileState.idx + 1)
+        .concat({ filePath, version: newVersion })
+      const newIdx = newHistory.length - 1
+      setFileState({ history: newHistory, idx: newIdx })
+    },
+    [filePath, fileState.idx, fileState.history]
+  )
   const handleFileChange = useCallback(
-    (path, rs) => {
-      if (rs) {
-        const actualPath = matchPathToSource(path, rs)
-        if (actualPath && actualPath !== filePath) {
-          const newHistory = fileState.history
-            .slice(0, fileState.idx + 1)
-            .concat(actualPath)
-          const newIdx = newHistory.length - 1
-          setFileState({ history: newHistory, idx: newIdx })
-        } else {
-          console.warn(
-            'WARNING! Selected source path not found among rawSources',
-            path
-          )
-        }
+    fullPath => {
+      const path = fullPath.replace(`./src/${version}/`, '')
+      const foundFile = matchPathToSource(path)
+      if (foundFile && foundFile.name !== filePath) {
+        const newHistory = fileState.history
+          .slice(0, fileState.idx + 1)
+          .concat({ filePath: foundFile.name, version })
+        const newIdx = newHistory.length - 1
+        setFileState({ history: newHistory, idx: newIdx })
+      } else {
+        console.warn(
+          'WARNING! Selected source path not found among files',
+          path
+        )
       }
     },
     [filePath, fileState.idx, fileState.history]
   )
-  const handleToggleCompiled = () => setShowCompiled(!showCompiled)
   useEffect(() => {
-    channel.on('sourceCode/rawSources', newRawSources => {
-      channel.removeListener('sourceCode/rawSources')
-      setRawSources(newRawSources)
-      if (filePath) {
-        handleFileChange(filePath, newRawSources)
-      }
-    })
-    return () => channel.removeListener('sourceCode/rawSources')
-  }, [setRawSources, channel, handleFileChange, filePath])
-  useEffect(() => {
-    channel.on('sourceCode/selectedStory', p => {
-      if (rawSources) {
-        handleFileChange(p, rawSources)
-      }
-    })
+    channel.on('sourceCode/selectedStory', handleFileChange)
     return () => channel.removeListener('sourceCode/selectedStory')
-  }, [rawSources, channel, handleFileChange])
+  }, [channel, handleFileChange])
 
   if (!props.active) return null
-  if (!rawSources) return <span>...loading...</span>
-  const files = Object.keys(rawSources).sort()
+
   const handleLinkClick = p => {
     const rel = path.join(filePath.replace(/\/[^/]*$/, '/'), p)
     const found = [
@@ -67,15 +64,11 @@ const SourceCodePanel = props => {
       ''
     ]
       .map(suff => rel + suff)
-      .find(p => !!rawSources[p])
+      .find(p => !!fileDiff[p])
     if (found) {
-      handleFileChange(found, rawSources)
+      handleFileChange(found)
     } else {
-      console.warn(
-        'WARNING - could not find corresponding file in list',
-        rel,
-        rawSources
-      )
+      console.warn('WARNING - could not find corresponding file in list', rel)
     }
   }
 
@@ -85,17 +78,17 @@ const SourceCodePanel = props => {
         filePath={filePath}
         fileState={fileState}
         setFileState={setFileState}
-        files={files}
-        handleToggleCompiled={handleToggleCompiled}
-        handleFileChange={i => handleFileChange(i, rawSources)}
-        showCompiled={showCompiled}
+        files={Object.values(fileDiff)}
+        handleVersionChange={handleVersionChange}
+        handleFileChange={handleFileChange}
+        version={version}
+        versions={fileInfo.versions}
       />
       <Highlighter
-        language={
-          !showCompiled && filePath.match(/.css$/) ? 'css' : 'javascript'
-        }
+        language={filePath.match(/.css$/) ? 'css' : 'javascript'}
         code={
-          (rawSources[filePath] || {})[showCompiled ? 'compiled' : 'raw'] || ''
+          (fileDiff[filePath] && fileDiff[filePath].versions[version].file) ||
+          ''
         }
         onLinkClick={handleLinkClick}
       />
@@ -105,7 +98,9 @@ const SourceCodePanel = props => {
 
 export default SourceCodePanel
 
-function matchPathToSource(path, rawSources) {
-  const files = Object.keys(rawSources)
-  return files.find(file => file.includes(path) || path.includes(file))
+function matchPathToSource(path) {
+  const files = Object.values(fileDiff)
+  return files.find(
+    file => file.name.includes(path) || path.includes(file.name)
+  )
 }

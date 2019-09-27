@@ -20,7 +20,9 @@ const SourceCodePanelControls = props => {
     files,
     handleToggleCompiled,
     handleFileChange,
-    showCompiled
+    version,
+    versions,
+    handleVersionChange
   } = props
 
   const [query, setQuery] = useState('')
@@ -36,9 +38,30 @@ const SourceCodePanelControls = props => {
       idx: Math.min(fileState.idx + 1, fileState.history.length - 1)
     })
 
-  const renderItem = useCallback(
+  const renderFileItem = useCallback(
     (option, { modifiers, handleClick }) => {
-      const currentlySelected = filePath === option
+      const curV = option.versions[version]
+      const currentlySelected = filePath === option.name
+      return (
+        <MenuItem
+          className={`${Classes.TEXT_SMALL} Editor_Menu_Item`}
+          key={option.name}
+          icon={
+            <Icon icon={currentlySelected ? 'tick' : 'blank'} iconSize={10} />
+          }
+          active={modifiers.active}
+          text={option.name}
+          shouldDismissPopover={false}
+          onClick={handleClick}
+        />
+      )
+    },
+    [filePath]
+  )
+
+  const renderVersionItem = useCallback(
+    (option, { modifiers, handleClick }) => {
+      const currentlySelected = version === option
       return (
         <MenuItem
           className={`${Classes.TEXT_SMALL} Editor_Menu_Item`}
@@ -53,7 +76,7 @@ const SourceCodePanelControls = props => {
         />
       )
     },
-    [filePath]
+    [version]
   )
 
   return (
@@ -69,11 +92,12 @@ const SourceCodePanelControls = props => {
         onClick={handleForward}
       />
       <Select
+        key="files"
         items={files.filter(option =>
-          option.toLowerCase().includes(query.toLowerCase())
+          option.name.toLowerCase().includes(query.toLowerCase())
         )}
-        itemRenderer={renderItem}
-        onItemSelect={handleFileChange}
+        itemRenderer={renderFileItem}
+        onItemSelect={option => handleFileChange(option.name)}
         popoverProps={{ minimal: true }}
         onQueryChange={setQuery}
       >
@@ -82,11 +106,19 @@ const SourceCodePanelControls = props => {
           rightIcon="double-caret-vertical"
         />
       </Select>
-      <Button
-        active={showCompiled}
-        text="Compiled"
-        onClick={handleToggleCompiled}
-      />
+      <Select
+        key="versions"
+        items={versions}
+        itemRenderer={renderVersionItem}
+        onItemSelect={handleVersionChange}
+        popoverProps={{ minimal: true }}
+        filterable={false}
+      >
+        <Button
+          text={version || 'Select a version'}
+          rightIcon="double-caret-vertical"
+        />
+      </Select>
     </ControlGroup>
   )
 }

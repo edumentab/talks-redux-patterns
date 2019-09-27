@@ -15,3 +15,24 @@
   width: 100%;
   justify-content: left;
 }
+
+.bp3-control-group > :last-child div {
+  border-radius: inherit;
+}
+
+[data-link-row] {
+  border-radius: 4px;
+}
+[data-link-row] > span {
+  cursor: pointer;
+  background-color: #f2f2fe;
+}
+[data-link-row] > span:nth-child(2) {
+  border-radius: 4px 0 0 4px;
+}
+[data-link-row] > span:nth-last-child(2) {
+  border-radius: 0 4px 4px 0;
+}
+[data-link-row]:hover {
+  box-shadow: 0 0 3px blue;
+}
