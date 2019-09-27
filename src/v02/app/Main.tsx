@@ -7,7 +7,11 @@ import { rebrickableService } from '../services'
 import { ThemeSelector } from './ThemeSelector'
 import { Theme } from './Theme'
 
-export const Main: FunctionComponent = () => {
+type MainProps = {
+  version: string
+}
+
+export const Main: FunctionComponent<MainProps> = ({ version }) => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(loadThemesInit())
@@ -19,7 +23,17 @@ export const Main: FunctionComponent = () => {
 
   return (
     <div style={{ maxWidth: '500px', margin: '0 auto' }}>
-      <h3 style={{ textAlign: 'center' }}>Super Castle Lego piece guesser</h3>
+      <h3
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}
+      >
+        <span>Super Castle Lego piece guesser</span>
+        <small style={{ fontWeight: 'normal', marginTop: '5px' }}>
+          ({version})
+        </small>
+      </h3>
       <ThemeSelector />
       <Theme />
     </div>

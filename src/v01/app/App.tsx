@@ -10,8 +10,10 @@ import { Main } from './Main'
 import '@blueprintjs/core/lib/css/blueprint.css'
 import './App.css'
 
-export const App: FunctionComponent = () => (
+type AppProps = { version: string }
+
+export const App: FunctionComponent<AppProps> = ({ version }) => (
   <Provider store={store}>
-    <Main />
+    <Main version={version} />
   </Provider>
 )
