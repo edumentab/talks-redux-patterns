@@ -27,11 +27,11 @@ versions.forEach(version => {
 
 for (const file in res) {
   const f = res[file]
+  f.allStates = []
   versions.forEach((v, n) => {
-    const fileV =
-      res[file].versions[v] || (res[file].versions[v] = { file: '' })
+    const fileV = f.versions[v] || (f.versions[v] = { file: '' })
     const prevV = versions[n - 1]
-    const prevFileV = (prevV && res[file].versions[prevV]) || {}
+    const prevFileV = (prevV && f.versions[prevV]) || {}
     fileV.state = !fileV.file
       ? prevFileV.file
         ? 'deleted'
@@ -41,7 +41,14 @@ for (const file in res) {
       : prevFileV.file === fileV.file
       ? 'unchanged'
       : 'edited'
+    f.allStates.push(fileV.state)
   })
+  if (f.allStates.slice(1).filter(s => s !== 'unchanged').length === 0) {
+    f.allStates = versions.map(() => 'eternal')
+    versions.forEach(v => {
+      f.versions[v].state = 'eternal'
+    })
+  }
 }
 
 fs.writeFileSync(
