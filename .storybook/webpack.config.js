@@ -1,4 +1,3 @@
-const SourcePlugin = require('./sourceCodeUtils/webpackPlugin')
 const path = require('path')
 
 module.exports = ({ config }) => {
@@ -45,13 +44,6 @@ module.exports = ({ config }) => {
     }
   )
 
-  // add plugin that collects the source code
-  config.plugins.push(new SourcePlugin())
-  // prevent filename mangling (which b0rks source file switching)
-  config.mode = 'development'
-  // prevent minification
-  config.optimization.minimizer = []
-
   config.resolve.extensions.push('.ts', '.tsx', '.css')
 
   // replace babel-loader added by storybook which doesn't handle TS
@@ -59,32 +51,10 @@ module.exports = ({ config }) => {
     0,
     1,
 
-    // add loader that registers compiled source code in a cache
-    {
-      test: /\.m?[tj]sx?$|\.css$/,
-      use: [
-        {
-          loader: path.resolve(__dirname, 'sourceCodeUtils/webpackLoader.js'),
-          options: { root: path.resolve(__dirname, '../src'), compiled: true }
-        }
-      ]
-    },
-
     // add our own babel-loader
     {
       test: /\.([tj]s|[tj]sx)$/,
       loader: require.resolve('babel-loader')
-    },
-
-    // add loader that registers raw source code in a cache
-    {
-      test: /\.m?[tj]sx?$|\.css$/,
-      use: [
-        {
-          loader: path.resolve(__dirname, 'sourceCodeUtils/webpackLoader.js'),
-          options: { root: path.resolve(__dirname, '../src') }
-        }
-      ]
     }
   )
 

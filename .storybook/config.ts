@@ -6,11 +6,7 @@ import sourceCodeDecorator from './sourceCodeUtils/storybookDecorator'
 function loadStories() {
   // we read test files too to show their source code, but we'll prevent
   // them from being executed in our webpack loader
-  const req = require.context(
-    '../src',
-    true,
-    /\.stories\.[tj]sx$|\.test\.[tj]sx?/
-  )
+  const req = require.context('../src', true, /\.stories\.[tj]sx$/)
   //addDecorator(withKnobs)
   //addDecorator(jsxDecorator)
   addDecorator(sourceCodeDecorator)
