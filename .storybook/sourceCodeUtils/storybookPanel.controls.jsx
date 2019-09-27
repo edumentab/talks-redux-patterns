@@ -8,9 +8,26 @@ import {
   ControlGroup
 } from '@blueprintjs/core'
 import { Select } from '@blueprintjs/select'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faSkullCrossbones,
+  faGhost,
+  faStar,
+  faEllipsisH,
+  faPen,
+  faInfinity
+} from '@fortawesome/free-solid-svg-icons'
 import '@blueprintjs/core/lib/css/blueprint.css'
 import './storybookPanel.css'
+
+const stateToIcon = {
+  deleted: faSkullCrossbones,
+  nonexistent: faGhost,
+  created: faStar,
+  unchanged: faEllipsisH,
+  edited: faPen,
+  eternal: faInfinity
+}
 
 const SourceCodePanelControls = props => {
   const {
@@ -24,6 +41,8 @@ const SourceCodePanelControls = props => {
     versions,
     handleVersionChange
   } = props
+
+  const file = files.filter(f => f.name === filePath)[0]
 
   const [query, setQuery] = useState('')
 
@@ -53,7 +72,7 @@ const SourceCodePanelControls = props => {
           text={option.name}
           shouldDismissPopover={false}
           onClick={handleClick}
-          labelElement={<span>({curV.state})</span>}
+          labelElement={<FontAwesomeIcon icon={stateToIcon[curV.state]} />}
         />
       )
     },
@@ -74,10 +93,17 @@ const SourceCodePanelControls = props => {
           text={option}
           shouldDismissPopover={false}
           onClick={handleClick}
+          labelElement={
+            file && (
+              <FontAwesomeIcon
+                icon={stateToIcon[file.versions[option].state]}
+              />
+            )
+          }
         />
       )
     },
-    [version]
+    [version, filePath, file]
   )
 
   return (
@@ -103,9 +129,8 @@ const SourceCodePanelControls = props => {
         onQueryChange={setQuery}
         className="fileSelector"
       >
-        <Button>
-          <span>{filePath || 'Select a file FFS'}</span>
-          <Icon icon="double-caret-vertical" />
+        <Button rightIcon="double-caret-vertical">
+          <span>{filePath || 'Select a file'}</span>
         </Button>
       </Select>
       <Select
