@@ -16,6 +16,10 @@
   justify-content: left;
 }
 
+.sourcePanel .fileSelector .bp3-button-text {
+  width: 100%;
+}
+
 .bp3-control-group > :last-child div {
   border-radius: inherit;
 }

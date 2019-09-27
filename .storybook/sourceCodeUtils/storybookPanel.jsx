@@ -25,12 +25,13 @@ const SourceCodePanel = props => {
   )
   const handleFileChange = useCallback(
     fullPath => {
-      const path = fullPath.replace(`./src/${version}/`, '')
+      const newVersion = (fullPath.match(/\.\/src\/(v[0-9]*)\//) || [])[1]
+      const path = fullPath.replace(/\.\/src\/v[0-9]*\//, '')
       const foundFile = matchPathToSource(path)
       if (foundFile && foundFile.name !== filePath) {
         const newHistory = fileState.history
           .slice(0, fileState.idx + 1)
-          .concat({ filePath: foundFile.name, version })
+          .concat({ filePath: foundFile.name, version: newVersion || version })
         const newIdx = newHistory.length - 1
         setFileState({ history: newHistory, idx: newIdx })
       } else {

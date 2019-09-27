@@ -53,10 +53,11 @@ const SourceCodePanelControls = props => {
           text={option.name}
           shouldDismissPopover={false}
           onClick={handleClick}
+          labelElement={<span>({curV.state})</span>}
         />
       )
     },
-    [filePath]
+    [filePath, version]
   )
 
   const renderVersionItem = useCallback(
@@ -100,11 +101,12 @@ const SourceCodePanelControls = props => {
         onItemSelect={option => handleFileChange(option.name)}
         popoverProps={{ minimal: true }}
         onQueryChange={setQuery}
+        className="fileSelector"
       >
-        <Button
-          text={filePath || 'Select a file'}
-          rightIcon="double-caret-vertical"
-        />
+        <Button>
+          <span>{filePath || 'Select a file FFS'}</span>
+          <Icon icon="double-caret-vertical" />
+        </Button>
       </Select>
       <Select
         key="versions"
