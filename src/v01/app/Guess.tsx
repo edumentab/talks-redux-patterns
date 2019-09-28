@@ -8,6 +8,13 @@ import React, {
 } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectGuesses, makeGuess } from '../redux'
+import { Classes, Tag, Intent } from '@blueprintjs/core'
+
+const responseToIntent = {
+  high: 'warning',
+  low: 'danger',
+  correct: 'success'
+}
 
 export const Guess: FunctionComponent = () => {
   const guesses = useSelector(selectGuesses)
@@ -40,21 +47,30 @@ export const Guess: FunctionComponent = () => {
     <Fragment>
       <form onSubmit={handleGuess}>
         <input
+          className={Classes.INPUT}
           style={{ width: '100%' }}
           ref={inputRef}
-          placeholder="Guess the # of pieces!"
+          placeholder="Guess # of pieces!"
         />
       </form>
-      <ul>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}
+      >
         {guesses
           .slice()
           .reverse()
           .map((guess, n) => (
-            <li key={n}>
-              {guess.guess} - {guess.response}
-            </li>
+            <span key={n} style={{ marginTop: '10px' }}>
+              <Tag minimal intent={responseToIntent[guess.response] as Intent}>
+                {guess.guess} - {guess.response}
+              </Tag>
+            </span>
           ))}
-      </ul>
+      </div>
     </Fragment>
   )
 }
