@@ -1,3 +1,7 @@
 .presentationPanel {
   padding: 5px;
 }
+
+.presentationPanel .pageContent {
+  margin-top: 1em;
+}
