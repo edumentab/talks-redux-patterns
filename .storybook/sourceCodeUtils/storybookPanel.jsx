@@ -87,10 +87,7 @@ const SourceCodePanel = props => {
       />
       <Highlighter
         language={filePath.match(/.css$/) ? 'css' : 'javascript'}
-        code={
-          (fileDiff[filePath] && fileDiff[filePath].versions[version].file) ||
-          ''
-        }
+        fileInfo={fileDiff[filePath] && fileDiff[filePath].versions[version]}
         onLinkClick={handleLinkClick}
       />
     </div>

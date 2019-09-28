@@ -43,3 +43,32 @@
 [data-link-row]:hover {
   box-shadow: 0 0 3px blue;
 }
+
+.diff .added {
+  background-color: rgb(143, 210, 143);
+  color: black;
+}
+
+.diff .removed {
+  background-color: rgb(128, 68, 68);
+  color: white;
+}
+
+.diff {
+  color: #777;
+  background: transparent;
+  text-shadow: white 0px 1px;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  line-height: 1.5;
+  tab-size: 4;
+  hyphens: none;
+  padding: 1em;
+  margin: 0.5em 0px;
+  overflow: auto;
+  font-size: 0.8em;
+}

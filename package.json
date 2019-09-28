@@ -43,6 +43,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@storybook/react": "^5.2.1",
     "classnames": "^2.2.6",
+    "diff": "^4.0.1",
     "immer": "^4.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

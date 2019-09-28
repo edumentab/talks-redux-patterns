@@ -3,9 +3,15 @@ import React, { useCallback } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import createElement from 'react-syntax-highlighter/dist/create-element'
+import classNames from 'classnames'
 
 const HighlighterInner = props => {
-  const { code, language = 'javascript', onLinkClick } = props
+  const {
+    fileInfo = { file: '' },
+    language = 'typescript',
+    onLinkClick
+  } = props
+  const { file: code, diff } = fileInfo
   const handleLinkClick = useCallback(
     e => {
       const link =
@@ -52,6 +58,24 @@ const HighlighterInner = props => {
           {code}
         </SyntaxHighlighter>
       </div>
+      {diff && (
+        <React.Fragment>
+          <hr />
+          <pre className="diff">
+            {diff.map((d, n) => (
+              <span
+                className={classNames({
+                  added: d.added,
+                  removed: d.removed
+                })}
+                key={n}
+              >
+                {d.value}
+              </span>
+            ))}
+          </pre>
+        </React.Fragment>
+      )}
     </React.Fragment>
   )
 }
@@ -63,7 +87,7 @@ class Highlighter extends React.Component {
   }
   render() {
     if (this.state.error) {
-      return <pre>{this.props.code}</pre>
+      return <pre>{this.props.fileInfo.code}</pre>
     }
     return <HighlighterInner {...this.props} />
   }

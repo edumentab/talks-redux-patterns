@@ -1,5 +1,7 @@
 const fs = require('fs')
 const path = require('path')
+const { execSync, exec } = require('child_process')
+const diff = require('diff')
 
 const root = path.join(__dirname, 'src')
 const res = {}
@@ -42,6 +44,9 @@ for (const file in res) {
       ? 'unchanged'
       : 'edited'
     f.allStates.push(fileV.state)
+    if (fileV.state === 'edited') {
+      fileV.diff = diff.diffChars(prevFileV.file, fileV.file)
+    }
   })
   if (f.allStates.slice(1).filter(s => s !== 'unchanged').length === 0) {
     f.allStates = versions.map(() => 'eternal')
