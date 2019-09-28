@@ -1,5 +1,5 @@
 import addonAPI, { types } from '@storybook/addons'
-import Panel from './storybookPanel'
+import Panel from './sourcePanel'
 import React from 'react'
 
 let currentId

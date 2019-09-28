@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import Highlighter from './storybookHighlighter'
+import Highlighter from './sourceHighlighter'
 import path from 'path'
-import SourceCodePanelControls from './storybookPanel.controls'
+import SourceCodePanelControls from './sourcePanel.controls'
 
 import fileInfo from '../../fileDiff.json'
 const fileDiff = fileInfo.files
