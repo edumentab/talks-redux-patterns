@@ -3,6 +3,8 @@ import Highlighter from './sourceHighlighter'
 import path from 'path'
 import SourceCodePanelControls from './sourcePanel.controls'
 
+import './sourcePanel.css'
+
 import fileInfo from '../../fileDiff.json'
 const fileDiff = fileInfo.files
 
@@ -74,7 +76,7 @@ const SourceCodePanel = props => {
   }
 
   return (
-    <div style={{ padding: '5px' }} className="sourcePanel">
+    <div className="sourcePanel">
       <SourceCodePanelControls
         filePath={filePath}
         fileState={fileState}

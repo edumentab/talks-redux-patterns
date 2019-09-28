@@ -18,7 +18,6 @@ import {
   faInfinity
 } from '@fortawesome/free-solid-svg-icons'
 import '@blueprintjs/core/lib/css/blueprint.css'
-import './sourcePanel.css'
 
 const stateToIcon = {
   deleted: faSkullCrossbones,

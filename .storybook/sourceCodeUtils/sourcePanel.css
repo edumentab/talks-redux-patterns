@@ -3,6 +3,11 @@
   overflow: auto;
 }
 
+.sourcePanel {
+  padding: 5px;
+  background-color: white;
+}
+
 .sourcePanel .bp3-control-group :nth-child(3) {
   flex-grow: 1;
 }
