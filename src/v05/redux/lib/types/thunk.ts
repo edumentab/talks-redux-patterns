@@ -6,6 +6,8 @@ export type AppThunkCreator<O = undefined> = ThunkCreator<
   O
 >
 
+export type AppThunk = Thunk<AppAction, AppState>
+
 export type ThunkCreator<A, S, O = undefined> = O extends undefined
   ? ThunkCreatorWithoutOptions<A, S>
   : ThunkCreatorWithOptions<A, S, O>

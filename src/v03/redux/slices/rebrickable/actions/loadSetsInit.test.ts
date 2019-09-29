@@ -4,7 +4,7 @@ import { fixtureTheme } from '../../../../services/rebrickable'
 
 describe('the loadSetsInit action', () => {
   it('sets loading flag and clears earlier error', () => {
-    const { getState, dispatch } = makeStore({})
+    const { getState, dispatch } = makeStore()
     dispatch(loadThemesSuccess({ 666: fixtureTheme }))
     dispatch(loadSetsError(666, 'error we want to be cleared'))
     dispatch(loadSetsInit(666))
