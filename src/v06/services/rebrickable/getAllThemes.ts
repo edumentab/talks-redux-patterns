@@ -1,7 +1,7 @@
 import { fetch } from '../fetch'
 import { token } from './token'
 import { Theme, ThemeRaw } from './types'
-import { ById } from '../../utilTypes'
+import { ById } from '../../utils'
 
 type APIthemesResult = {
   results: ThemeRaw[]

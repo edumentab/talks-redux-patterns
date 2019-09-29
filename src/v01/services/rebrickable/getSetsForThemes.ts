@@ -1,7 +1,7 @@
 import { fetch } from '../fetch'
 import { token } from './token'
 import { Set } from './types'
-import { ById } from '../../utilTypes'
+import { ById } from '../../utils'
 
 type APISetsResult = {
   results: Set[]

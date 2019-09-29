@@ -10,7 +10,7 @@ jest.mock('../../../../services', () => ({
 
 import { rebrickableService } from '../../../../services'
 import { loadThemesInit, loadThemesSuccess, loadThemesError } from '../actions'
-import { fakePromise, nextTick } from '../../../lib'
+import { fakePromise, nextTick } from '../../../../utils'
 
 describe('the loadThemesThunk creator', () => {
   it('handles happy path', async () => {

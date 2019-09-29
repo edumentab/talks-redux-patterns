@@ -1,6 +1,6 @@
 import { RebrickableActionNames } from '../types/actionNames'
 import { Action } from '../../../lib/types/action'
-import { ById } from '../../../../utilTypes'
+import { ById } from '../../../../utils'
 import { Theme } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
 

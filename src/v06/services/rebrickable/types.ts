@@ -1,4 +1,4 @@
-import { ById, LoadableData } from '../../utilTypes'
+import { ById, LoadableData } from '../../utils'
 
 export type ThemeRaw = {
   id: number

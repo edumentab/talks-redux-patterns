@@ -9,7 +9,7 @@ import {
   loadSetsError
 } from './actions'
 import { rebrickableReducer } from './reducer'
-import { ById } from '../../../utilTypes'
+import { ById } from '../../../utils'
 import { Theme, Set } from '../../../services/rebrickable/types'
 import { fixtureSet, fixtureTheme } from '../../../services/rebrickable'
 
