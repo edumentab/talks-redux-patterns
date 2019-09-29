@@ -1,15 +1,16 @@
 import React, { FunctionComponent, useCallback, useState, useMemo } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { setCurrentTheme, AppState } from '../redux'
 
 import { MenuItem, Classes, Icon, Button } from '@blueprintjs/core'
 import { Select } from '@blueprintjs/select'
 
 import { Theme } from '../services/rebrickable/types'
+import { useDispatchWithSender } from './useDispatchWithSender'
 
 export const ThemeSelector: FunctionComponent = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatchWithSender('ThemeSelector')
 
   const { themes, isLoadingThemes, currentThemeId } = useSelector(
     (state: AppState) => ({

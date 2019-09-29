@@ -37,7 +37,7 @@ describe('the loadSetsInit action consequence', () => {
     resolve(fakeData)
 
     await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toEqual(
+      expect(actionLog[actionLog.length - 1]).toMatchObject(
         loadSetsSuccess({ data: fakeData, themeId })
       )
     })
@@ -56,7 +56,7 @@ describe('the loadSetsInit action consequence', () => {
     reject(error)
 
     await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toEqual(
+      expect(actionLog[actionLog.length - 1]).toMatchObject(
         loadSetsError({ error, themeId })
       )
     })

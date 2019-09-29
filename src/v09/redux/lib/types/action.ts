@@ -1,6 +1,7 @@
 export type Action<T extends string, P> = {
   type: T
   error?: boolean
+  sender?: string
 } & (P extends undefined
   ? {}
   : {

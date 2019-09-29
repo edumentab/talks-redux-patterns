@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useState, useMemo } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   setCurrentSet,
   AppState,
@@ -12,9 +12,10 @@ import { MenuItem, Classes, Icon, Button } from '@blueprintjs/core'
 import { Select } from '@blueprintjs/select'
 
 import { Set } from '../services/rebrickable/types'
+import { useDispatchWithSender } from './useDispatchWithSender'
 
 export const SetSelector: FunctionComponent = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatchWithSender('SetSelector')
 
   const { currentSetId, sets, currentThemeId, themeName } = useSelector(
     (state: AppState) => ({

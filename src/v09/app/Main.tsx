@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatchWithSender } from './useDispatchWithSender'
 import { loadThemesInit } from '../redux'
 
 import { ThemeSelector } from './ThemeSelector'
@@ -11,7 +11,7 @@ type MainProps = {
 }
 
 export const Main: FunctionComponent<MainProps> = ({ version }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatchWithSender('Main')
   useEffect(() => {
     dispatch(loadThemesInit())
   }, [dispatch])

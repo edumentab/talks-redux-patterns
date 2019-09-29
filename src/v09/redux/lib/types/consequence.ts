@@ -5,7 +5,9 @@ export type ConsequenceAPI<A, S, D> = {
   action: A
 }
 
-export type Consequence<A, S, D> = (api: ConsequenceAPI<A, S, D>) => void
+export type Consequence<A, S, D> = ((api: ConsequenceAPI<A, S, D>) => void) & {
+  name: string
+}
 
 export type ConsequenceGetter<A, S, D> = (
   api: ConsequenceAPI<A, S, D>

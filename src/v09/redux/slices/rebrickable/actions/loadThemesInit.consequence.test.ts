@@ -31,7 +31,7 @@ describe('the loadThemesInit consequence', () => {
     const fakeData = { 5: fixtureTheme }
     resolve(fakeData)
     await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toEqual(
+      expect(actionLog[actionLog.length - 1]).toMatchObject(
         loadThemesSuccess({ data: fakeData })
       )
     })
@@ -48,7 +48,7 @@ describe('the loadThemesInit consequence', () => {
     reject(error)
 
     await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toEqual(
+      expect(actionLog[actionLog.length - 1]).toMatchObject(
         loadThemesError({ error })
       )
     })

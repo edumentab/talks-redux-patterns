@@ -2,9 +2,10 @@ import React, { FunctionComponent, useEffect } from 'react'
 
 import { SetSelector } from './SetSelector'
 import { AppState, selectCurrentThemeSets, loadSetsInit } from '../redux'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { Set } from './Set'
+import { useDispatchWithSender } from './useDispatchWithSender'
 
 export const Theme: FunctionComponent = () => {
   const { currentThemeId, currentSetId, sets } = useSelector(
@@ -14,7 +15,7 @@ export const Theme: FunctionComponent = () => {
     })
   )
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatchWithSender('Theme')
 
   useEffect(() => {
     if (currentThemeId && (!sets || (!sets!.data && !sets!.loading))) {

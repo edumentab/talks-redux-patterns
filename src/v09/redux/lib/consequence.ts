@@ -14,7 +14,14 @@ export const createConsequenceMiddleware = <A, S, D>(
       deps
     }
     for (const cons of consGetter(api)) {
-      cons(api)
+      cons({
+        ...api,
+        dispatch: (a: A) => {
+          // @ts-ignore
+          a.sender = `CONSEQUENCE(${cons.name})`
+          return api.dispatch(a)
+        }
+      })
     }
   }
 }

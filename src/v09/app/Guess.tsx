@@ -6,9 +6,10 @@ import React, {
   useCallback,
   useEffect
 } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { selectGuesses, makeGuess } from '../redux'
 import { Classes, Tag, Intent } from '@blueprintjs/core'
+import { useDispatchWithSender } from './useDispatchWithSender'
 
 const responseToIntent = {
   high: 'warning',
@@ -19,7 +20,7 @@ const responseToIntent = {
 export const Guess: FunctionComponent = () => {
   const guesses = useSelector(selectGuesses)
   const inputRef = useRef<HTMLInputElement>(null)
-  const dispatch = useDispatch()
+  const dispatch = useDispatchWithSender('Guess')
 
   const handleGuess = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
