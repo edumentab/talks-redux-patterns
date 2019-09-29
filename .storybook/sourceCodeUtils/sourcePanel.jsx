@@ -2,11 +2,22 @@ import React, { useEffect, useState, useCallback } from 'react'
 import Highlighter from './sourceHighlighter'
 import path from 'path'
 import SourceCodePanelControls from './sourcePanel.controls'
-
+import { stateToIcon } from './stateToIcon'
 import './sourcePanel.css'
 
 import fileInfo from '../../fileDiff.json'
+import { Tag } from '@blueprintjs/core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const fileDiff = fileInfo.files
+
+const stateExplanation = {
+  deleted: 'Deleted in this version',
+  nonexistent: `Doesn't exist in this version`,
+  created: `Created in this version`,
+  unchanged: `Unchanged from previous version`,
+  edited: `Edited in this version (see diff below source)`,
+  eternal: 'No changes in any version'
+}
 
 const SourceCodePanel = props => {
   const { channel } = props
@@ -75,6 +86,10 @@ const SourceCodePanel = props => {
     }
   }
 
+  const { state } =
+    (filePath && fileInfo.files[filePath].versions[version]) || {}
+  console.log('POO', fileInfo, version)
+
   return (
     <div className="sourcePanel">
       <SourceCodePanelControls
@@ -87,6 +102,14 @@ const SourceCodePanel = props => {
         version={version}
         versions={fileInfo.versions}
       />
+      {state && (
+        <div key={filePath + version} className="fileExplanation">
+          <Tag multiline>
+            <FontAwesomeIcon icon={stateToIcon[state]} />
+            {stateExplanation[state]}
+          </Tag>
+        </div>
+      )}
       <Highlighter
         language={filePath.match(/.css$/) ? 'css' : 'javascript'}
         fileInfo={fileDiff[filePath] && fileDiff[filePath].versions[version]}

@@ -25,6 +25,15 @@
   width: 100%;
 }
 
+.sourcePanel .fileExplanation {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.sourcePanel .fileExplanation [data-icon] {
+  margin-right: 10px;
+}
+
 .bp3-control-group > :last-child div {
   border-radius: inherit;
 }

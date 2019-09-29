@@ -9,24 +9,9 @@ import {
 } from '@blueprintjs/core'
 import { Select } from '@blueprintjs/select'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faSkullCrossbones,
-  faGhost,
-  faStar,
-  faEllipsisH,
-  faPen,
-  faInfinity
-} from '@fortawesome/free-solid-svg-icons'
-import '@blueprintjs/core/lib/css/blueprint.css'
 
-const stateToIcon = {
-  deleted: faSkullCrossbones,
-  nonexistent: faGhost,
-  created: faStar,
-  unchanged: faEllipsisH,
-  edited: faPen,
-  eternal: faInfinity
-}
+import '@blueprintjs/core/lib/css/blueprint.css'
+import { stateToIcon } from './stateToIcon'
 
 const SourceCodePanelControls = props => {
   const {
