@@ -1,4 +1,4 @@
-import { loadSetsError, loadSetsInit, loadThemesSuccess } from '../actions'
+import { loadSetsError, loadSetsInit, loadThemesSuccess } from '.'
 import { makeStore } from '../../../makeStore'
 import { fixtureTheme } from '../../../../services/rebrickable'
 

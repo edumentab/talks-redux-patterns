@@ -1,5 +1,5 @@
 import { makeStore } from '../../../makeStore'
-import { makeGuess } from '../actions'
+import { makeGuess } from '.'
 
 describe('the makeGuess action', () => {
   it('adds guesses correctly', () => {

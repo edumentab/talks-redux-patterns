@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react'
 
 import { useDispatch } from 'react-redux'
-import { loadThemesInit, loadThemesError, loadThemesSuccess } from '../redux'
-import { rebrickableService } from '../services'
+import { loadThemesThunk } from '../redux'
 
 import { ThemeSelector } from './ThemeSelector'
 import { Theme } from './Theme'
@@ -14,11 +13,7 @@ type MainProps = {
 export const Main: FunctionComponent<MainProps> = ({ version }) => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(loadThemesInit())
-    rebrickableService
-      .getThemesByParent(186)
-      .then(data => dispatch(loadThemesSuccess({ data })))
-      .catch(error => dispatch(loadThemesError({ error })))
+    dispatch(loadThemesThunk())
   }, [dispatch])
 
   return (

@@ -1,4 +1,4 @@
-import { loadThemesSuccess, loadThemesInit } from '../actions'
+import { loadThemesSuccess, loadThemesInit } from '.'
 import { makeStore } from '../../../makeStore'
 import { fixtureTheme } from '../../../../services/rebrickable'
 

@@ -1,4 +1,4 @@
-import { loadThemesInit, loadThemesError } from '../actions'
+import { loadThemesInit, loadThemesError } from '.'
 import { makeStore } from '../../../makeStore'
 
 describe('the loadThemesInit action', () => {

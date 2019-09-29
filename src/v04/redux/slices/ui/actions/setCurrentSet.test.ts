@@ -1,5 +1,5 @@
 import { makeStore } from '../../../makeStore'
-import { setCurrentSet } from '../actions'
+import { setCurrentSet } from '.'
 import { makeGuess } from '../../guessingGame/actions'
 
 describe('the setCurrentSet action', () => {

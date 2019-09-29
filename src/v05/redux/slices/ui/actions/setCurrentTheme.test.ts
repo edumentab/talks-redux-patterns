@@ -1,4 +1,4 @@
-import { setCurrentTheme } from '../actions'
+import { setCurrentTheme } from '.'
 import { makeGuess } from '../../guessingGame/actions'
 import { makeStore } from '../../../makeStore'
 
