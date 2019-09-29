@@ -5,6 +5,7 @@ import createActionLogMiddleware from './lib/actionLog'
 import { rootReducer } from './rootReducer'
 import { AppState, AppAction } from './types'
 import { AppThunk } from './lib/types/thunk'
+import { rebrickableService } from '../services'
 
 type MakeStoreOpts = {
   initialState?: AppState
@@ -41,3 +42,6 @@ export const makeStore = (opts: MakeStoreOpts = {}) => {
     dispatch: (a: AppAction | AppThunk) => void
   }
 }
+
+export const makeProdStore = () =>
+  makeStore({ deps: { rebrickable: rebrickableService } })
