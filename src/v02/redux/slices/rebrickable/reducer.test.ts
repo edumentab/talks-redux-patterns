@@ -13,6 +13,8 @@ import { ById } from '../../../utilTypes'
 import { Theme, Set } from '../../../services/rebrickable/types'
 import { fixtureSet, fixtureTheme } from '../../../services/rebrickable'
 
+// TODO - immerify!
+
 describe('the rebrickableReducer', () => {
   describe('for loading themes', () => {
     it('starts loading correctly', () => {

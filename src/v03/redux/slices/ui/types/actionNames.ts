@@ -1,0 +1,4 @@
+export enum UIActionNames {
+  SET_CURRENT_THEME = 'UI::SET_CURRENT_THEME',
+  SET_CURRENT_SET = 'UI::SET_CURRENT_SET'
+}

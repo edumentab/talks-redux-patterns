@@ -8,7 +8,8 @@ type MakeStoreOpts = {
   initialState?: AppState
 }
 
-export const makeStore = ({ initialState }: MakeStoreOpts) => {
+export const makeStore = (opts: MakeStoreOpts = {}) => {
+  const { initialState } = opts
   const enhancers = []
 
   const devToolsExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION__

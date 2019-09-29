@@ -1,0 +1,87 @@
+[
+  {
+    "id": 187,
+    "parent_id": 186,
+    "name": "Black Falcons"
+  },
+  {
+    "id": 188,
+    "parent_id": 186,
+    "name": "Black Knights"
+  },
+  {
+    "id": 189,
+    "parent_id": 186,
+    "name": "Classic Castle"
+  },
+  {
+    "id": 190,
+    "parent_id": 186,
+    "name": "Crusaders"
+  },
+  {
+    "id": 191,
+    "parent_id": 186,
+    "name": "Dark Forest"
+  },
+  {
+    "id": 192,
+    "parent_id": 186,
+    "name": "Dragon Knights"
+  },
+  {
+    "id": 193,
+    "parent_id": 186,
+    "name": "Fantasy Era"
+  },
+  {
+    "id": 194,
+    "parent_id": 186,
+    "name": "Forestmen"
+  },
+  {
+    "id": 195,
+    "parent_id": 186,
+    "name": "Fright Knights"
+  },
+  {
+    "id": 196,
+    "parent_id": 186,
+    "name": "Kingdoms"
+  },
+  {
+    "id": 197,
+    "parent_id": 186,
+    "name": "Knights Kingdom I"
+  },
+  {
+    "id": 198,
+    "parent_id": 186,
+    "name": "Knights Kingdom II"
+  },
+  {
+    "id": 199,
+    "parent_id": 186,
+    "name": "Lion Knights"
+  },
+  {
+    "id": 200,
+    "parent_id": 186,
+    "name": "My Own Creation"
+  },
+  {
+    "id": 201,
+    "parent_id": 186,
+    "name": "Royal Knights"
+  },
+  {
+    "id": 202,
+    "parent_id": 186,
+    "name": "Supplemental"
+  },
+  {
+    "id": 203,
+    "parent_id": 186,
+    "name": "Wolfpack"
+  }
+]
