@@ -119,9 +119,11 @@ const SourceCodePanelControls = props => {
       />
       <Select
         key="files"
-        items={files.filter(option =>
-          option.name.toLowerCase().includes(query.toLowerCase())
-        )}
+        items={files
+          .filter(option =>
+            option.name.toLowerCase().includes(query.toLowerCase())
+          )
+          .sort((o1, o2) => (o1.name < o2.name ? -1 : 1))}
         itemRenderer={renderFileItem}
         onItemSelect={option => handleFileChange(option.name)}
         popoverProps={{ minimal: true }}
