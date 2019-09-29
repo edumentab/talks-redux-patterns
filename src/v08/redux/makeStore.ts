@@ -1,25 +1,28 @@
 import { createStore, compose, applyMiddleware } from 'redux'
 import { initialAppState } from './initialAppState'
-import createThunkMiddleware from './lib/thunk'
 import createActionLogMiddleware from './lib/actionLog'
 import { rootReducer } from './rootReducer'
-import { AppState, AppAction } from './types'
-import { AppThunk } from './lib/types/thunk'
+import { AppState, AppAction, AppConsGetter, AppCons } from './types'
 import { rebrickableService } from '../services'
+import { createConsequenceMiddleware } from './lib/consequence'
+import {
+  loadSetsInitConsequence,
+  loadThemesInitConsequence
+} from './slices/rebrickable/actions'
 
 type MakeStoreOpts = {
   initialState?: AppState
   actionLog?: AppAction[]
   deps?: any
+  consGetter?: AppConsGetter
 }
 
 export const makeStore = (opts: MakeStoreOpts = {}) => {
-  const { initialState, actionLog, deps } = opts
-  const middlewares = [
-    (createThunkMiddleware as typeof createThunkMiddleware & {
-      withExtraArgument: typeof createThunkMiddleware
-    }).withExtraArgument(deps)
-  ]
+  const { initialState, actionLog, deps, consGetter } = opts
+  const middlewares = []
+  if (consGetter) {
+    middlewares.push(createConsequenceMiddleware(consGetter, deps))
+  }
   if (actionLog) {
     middlewares.push(createActionLogMiddleware(actionLog))
   }
@@ -37,11 +40,14 @@ export const makeStore = (opts: MakeStoreOpts = {}) => {
     compose(...enhancers)
   )
 
-  return store as {
-    getState: () => AppState
-    dispatch: (a: AppAction | AppThunk) => void
-  }
+  return store
 }
 
-export const makeProdStore = () =>
-  makeStore({ deps: { rebrickable: rebrickableService } })
+export const makeProdStore = () => {
+  const appConsequences: AppCons[] = [
+    loadSetsInitConsequence,
+    loadThemesInitConsequence
+  ]
+  const consGetter: AppConsGetter = () => appConsequences
+  return makeStore({ deps: { rebrickable: rebrickableService }, consGetter })
+}

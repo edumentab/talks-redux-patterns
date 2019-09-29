@@ -1,11 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react'
 
 import { SetSelector } from './SetSelector'
-import {
-  AppState,
-  selectCurrentThemeSets,
-  loadSetsForThemeThunk
-} from '../redux'
+import { AppState, selectCurrentThemeSets, loadSetsInit } from '../redux'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Set } from './Set'
@@ -22,7 +18,7 @@ export const Theme: FunctionComponent = () => {
 
   useEffect(() => {
     if (currentThemeId && (!sets || (!sets!.data && !sets!.loading))) {
-      dispatch(loadSetsForThemeThunk(currentThemeId))
+      dispatch(loadSetsInit({ themeId: currentThemeId }))
     }
   }, [currentThemeId, sets, dispatch])
 
