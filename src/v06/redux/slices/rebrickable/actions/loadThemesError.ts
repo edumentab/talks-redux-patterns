@@ -11,7 +11,6 @@ export type LoadThemesErrorAction = Action<
   LoadThemesErrorPayload
 >
 
-export const loadThemesError = factory<LoadThemesErrorAction>(
-  RebrickableActionNames.LOAD_THEMES_ERROR,
-  true
-)
+export const [loadThemesError, isLoadThemesError] = factory<
+  LoadThemesErrorAction
+>(RebrickableActionNames.LOAD_THEMES_ERROR, true)

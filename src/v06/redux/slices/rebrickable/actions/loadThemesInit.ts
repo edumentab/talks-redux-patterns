@@ -7,6 +7,6 @@ export type LoadThemesInitAction = Action<
   undefined
 >
 
-export const loadThemesInit = factory<LoadThemesInitAction>(
+export const [loadThemesInit, isLoadThemesInit] = factory<LoadThemesInitAction>(
   RebrickableActionNames.LOAD_THEMES_INIT
 )

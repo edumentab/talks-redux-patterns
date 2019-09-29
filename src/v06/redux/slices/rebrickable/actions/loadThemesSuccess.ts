@@ -13,6 +13,6 @@ export type LoadThemesSuccessAction = Action<
   LoadThemesSuccessPayload
 >
 
-export const loadThemesSuccess = factory<LoadThemesSuccessAction>(
-  RebrickableActionNames.LOAD_THEMES_SUCCESS
-)
+export const [loadThemesSuccess, isLoadThemesSuccess] = factory<
+  LoadThemesSuccessAction
+>(RebrickableActionNames.LOAD_THEMES_SUCCESS)

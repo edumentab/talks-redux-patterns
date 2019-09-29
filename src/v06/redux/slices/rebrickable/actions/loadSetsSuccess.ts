@@ -14,6 +14,6 @@ export type LoadSetsSuccessAction = Action<
   LoadSetsSuccessPayload
 >
 
-export const loadSetsSuccess = factory<LoadSetsSuccessAction>(
-  RebrickableActionNames.LOAD_SETS_SUCCESS
-)
+export const [loadSetsSuccess, isLoadSetsSuccess] = factory<
+  LoadSetsSuccessAction
+>(RebrickableActionNames.LOAD_SETS_SUCCESS)

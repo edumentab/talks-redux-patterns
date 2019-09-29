@@ -13,5 +13,7 @@ export const factory = <A extends Action<string, any>>(
     })
   })) as ActionCreator<A>
   creator.actionType = type
-  return creator
+  const guard = (action: Action<string, any>): action is A =>
+    action.type === (type as string)
+  return <const>[creator, guard]
 }

@@ -11,6 +11,6 @@ export type LoadSetsInitAction = Action<
   LoadSetsInitPayload
 >
 
-export const loadSetsInit = factory<LoadSetsInitAction>(
+export const [loadSetsInit, isLoadSetsInit] = factory<LoadSetsInitAction>(
   RebrickableActionNames.LOAD_SETS_INIT
 )

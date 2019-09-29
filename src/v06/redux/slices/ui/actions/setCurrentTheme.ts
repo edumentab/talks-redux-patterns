@@ -11,6 +11,6 @@ export type SetCurrentThemeAction = Action<
   SetCurrentThemePayload
 >
 
-export const setCurrentTheme = factory<SetCurrentThemeAction>(
-  UIActionNames.SET_CURRENT_THEME
-)
+export const [setCurrentTheme, isSetCurrentTheme] = factory<
+  SetCurrentThemeAction
+>(UIActionNames.SET_CURRENT_THEME)

@@ -12,7 +12,7 @@ export type LoadSetsErrorAction = Action<
   LoadSetsErrorPayload
 >
 
-export const loadSetsError = factory<LoadSetsErrorAction>(
+export const [loadSetsError, isLoadSetsError] = factory<LoadSetsErrorAction>(
   RebrickableActionNames.LOAD_SETS_ERROR,
   true
 )
