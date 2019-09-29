@@ -3,7 +3,6 @@ import { rebrickableService } from '../../../../services'
 import { loadThemesInit, loadThemesError, loadThemesSuccess } from '../actions'
 
 export const loadThemesThunk: AppThunkCreator = () => dispatch => {
-  console.log('WTF', dispatch)
   dispatch(loadThemesInit())
   rebrickableService
     .getThemesByParent(186)

@@ -3,14 +3,10 @@ import React, { FunctionComponent, useEffect } from 'react'
 import { SetSelector } from './SetSelector'
 import {
   AppState,
-  loadSetsInit,
-  loadSetsSuccess,
-  loadSetsError,
-  selectCurrentThemeSets
+  selectCurrentThemeSets,
+  loadSetsForThemeThunk
 } from '../redux'
 import { useSelector, useDispatch } from 'react-redux'
-
-import { rebrickableService } from '../services'
 
 import { Set } from './Set'
 
@@ -26,15 +22,7 @@ export const Theme: FunctionComponent = () => {
 
   useEffect(() => {
     if (currentThemeId && (!sets || (!sets!.data && !sets!.loading))) {
-      dispatch(loadSetsInit({ themeId: currentThemeId }!))
-      rebrickableService
-        .getSetsForTheme(currentThemeId!)
-        .then(data =>
-          dispatch(loadSetsSuccess({ themeId: currentThemeId!, data }))
-        )
-        .catch(error =>
-          dispatch(loadSetsError({ themeId: currentThemeId!, error }))
-        )
+      dispatch(loadSetsForThemeThunk(currentThemeId))
     }
   }, [currentThemeId, sets, dispatch])
 
