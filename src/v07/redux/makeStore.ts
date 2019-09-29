@@ -9,11 +9,16 @@ import { AppThunk } from './lib/types/thunk'
 type MakeStoreOpts = {
   initialState?: AppState
   actionLog?: AppAction[]
+  deps?: any
 }
 
 export const makeStore = (opts: MakeStoreOpts = {}) => {
-  const { initialState, actionLog } = opts
-  const middlewares = [createThunkMiddleware]
+  const { initialState, actionLog, deps } = opts
+  const middlewares = [
+    (createThunkMiddleware as typeof createThunkMiddleware & {
+      withExtraArgument: typeof createThunkMiddleware
+    }).withExtraArgument(deps)
+  ]
   if (actionLog) {
     middlewares.push(createActionLogMiddleware(actionLog))
   }

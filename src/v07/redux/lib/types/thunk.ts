@@ -1,19 +1,24 @@
-import { AppAction, AppState } from '../../types'
+import { AppAction, AppState, AppDeps } from '../../types'
 
 export type AppThunkCreator<O = undefined> = ThunkCreator<
   AppAction,
   AppState,
+  AppDeps,
   O
 >
 
-export type AppThunk = Thunk<AppAction, AppState>
+export type AppThunk = Thunk<AppAction, AppState, AppDeps>
 
-export type ThunkCreator<A, S, O = undefined> = O extends undefined
-  ? ThunkCreatorWithoutOptions<A, S>
-  : ThunkCreatorWithOptions<A, S, O>
+export type ThunkCreator<A, S, D, O = undefined> = O extends undefined
+  ? ThunkCreatorWithoutOptions<A, S, D>
+  : ThunkCreatorWithOptions<A, S, D, O>
 
-type ThunkCreatorWithoutOptions<A, S> = () => Thunk<A, S>
+type ThunkCreatorWithoutOptions<A, S, D> = () => Thunk<A, S, D>
 
-type ThunkCreatorWithOptions<A, S, O> = (opts: O) => Thunk<A, S>
+type ThunkCreatorWithOptions<A, S, D, O> = (opts: O) => Thunk<A, S, D>
 
-type Thunk<A, S> = (dispatch: (action: A) => void, getState: () => S) => void
+type Thunk<A, S, D> = (
+  dispatch: (action: A) => void,
+  getState: () => S,
+  deps: D
+) => void

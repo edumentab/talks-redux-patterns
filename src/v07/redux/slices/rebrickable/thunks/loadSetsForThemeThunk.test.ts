@@ -1,14 +1,6 @@
 import { makeStore } from '../../../makeStore'
 import { loadSetsForThemeThunk } from '.'
-
-jest.mock('../../../../services', () => ({
-  rebrickableService: {
-    ...require.requireActual('../../../../services').rebrickableService,
-    getSetsForTheme: jest.fn()
-  }
-}))
-
-import { rebrickableService } from '../../../../services'
+import { fixtureTheme, fixtureSet } from '../../../../services/rebrickable'
 import {
   loadSetsInit,
   loadSetsError,
@@ -19,23 +11,27 @@ import { fakePromise, nextTick } from '../../../../utils'
 
 describe('the loadSetsForThemeThunk creator', () => {
   it('handles happy path', async () => {
+    const { promise, resolve } = fakePromise()
+    const mockGetSetsForTheme = jest.fn().mockReturnValue(promise)
+    const fakeDeps = {
+      rebrickable: {
+        getSetsForTheme: mockGetSetsForTheme
+      }
+    }
     const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog })
+    const { dispatch } = makeStore({ actionLog, deps: fakeDeps })
     const themeId = 666
     dispatch(
       loadThemesSuccess({
-        data: { [themeId]: rebrickableService.fixtureTheme }
+        data: { [themeId]: fixtureTheme }
       })
     )
 
-    const { promise, resolve } = fakePromise()
-    ;(rebrickableService.getSetsForTheme as any).mockReturnValue(promise)
-
     dispatch(loadSetsForThemeThunk(themeId))
     expect(actionLog[actionLog.length - 1]).toEqual(loadSetsInit({ themeId }))
-    expect(rebrickableService.getSetsForTheme).toHaveBeenCalledWith(themeId)
+    expect(mockGetSetsForTheme).toHaveBeenCalledWith(themeId)
 
-    const fakeData = { 5: rebrickableService.fixtureSet }
+    const fakeData = { 5: fixtureSet }
     resolve(fakeData)
     await nextTick(() => {
       expect(actionLog[actionLog.length - 1]).toEqual(
@@ -44,17 +40,21 @@ describe('the loadSetsForThemeThunk creator', () => {
     })
   })
   it('handles sad path', async () => {
+    const { promise, reject } = fakePromise()
+    const mockGetSetsForTheme = jest.fn().mockReturnValue(promise)
+    const fakeDeps = {
+      rebrickable: {
+        getSetsForTheme: mockGetSetsForTheme
+      }
+    }
     const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog })
+    const { dispatch } = makeStore({ actionLog, deps: fakeDeps })
     const themeId = 666
     dispatch(
       loadThemesSuccess({
-        data: { [themeId]: rebrickableService.fixtureTheme }
+        data: { [themeId]: fixtureTheme }
       })
     )
-
-    const { promise, reject } = fakePromise()
-    ;(rebrickableService.getSetsForTheme as any).mockReturnValue(promise)
     dispatch(loadSetsForThemeThunk(themeId))
 
     const error = 'oh no'

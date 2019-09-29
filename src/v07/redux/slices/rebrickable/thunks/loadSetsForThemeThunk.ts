@@ -1,12 +1,11 @@
 import { AppThunkCreator } from '../../../lib/types/thunk'
-import { rebrickableService } from '../../../../services'
 import { loadSetsInit, loadSetsSuccess, loadSetsError } from '../actions'
 
 export const loadSetsForThemeThunk: AppThunkCreator<number> = (
   themeId: number
-) => dispatch => {
+) => (dispatch, getState, deps) => {
   dispatch(loadSetsInit({ themeId }))
-  rebrickableService
+  deps.rebrickable
     .getSetsForTheme(themeId)
     .then(data => dispatch(loadSetsSuccess({ themeId, data })))
     .catch(error => dispatch(loadSetsError({ themeId, error })))
