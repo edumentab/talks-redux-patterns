@@ -3,6 +3,6 @@ import React from 'react'
 
 import { App } from './App'
 
-storiesOf('v03', module).add('Store test', () => {
+storiesOf('SCLPG', module).add('v03 - storetest', () => {
   return <App key="v03" version="v03-store" />
 })

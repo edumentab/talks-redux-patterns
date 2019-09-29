@@ -3,6 +3,6 @@ import React from 'react'
 
 import { App } from './App'
 
-storiesOf('v01', module).add('The beginning', () => {
+storiesOf('SCLPG', module).add('v01 - start', () => {
   return <App key="v01" version="v01-start" />
 })

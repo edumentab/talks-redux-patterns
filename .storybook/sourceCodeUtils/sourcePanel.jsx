@@ -88,7 +88,6 @@ const SourceCodePanel = props => {
 
   const { state } =
     (filePath && fileInfo.files[filePath].versions[version]) || {}
-  console.log('POO', fileInfo, version)
 
   return (
     <div className="sourcePanel">
