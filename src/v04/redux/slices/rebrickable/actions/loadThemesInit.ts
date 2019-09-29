@@ -1,11 +1,12 @@
 import { RebrickableActionNames } from '../types/actionNames'
 import { Action } from '../../../lib/types/action'
+import { factory } from '../../../lib/factory'
 
 export type LoadThemesInitAction = Action<
   RebrickableActionNames.LOAD_THEMES_INIT,
   undefined
 >
 
-export const loadThemesInit = (): LoadThemesInitAction => ({
-  type: RebrickableActionNames.LOAD_THEMES_INIT
-})
+export const loadThemesInit = factory<LoadThemesInitAction>(
+  RebrickableActionNames.LOAD_THEMES_INIT
+)

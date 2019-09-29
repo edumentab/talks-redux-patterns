@@ -1,5 +1,6 @@
 import { Action } from '../../../lib/types/action'
 import { UIActionNames } from '../types'
+import { factory } from '../../../lib/factory'
 
 type SetCurrentThemePayload = {
   themeId: number
@@ -10,7 +11,6 @@ export type SetCurrentThemeAction = Action<
   SetCurrentThemePayload
 >
 
-export const setCurrentTheme = (themeId: number): SetCurrentThemeAction => ({
-  type: UIActionNames.SET_CURRENT_THEME,
-  payload: { themeId }
-})
+export const setCurrentTheme = factory<SetCurrentThemeAction>(
+  UIActionNames.SET_CURRENT_THEME
+)

@@ -1,5 +1,6 @@
 import { Action } from '../../../lib/types/action'
 import { UIActionNames } from '../types'
+import { factory } from '../../../lib/factory'
 
 type SetCurrentSetPayload = {
   setId: string
@@ -10,7 +11,6 @@ export type SetCurrentSetAction = Action<
   SetCurrentSetPayload
 >
 
-export const setCurrentSet = (setId: string): SetCurrentSetAction => ({
-  type: UIActionNames.SET_CURRENT_SET,
-  payload: { setId }
-})
+export const setCurrentSet = factory<SetCurrentSetAction>(
+  UIActionNames.SET_CURRENT_SET
+)

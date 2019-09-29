@@ -1,5 +1,6 @@
 import { GuessingGameActionNames } from '../types/actionNames'
 import { Action } from '../../../lib/types/action'
+import { factory } from '../../../lib/factory'
 
 type MakeGuessPayload = {
   guess: number
@@ -10,7 +11,6 @@ export type MakeGuessAction = Action<
   MakeGuessPayload
 >
 
-export const makeGuess = (guess: number): MakeGuessAction => ({
-  type: GuessingGameActionNames.MAKE_GUESS,
-  payload: { guess }
-})
+export const makeGuess = factory<MakeGuessAction>(
+  GuessingGameActionNames.MAKE_GUESS
+)

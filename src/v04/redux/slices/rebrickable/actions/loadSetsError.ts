@@ -1,5 +1,6 @@
 import { RebrickableActionNames } from '../types/actionNames'
 import { Action } from '../../../lib/types/action'
+import { factory } from '../../../lib/factory'
 
 type LoadSetsErrorPayload = {
   themeId: number
@@ -11,11 +12,7 @@ export type LoadSetsErrorAction = Action<
   LoadSetsErrorPayload
 >
 
-export const loadSetsError = (
-  themeId: number,
-  error: string
-): LoadSetsErrorAction => ({
-  type: RebrickableActionNames.LOAD_SETS_ERROR,
-  payload: { error, themeId },
-  error: true
-})
+export const loadSetsError = factory<LoadSetsErrorAction>(
+  RebrickableActionNames.LOAD_SETS_ERROR,
+  true
+)

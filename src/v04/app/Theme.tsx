@@ -26,11 +26,15 @@ export const Theme: FunctionComponent = () => {
 
   useEffect(() => {
     if (currentThemeId && (!sets || (!sets!.data && !sets!.loading))) {
-      dispatch(loadSetsInit(currentThemeId!))
+      dispatch(loadSetsInit({ themeId: currentThemeId }!))
       rebrickableService
         .getSetsForTheme(currentThemeId!)
-        .then(res => dispatch(loadSetsSuccess(currentThemeId!, res)))
-        .catch(err => dispatch(loadSetsError(currentThemeId!, err)))
+        .then(data =>
+          dispatch(loadSetsSuccess({ themeId: currentThemeId!, data }))
+        )
+        .catch(error =>
+          dispatch(loadSetsError({ themeId: currentThemeId!, error }))
+        )
     }
   }, [currentThemeId, sets, dispatch])
 

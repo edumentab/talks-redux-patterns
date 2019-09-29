@@ -54,7 +54,7 @@ const SourceCodePanel = props => {
         )
       }
     },
-    [filePath, fileState.idx, fileState.history]
+    [filePath, fileState.idx, fileState.history, version]
   )
   useEffect(() => {
     channel.on('sourceCode/selectedStory', handleFileChange)

@@ -87,7 +87,7 @@ const SourceCodePanelControls = props => {
         />
       )
     },
-    [version, filePath, file]
+    [version, file]
   )
 
   return (
