@@ -1,0 +1,11 @@
+:global(.bp3-menu) {
+  max-height: 80vh;
+  overflow: auto;
+}
+
+:global(.bp3-popover-wrapper),
+:global(.bp3-popover-target),
+:global(.bp3-button) {
+  width: 100%;
+  display: block;
+}
