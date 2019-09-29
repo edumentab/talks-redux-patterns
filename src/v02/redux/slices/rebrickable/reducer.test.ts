@@ -1,4 +1,3 @@
-import { RebrickableState } from './types/state'
 import { initialRebrickableState } from './initialState'
 import {
   loadThemesInit,
@@ -12,20 +11,18 @@ import { rebrickableReducer } from './reducer'
 import { ById } from '../../../utilTypes'
 import { Theme, Set } from '../../../services/rebrickable/types'
 import { fixtureSet, fixtureTheme } from '../../../services/rebrickable'
-
-// TODO - immerify!
+import produce from 'immer'
 
 describe('the rebrickableReducer', () => {
   describe('for loading themes', () => {
     it('starts loading correctly', () => {
-      const previousState: RebrickableState = {
-        ...initialRebrickableState,
-        themes: {
+      const previousState = produce(initialRebrickableState, draft => {
+        draft.themes = {
           loading: false,
           error: 'previous error',
           data: {}
         }
-      }
+      })
       const action = loadThemesInit()
       const result = rebrickableReducer(previousState, action)
       expect(result.themes).toEqual({
@@ -35,14 +32,13 @@ describe('the rebrickableReducer', () => {
       })
     })
     it('handles success correctly', () => {
-      const previousState: RebrickableState = {
-        ...initialRebrickableState,
-        themes: {
+      const previousState = produce(initialRebrickableState, draft => {
+        draft.themes = {
           loading: true,
           error: null,
           data: null
         }
-      }
+      })
       const dataPayload: ById<Theme> = { 666: fixtureTheme }
       const action = loadThemesSuccess(dataPayload)
       const result = rebrickableReducer(previousState, action)
@@ -53,14 +49,13 @@ describe('the rebrickableReducer', () => {
       })
     })
     it('handles failure correctly', () => {
-      const previousState: RebrickableState = {
-        ...initialRebrickableState,
-        themes: {
+      const previousState = produce(initialRebrickableState, draft => {
+        draft.themes = {
           loading: true,
           error: null,
           data: null
         }
-      }
+      })
       const action = loadThemesError('oh no')
       const result = rebrickableReducer(previousState, action)
       expect(result.themes).toEqual({
@@ -71,34 +66,23 @@ describe('the rebrickableReducer', () => {
     })
   })
   describe('for loading sets', () => {
-    const stateWithTheme: RebrickableState = {
-      ...initialRebrickableState,
-      themes: {
+    const stateWithTheme = produce(initialRebrickableState, draft => {
+      draft.themes = {
         loading: false,
         error: null,
         data: {
           666: fixtureTheme
         }
       }
-    }
+    })
     it('starts loading correctly', () => {
-      const previousState: RebrickableState = {
-        ...stateWithTheme,
-        themes: {
-          ...stateWithTheme.themes,
-          data: {
-            ...stateWithTheme.themes.data,
-            666: {
-              ...stateWithTheme.themes.data![666],
-              sets: {
-                loading: false,
-                error: 'previous error',
-                data: {}
-              }
-            }
-          }
+      const previousState = produce(stateWithTheme, draft => {
+        draft.themes.data![666].sets = {
+          loading: false,
+          error: 'previous error',
+          data: {}
         }
-      }
+      })
       const action = loadSetsInit(666)
       const result = rebrickableReducer(previousState, action)
       expect(result.themes.data![666].sets).toEqual({
@@ -108,23 +92,13 @@ describe('the rebrickableReducer', () => {
       })
     })
     it('handles success correctly', () => {
-      const previousState: RebrickableState = {
-        ...stateWithTheme,
-        themes: {
-          ...stateWithTheme.themes,
-          data: {
-            ...stateWithTheme.themes.data,
-            666: {
-              ...stateWithTheme.themes.data![666],
-              sets: {
-                loading: true,
-                error: null,
-                data: null
-              }
-            }
-          }
+      const previousState = produce(stateWithTheme, draft => {
+        draft.themes.data![666].sets = {
+          loading: true,
+          error: null,
+          data: null
         }
-      }
+      })
       const dataPayload: ById<Set> = { '6087_2': fixtureSet }
       const action = loadSetsSuccess(666, dataPayload)
       const result = rebrickableReducer(previousState, action)
@@ -135,23 +109,13 @@ describe('the rebrickableReducer', () => {
       })
     })
     it('handles failure correctly', () => {
-      const previousState: RebrickableState = {
-        ...stateWithTheme,
-        themes: {
-          ...stateWithTheme.themes,
-          data: {
-            ...stateWithTheme.themes.data,
-            666: {
-              ...stateWithTheme.themes.data![666],
-              sets: {
-                loading: true,
-                error: null,
-                data: null
-              }
-            }
-          }
+      const previousState = produce(stateWithTheme, draft => {
+        draft.themes.data![666].sets = {
+          loading: true,
+          error: null,
+          data: null
         }
-      }
+      })
       const action = loadSetsError(666, 'ack!')
       const result = rebrickableReducer(previousState, action)
       expect(result.themes.data![666].sets).toEqual({
