@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react'
+import classNames from 'classnames'
 
 import {
   MenuItem,
@@ -12,6 +13,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import '@blueprintjs/core/lib/css/blueprint.css'
 import { stateToIcon } from './stateToIcon'
+
+const fileSorter = (o1, o2) => (o1.name < o2.name ? -1 : 1)
+
+const fileIsTouched = (file, version) =>
+  (version === 'v01'
+    ? ['deleted', 'created', 'edited', 'eternal', 'unchanged']
+    : ['deleted', 'created', 'edited']
+  ).includes(file.versions[version].state)
 
 const SourceCodePanelControls = props => {
   const {
@@ -41,13 +50,23 @@ const SourceCodePanelControls = props => {
       idx: Math.min(fileState.idx + 1, fileState.history.length - 1)
     })
 
+  const touched = files.filter(f => fileIsTouched(f, version)).sort(fileSorter)
+  const untouched = files
+    .filter(f => !fileIsTouched(f, version))
+    .sort(fileSorter)
+  const listFiles = touched.concat(untouched)
+
   const renderFileItem = useCallback(
     (option, { modifiers, handleClick }) => {
       const curV = option.versions[version]
       const currentlySelected = filePath === option.name
       return (
         <MenuItem
-          className={`${Classes.TEXT_SMALL} Editor_Menu_Item`}
+          className={classNames(
+            Classes.TEXT_SMALL,
+            !fileIsTouched(option, version) && 'untouchedItem',
+            option === untouched[0] && 'firstUntouchedItem'
+          )}
           key={option.name}
           icon={
             <Icon icon={currentlySelected ? 'tick' : 'blank'} iconSize={10} />
@@ -60,7 +79,7 @@ const SourceCodePanelControls = props => {
         />
       )
     },
-    [filePath, version]
+    [filePath, version, untouched]
   )
 
   const renderVersionItem = useCallback(
@@ -104,11 +123,9 @@ const SourceCodePanelControls = props => {
       />
       <Select
         key="files"
-        items={files
-          .filter(option =>
-            option.name.toLowerCase().includes(query.toLowerCase())
-          )
-          .sort((o1, o2) => (o1.name < o2.name ? -1 : 1))}
+        items={listFiles.filter(option =>
+          option.name.toLowerCase().includes(query.toLowerCase())
+        )}
         itemRenderer={renderFileItem}
         onItemSelect={option => handleFileChange(option.name)}
         popoverProps={{ minimal: true }}

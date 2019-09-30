@@ -39,6 +39,16 @@
   margin-right: 10px;
 }
 
+.untouchedItem {
+  color: #999 !important;
+}
+
+.firstUntouchedItem {
+  border-top: 1px solid black;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
 .bp3-control-group > :last-child div {
   border-radius: inherit;
 }
