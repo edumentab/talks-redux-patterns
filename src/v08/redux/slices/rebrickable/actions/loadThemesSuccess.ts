@@ -1,4 +1,3 @@
-import { RebrickableActionNames } from '../types/actionNames'
 import { Action } from '../../../lib/types/action'
 import { ById } from '../../../../utils'
 import { Theme } from '../../../../services/rebrickable/types'
@@ -9,10 +8,10 @@ type LoadThemesSuccessPayload = {
 }
 
 export type LoadThemesSuccessAction = Action<
-  RebrickableActionNames.LOAD_THEMES_SUCCESS,
+  'LOAD_THEMES_SUCCESS',
   LoadThemesSuccessPayload
 >
 
 export const [loadThemesSuccess, isLoadThemesSuccess] = factory<
   LoadThemesSuccessAction
->(RebrickableActionNames.LOAD_THEMES_SUCCESS)
+>('LOAD_THEMES_SUCCESS')

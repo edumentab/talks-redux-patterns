@@ -1,5 +1,4 @@
 import { AppActionMould } from '../../../types'
-import { UIActionNames } from '../types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 
@@ -8,12 +7,12 @@ type SetCurrentSetPayload = {
 }
 
 export type SetCurrentSetAction = AppActionMould<
-  UIActionNames.SET_CURRENT_SET,
+  'SET_CURRENT_SET',
   SetCurrentSetPayload
 >
 
 export const [setCurrentSet, isSetCurrentSet] = factory<SetCurrentSetAction>({
-  type: UIActionNames.SET_CURRENT_SET,
+  type: 'SET_CURRENT_SET',
   reducer: (state, payload) => {
     const { setId } = payload
     return produce(state, draft => {

@@ -1,4 +1,3 @@
-import { RebrickableActionNames } from '../types/actionNames'
 import { Action } from '../../../lib/types/action'
 import { factory } from '../../../lib/factory'
 
@@ -6,11 +5,8 @@ type LoadSetsInitPayload = {
   themeId: number
 }
 
-export type LoadSetsInitAction = Action<
-  RebrickableActionNames.LOAD_SETS_INIT,
-  LoadSetsInitPayload
->
+export type LoadSetsInitAction = Action<'LOAD_SETS_INIT', LoadSetsInitPayload>
 
 export const [loadSetsInit, isLoadSetsInit] = factory<LoadSetsInitAction>(
-  RebrickableActionNames.LOAD_SETS_INIT
+  'LOAD_SETS_INIT'
 )

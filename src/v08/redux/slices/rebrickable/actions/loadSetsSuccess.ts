@@ -1,4 +1,3 @@
-import { RebrickableActionNames } from '../types/actionNames'
 import { ById } from '../../../../utils'
 import { Action } from '../../../lib/types/action'
 import { Set } from '../../../../services/rebrickable/types'
@@ -10,10 +9,10 @@ type LoadSetsSuccessPayload = {
 }
 
 export type LoadSetsSuccessAction = Action<
-  RebrickableActionNames.LOAD_SETS_SUCCESS,
+  'LOAD_SETS_SUCCESS',
   LoadSetsSuccessPayload
 >
 
 export const [loadSetsSuccess, isLoadSetsSuccess] = factory<
   LoadSetsSuccessAction
->(RebrickableActionNames.LOAD_SETS_SUCCESS)
+>('LOAD_SETS_SUCCESS')

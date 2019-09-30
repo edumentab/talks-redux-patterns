@@ -1,4 +1,3 @@
-import { RebrickableActionNames } from '../types/actionNames'
 import { AppActionMould } from '../../../types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
@@ -9,12 +8,12 @@ type LoadSetsErrorPayload = {
 }
 
 export type LoadSetsErrorAction = AppActionMould<
-  RebrickableActionNames.LOAD_SETS_ERROR,
+  'LOAD_SETS_ERROR',
   LoadSetsErrorPayload
 >
 
 export const [loadSetsError, isLoadSetsError] = factory<LoadSetsErrorAction>({
-  type: RebrickableActionNames.LOAD_SETS_ERROR,
+  type: 'LOAD_SETS_ERROR',
   isError: true,
   reducer: (state, payload) => {
     const { themeId, error } = payload

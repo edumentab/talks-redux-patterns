@@ -1,4 +1,3 @@
-import { RebrickableActionNames } from '../types/actionNames'
 import { ById } from '../../../../utils'
 import { AppActionMould } from '../../../types'
 import { Set } from '../../../../services/rebrickable/types'
@@ -11,14 +10,14 @@ type LoadSetsSuccessPayload = {
 }
 
 export type LoadSetsSuccessAction = AppActionMould<
-  RebrickableActionNames.LOAD_SETS_SUCCESS,
+  'LOAD_SETS_SUCCESS',
   LoadSetsSuccessPayload
 >
 
 export const [loadSetsSuccess, isLoadSetsSuccess] = factory<
   LoadSetsSuccessAction
 >({
-  type: RebrickableActionNames.LOAD_SETS_SUCCESS,
+  type: 'LOAD_SETS_SUCCESS',
   reducer: (state, payload) => {
     const { data, themeId } = payload
     return produce(state, draft => {

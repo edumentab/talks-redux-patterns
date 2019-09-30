@@ -1,4 +1,3 @@
-import { RebrickableActionNames } from '../types/actionNames'
 import { AppActionMould } from '../../../types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
@@ -8,14 +7,14 @@ type LoadThemesErrorPayload = {
 }
 
 export type LoadThemesErrorAction = AppActionMould<
-  RebrickableActionNames.LOAD_THEMES_ERROR,
+  'LOAD_THEMES_ERROR',
   LoadThemesErrorPayload
 >
 
 export const [loadThemesError, isLoadThemesError] = factory<
   LoadThemesErrorAction
 >({
-  type: RebrickableActionNames.LOAD_THEMES_ERROR,
+  type: 'LOAD_THEMES_ERROR',
   isError: true,
   reducer: (state, payload) => {
     const { error } = payload
