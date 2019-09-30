@@ -13,12 +13,12 @@ const rule = {
           }
           if (
             node.callee.name === 'useDispatchWithSender' &&
-            node.arguments.length === 1 &&
+            node.arguments.length &&
             node.arguments[0].type === 'Literal' &&
             !fileName.match(node.arguments[0].value)
           ) {
             context.report({
-              node,
+              node: node.arguments[0],
               message:
                 'useDispatchWithSender should be given sender matching filename!'
             })
