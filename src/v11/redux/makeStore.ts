@@ -5,16 +5,18 @@ import { rootReducer } from './rootReducer'
 import { AppState, AppAction, AppConsGetter, AppCons } from './types'
 import { rebrickableService } from '../services'
 import { createConsequenceMiddleware } from './lib/consequence'
+import { loadThemesInit } from './slices/rebrickable/actions'
 
 type MakeStoreOpts = {
   initialState?: AppState
   actionLog?: AppAction[]
   deps?: any
   consGetter?: AppConsGetter
+  initCons?: AppCons
 }
 
 export const makeStore = (opts: MakeStoreOpts = {}) => {
-  const { initialState, actionLog, deps, consGetter } = opts
+  const { initialState, actionLog, deps, consGetter, initCons } = opts
   const middlewares = []
   if (consGetter) {
     middlewares.push(createConsequenceMiddleware(consGetter, deps))
@@ -36,11 +38,24 @@ export const makeStore = (opts: MakeStoreOpts = {}) => {
     compose(...enhancers)
   )
 
+  if (initCons) {
+    store.dispatch({
+      type: '__APPINIT__',
+      payload: undefined,
+      reducer: s => s,
+      cons: initCons
+    })
+  }
+
   return store
 }
 
 export const makeProdStore = () => {
   const consGetter: AppConsGetter = ({ action }) =>
     action.cons ? [action.cons] : []
-  return makeStore({ deps: { rebrickable: rebrickableService }, consGetter })
+  return makeStore({
+    deps: { rebrickable: rebrickableService },
+    consGetter,
+    initCons: ({ dispatch }) => dispatch(loadThemesInit())
+  })
 }

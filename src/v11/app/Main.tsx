@@ -1,7 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react'
-
-import { useDispatchWithSender } from './useDispatchWithSender'
-import { loadThemesInit } from '../redux'
+import React, { FunctionComponent } from 'react'
 
 import { ThemeSelector } from './ThemeSelector'
 import { Theme } from './Theme'
@@ -11,11 +8,6 @@ type MainProps = {
 }
 
 export const Main: FunctionComponent<MainProps> = ({ version }) => {
-  const dispatch = useDispatchWithSender('Main')
-  useEffect(() => {
-    dispatch(loadThemesInit())
-  }, [dispatch])
-
   return (
     <div style={{ maxWidth: '500px', margin: '0 auto' }}>
       <h3
