@@ -1,6 +1,7 @@
 import { AppActionMould } from '../../../types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
+import { loadSetsInit } from '../../rebrickable/actions'
 
 type SetCurrentThemePayload = {
   themeId: number
@@ -22,5 +23,12 @@ export const [setCurrentTheme, isSetCurrentTheme] = factory<
       draft.ui.currentSetId = null
       draft.guessingGame.guesses = []
     })
+  },
+  cons: ({ dispatch, getState }) => {
+    const themeId = getState().ui.currentThemeId!
+    const { sets } = getState().rebrickable.themes.data![themeId]
+    if (!sets || (!sets!.data && !sets!.loading)) {
+      dispatch(loadSetsInit({ themeId }))
+    }
   }
 })

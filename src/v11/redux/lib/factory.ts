@@ -20,6 +20,9 @@ export const factory = <A extends Action<string, any, any, any>>(
   blueprint: CreatorBlueprint<A>
 ) => {
   const { type, reducer, isError, cons } = blueprint
+  if (cons) {
+    cons.displayName = type
+  }
   const creator = (payload => ({
     type,
     payload,
@@ -27,7 +30,9 @@ export const factory = <A extends Action<string, any, any, any>>(
     ...(isError && {
       error: true
     }),
-    ...(cons && { cons })
+    ...(cons && {
+      cons
+    })
   })) as ActionCreator<A>
   creator.actionType = blueprint.type
   const guard = (action: Action<string, any, any, any>): action is A =>

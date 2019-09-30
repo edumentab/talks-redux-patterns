@@ -10,6 +10,6 @@ To run a component locally, simply...
 - make changes to the code and the browser will immediately update!
 */
 
-import { App } from '../src/v09/app/App'
+import { App } from '../src/v11/app/App'
 
 ReactDOM.render(<App version="local" />, document.getElementById('root'))

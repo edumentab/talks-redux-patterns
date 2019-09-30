@@ -19,7 +19,7 @@ export const createConsequenceMiddleware = <S extends object, D extends object>(
         ...api,
         dispatch: (a: Action<string, any, S, D>) => {
           // @ts-ignore
-          a.sender = `CONSEQUENCE(${cons.name})`
+          a.sender = `CONSEQUENCE(${cons.displayName || cons.name})`
           return api.dispatch(a)
         }
       })

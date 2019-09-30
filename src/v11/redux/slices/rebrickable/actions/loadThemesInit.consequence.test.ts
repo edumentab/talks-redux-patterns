@@ -1,9 +1,13 @@
 import { makeStore } from '../../../makeStore'
 import { fixtureTheme } from '../../../../services/rebrickable'
-import { loadThemesInit, loadThemesSuccess, loadThemesError } from '.'
+import {
+  loadThemesInit,
+  loadThemesSuccess,
+  loadThemesError,
+  isLoadThemesInit
+} from '.'
 import { fakePromise, nextTick } from '../../../../utils'
 import { AppConsGetter } from '../../../types'
-import { isLoadThemesInit } from './loadThemesInit'
 
 const consGetter: AppConsGetter = ({ action }) =>
   isLoadThemesInit(action) ? [action.cons!] : []

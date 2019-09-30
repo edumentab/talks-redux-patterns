@@ -10,7 +10,7 @@ export type ConsequenceAPI<S extends object, D extends object> = {
 export type Consequence<S extends object, D extends object> = ((
   api: ConsequenceAPI<S, D>
 ) => void) & {
-  name: string
+  displayName?: string
 }
 
 export type ConsequenceGetter<S extends object, D extends object> = (
