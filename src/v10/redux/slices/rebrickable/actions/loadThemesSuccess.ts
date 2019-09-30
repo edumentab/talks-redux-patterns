@@ -1,18 +1,28 @@
 import { RebrickableActionNames } from '../types/actionNames'
-import { Action } from '../../../lib/types/action'
+import { AppActionMould } from '../../../types'
 import { ById } from '../../../../utils'
 import { Theme } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
+import produce from 'immer'
 
 type LoadThemesSuccessPayload = {
   data: ById<Theme>
 }
 
-export type LoadThemesSuccessAction = Action<
+export type LoadThemesSuccessAction = AppActionMould<
   RebrickableActionNames.LOAD_THEMES_SUCCESS,
   LoadThemesSuccessPayload
 >
 
 export const [loadThemesSuccess, isLoadThemesSuccess] = factory<
   LoadThemesSuccessAction
->(RebrickableActionNames.LOAD_THEMES_SUCCESS)
+>({
+  type: RebrickableActionNames.LOAD_THEMES_SUCCESS,
+  reducer: (state, payload) => {
+    const { data } = payload
+    return produce(state, draft => {
+      draft.rebrickable.themes.loading = false
+      draft.rebrickable.themes.data = data
+    })
+  }
+})

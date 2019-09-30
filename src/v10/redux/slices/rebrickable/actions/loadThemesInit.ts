@@ -1,12 +1,24 @@
 import { RebrickableActionNames } from '../types/actionNames'
-import { Action } from '../../../lib/types/action'
+import { AppActionMould } from '../../../types'
 import { factory } from '../../../lib/factory'
+import produce from 'immer'
 
-export type LoadThemesInitAction = Action<
+export type LoadThemesInitAction = AppActionMould<
   RebrickableActionNames.LOAD_THEMES_INIT,
   undefined
 >
 
 export const [loadThemesInit, isLoadThemesInit] = factory<LoadThemesInitAction>(
-  RebrickableActionNames.LOAD_THEMES_INIT
+  {
+    type: RebrickableActionNames.LOAD_THEMES_INIT,
+    reducer: state => {
+      return produce(state, draft => {
+        draft.rebrickable.themes = {
+          error: null,
+          loading: true,
+          data: null
+        }
+      })
+    }
+  }
 )

@@ -1,16 +1,27 @@
-import { Action } from '../../../lib/types/action'
+import { AppActionMould } from '../../../types'
 import { UIActionNames } from '../types'
 import { factory } from '../../../lib/factory'
+import produce from 'immer'
 
 type SetCurrentThemePayload = {
   themeId: number
 }
 
-export type SetCurrentThemeAction = Action<
+export type SetCurrentThemeAction = AppActionMould<
   UIActionNames.SET_CURRENT_THEME,
   SetCurrentThemePayload
 >
 
 export const [setCurrentTheme, isSetCurrentTheme] = factory<
   SetCurrentThemeAction
->(UIActionNames.SET_CURRENT_THEME)
+>({
+  type: UIActionNames.SET_CURRENT_THEME,
+  reducer: (state, payload) => {
+    const { themeId } = payload
+    return produce(state, draft => {
+      draft.ui.currentThemeId = themeId
+      draft.ui.currentSetId = null
+      draft.guessingGame.guesses = []
+    })
+  }
+})

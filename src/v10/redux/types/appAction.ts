@@ -1,26 +1,3 @@
-import {
-  LoadSetsErrorAction,
-  LoadSetsInitAction,
-  LoadSetsSuccessAction,
-  LoadThemesErrorAction,
-  LoadThemesInitAction,
-  LoadThemesSuccessAction
-} from '../slices/rebrickable/actions'
+import { AppActionMould } from './appActionMould'
 
-import { MakeGuessAction } from '../slices/guessingGame/actions'
-
-import {
-  SetCurrentSetAction,
-  SetCurrentThemeAction
-} from '../slices/ui/actions'
-
-export type AppAction =
-  | LoadSetsErrorAction
-  | LoadSetsSuccessAction
-  | LoadSetsInitAction
-  | LoadThemesErrorAction
-  | LoadThemesInitAction
-  | LoadThemesSuccessAction
-  | MakeGuessAction
-  | SetCurrentSetAction
-  | SetCurrentThemeAction
+export type AppAction = AppActionMould<string, any>
