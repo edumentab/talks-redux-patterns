@@ -1,27 +1,21 @@
 import { ConsequenceAPI, ConsequenceGetter } from './types/consequence'
+import { Action } from './types/action'
 import { Middleware } from 'redux'
 
-export const createConsequenceMiddleware = <A, S, D>(
-  consGetter: ConsequenceGetter<A, S, D>,
+export const createConsequenceMiddleware = <S extends object, D extends object>(
+  consGetter: ConsequenceGetter<S, D>,
   deps: D
 ): Middleware => {
   return ({ dispatch, getState }) => next => action => {
     next(action)
-    const api: ConsequenceAPI<A, S, D> = {
+    const api: ConsequenceAPI<S, D> = {
       action,
-      dispatch: (dispatch as any) as (a: A) => void,
+      dispatch: (dispatch as any) as (a: Action<string, any>) => void,
       getState,
       deps
     }
     for (const cons of consGetter(api)) {
-      cons({
-        ...api,
-        dispatch: (a: A) => {
-          // @ts-ignore
-          a.sender = `CONSEQUENCE(${cons.name})`
-          return api.dispatch(a)
-        }
-      })
+      cons(api)
     }
   }
 }
