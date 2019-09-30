@@ -6,12 +6,18 @@ export const PresentationV01 = () => {
     <div>
       <ReactMarkdown
         source={`
-### Patterns already applied
+### In version 1 we already have...
 
 * Full app-redux split
 * combined reducer
-* RSA
+* separate service layer
+* [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action)
+* action creators
 
+### Sorry for
+
+* Missing React tests
+* Sharp corners :)
 `}
       />
     </div>
