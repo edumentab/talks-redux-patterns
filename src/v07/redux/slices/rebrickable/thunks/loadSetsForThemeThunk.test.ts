@@ -9,52 +9,46 @@ import {
 } from '../actions'
 import { fakePromise, nextTick } from '../../../../utils'
 
+const deps = {
+  rebrickable: {
+    getSetsForTheme: jest.fn()
+  }
+}
+
+const themeId = 666
+
+const themeSuccessAction = loadThemesSuccess({
+  data: { [themeId]: fixtureTheme }
+})
+
 describe('the loadSetsForThemeThunk creator', () => {
-  it('handles happy path', async () => {
+  it('calls service, handles happy path', async () => {
     const { promise, resolve } = fakePromise()
-    const mockGetSetsForTheme = jest.fn().mockReturnValue(promise)
-    const fakeDeps = {
-      rebrickable: {
-        getSetsForTheme: mockGetSetsForTheme
-      }
-    }
+    deps.rebrickable.getSetsForTheme.mockReturnValue(promise)
     const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, deps: fakeDeps })
-    const themeId = 666
-    dispatch(
-      loadThemesSuccess({
-        data: { [themeId]: fixtureTheme }
-      })
-    )
+    const { dispatch } = makeStore({ actionLog, deps })
+    dispatch(themeSuccessAction)
 
     dispatch(loadSetsForThemeThunk(themeId))
-    expect(actionLog[actionLog.length - 1]).toEqual(loadSetsInit({ themeId }))
-    expect(mockGetSetsForTheme).toHaveBeenCalledWith(themeId)
 
-    const fakeData = { 5: fixtureSet }
-    resolve(fakeData)
+    expect(actionLog[actionLog.length - 1]).toEqual(loadSetsInit({ themeId }))
+    expect(deps.rebrickable.getSetsForTheme).toHaveBeenCalledWith(themeId)
+
+    const fakeSetData = { 5: fixtureSet }
+    resolve(fakeSetData)
     await nextTick(() => {
       expect(actionLog[actionLog.length - 1]).toEqual(
-        loadSetsSuccess({ data: fakeData, themeId })
+        loadSetsSuccess({ data: fakeSetData, themeId })
       )
     })
   })
   it('handles sad path', async () => {
     const { promise, reject } = fakePromise()
-    const mockGetSetsForTheme = jest.fn().mockReturnValue(promise)
-    const fakeDeps = {
-      rebrickable: {
-        getSetsForTheme: mockGetSetsForTheme
-      }
-    }
+    deps.rebrickable.getSetsForTheme.mockReturnValue(promise)
     const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, deps: fakeDeps })
-    const themeId = 666
-    dispatch(
-      loadThemesSuccess({
-        data: { [themeId]: fixtureTheme }
-      })
-    )
+    const { dispatch } = makeStore({ actionLog, deps })
+    dispatch(themeSuccessAction)
+
     dispatch(loadSetsForThemeThunk(themeId))
 
     const error = 'oh no'
