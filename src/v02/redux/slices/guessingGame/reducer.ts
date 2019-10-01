@@ -8,20 +8,20 @@ export function guessingGameReducer(
   state: GuessingGameState = initialGuessingGameState,
   action: AppAction
 ): GuessingGameState {
-  switch (action.type) {
-    case GuessingGameActionNames.MAKE_GUESS: {
-      const { guess } = action.payload
-      return produce(state, draft => {
+  return produce(state, draft => {
+    switch (action.type) {
+      case GuessingGameActionNames.MAKE_GUESS: {
+        const { guess } = action.payload
         draft.guesses.push(guess)
-      })
-    }
-    case UIActionNames.SET_CURRENT_SET:
-    case UIActionNames.SET_CURRENT_THEME: {
-      return produce(state, draft => {
+        return
+      }
+      case UIActionNames.SET_CURRENT_SET:
+      case UIActionNames.SET_CURRENT_THEME: {
         draft.guesses = []
-      })
+        return
+      }
+      default:
+        return
     }
-    default:
-      return state
-  }
+  })
 }

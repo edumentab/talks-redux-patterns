@@ -9,16 +9,16 @@ export function guessingGameReducer(
   state: GuessingGameState = initialGuessingGameState,
   action: AppAction
 ): GuessingGameState {
-  if (isMakeGuess(action)) {
-    const { guess } = action.payload
-    return produce(state, draft => {
+  return produce(state, draft => {
+    if (isMakeGuess(action)) {
+      const { guess } = action.payload
       draft.guesses.push(guess)
-    })
-  }
-  if (isSetCurrentSet(action) || isSetCurrentTheme(action)) {
-    return produce(state, draft => {
+      return
+    }
+    if (isSetCurrentSet(action) || isSetCurrentTheme(action)) {
       draft.guesses = []
-    })
-  }
-  return state
+      return
+    }
+    return
+  })
 }
