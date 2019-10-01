@@ -5,11 +5,11 @@ import produce from 'immer'
 import { isMakeGuess } from './actions'
 import { isSetCurrentSet, isSetCurrentTheme } from '../ui/actions'
 
-export function guessingGameReducer(
+export const guessingGameReducer = (
   state: GuessingGameState = initialGuessingGameState,
   action: AppAction
-): GuessingGameState {
-  return produce(state, draft => {
+): GuessingGameState =>
+  produce(state, draft => {
     if (isMakeGuess(action)) {
       const { guess } = action.payload
       draft.guesses.push(guess)
@@ -19,6 +19,4 @@ export function guessingGameReducer(
       draft.guesses = []
       return
     }
-    return
   })
-}

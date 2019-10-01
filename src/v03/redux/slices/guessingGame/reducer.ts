@@ -4,11 +4,11 @@ import { UIActionNames } from '../ui/types'
 import { AppAction } from '../../types'
 import produce from 'immer'
 
-export function guessingGameReducer(
+export const guessingGameReducer = (
   state: GuessingGameState = initialGuessingGameState,
   action: AppAction
-): GuessingGameState {
-  return produce(state, draft => {
+): GuessingGameState =>
+  produce(state, draft => {
     switch (action.type) {
       case GuessingGameActionNames.MAKE_GUESS: {
         const { guess } = action.payload
@@ -20,8 +20,5 @@ export function guessingGameReducer(
         draft.guesses = []
         return
       }
-      default:
-        return
     }
   })
-}
