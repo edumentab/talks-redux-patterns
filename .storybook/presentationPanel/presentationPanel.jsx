@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import './presentationPanel.css'
 import { useAddonState } from '@storybook/api'
@@ -34,6 +34,12 @@ const pages = [
 
 export const Panel = props => {
   const [page, setPage] = useAddonState('edumentab/presentation', 0)
+  useEffect(() => {
+    document.body.addEventListener(
+      'keydown',
+      e => e.key === 'q' && toggleFullScreen()
+    )
+  }, [])
   if (!props.active) return null
   const [title, Page] = pages[page]
   return (
@@ -53,4 +59,14 @@ export const Panel = props => {
       </div>
     </div>
   )
+}
+
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+    document.body.requestFullscreen()
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen()
+    }
+  }
 }
