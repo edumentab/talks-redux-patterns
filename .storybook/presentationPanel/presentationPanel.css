@@ -1,3 +1,7 @@
+#root > div:first-child {
+  background-color: aliceblue;
+}
+
 .presentationPanel {
   padding: 5px;
 }
