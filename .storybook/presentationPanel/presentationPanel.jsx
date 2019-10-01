@@ -16,6 +16,7 @@ import { PresentationV08 } from './presentationV08'
 import { PresentationV09 } from './presentationV09'
 import { PresentationV10 } from './presentationV10'
 import { PresentationV11 } from './presentationV11'
+import { PresentationV99 } from './presentationV99'
 
 const pages = [
   ['hello!', PresentationV00],
@@ -29,7 +30,8 @@ const pages = [
   ['cons', PresentationV08],
   ['sender', PresentationV09],
   ['reducer', PresentationV10],
-  ['cons II', PresentationV11]
+  ['cons II', PresentationV11],
+  ['bye!', PresentationV99]
 ]
 
 export const Panel = props => {
@@ -44,16 +46,18 @@ export const Panel = props => {
   const [title, Page] = pages[page]
   return (
     <div className="presentationPanel bp3-ui-text">
-      <ButtonGroup>
-        {pages.map(([title], n) => (
-          <Button
-            key={n}
-            onClick={() => setPage(n)}
-            active={n === page}
-            text={title}
-          />
-        ))}
-      </ButtonGroup>
+      <div style={{ transform: 'scale(0.7, 0.7)', transformOrigin: 'left' }}>
+        <ButtonGroup>
+          {pages.map(([title], n) => (
+            <Button
+              key={n}
+              onClick={() => setPage(n)}
+              active={n === page}
+              text={title}
+            />
+          ))}
+        </ButtonGroup>
+      </div>
       <div className="pageContent">
         <Page />
       </div>
