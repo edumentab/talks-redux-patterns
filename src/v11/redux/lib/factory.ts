@@ -26,7 +26,9 @@ export const factory = <A extends Action<string, any, any, any>>(
   const creator = (payload => ({
     type,
     payload,
-    reducer,
+    ...(reducer && {
+      reducer
+    }),
     ...(isError && {
       error: true
     }),

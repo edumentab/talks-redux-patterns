@@ -10,6 +10,7 @@ export const PresentationV05 = () => {
 
 * introduce [thunks](https://github.com/reduxjs/redux-thunk)
 * move side effects from app to thunks
+* add actionLog middleware (to be able to test)
 
 ### Rationale
 
@@ -18,6 +19,8 @@ export const PresentationV05 = () => {
 
 ### Note
 
+* Still testing via store, don't test thunks separately
+* Separate thunk creators and action creators!
 * The missing React tests would be simplified in this step
 * Thunks aren't here to stay...
 

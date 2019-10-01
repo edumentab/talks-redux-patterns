@@ -42,7 +42,6 @@ export const makeStore = (opts: MakeStoreOpts = {}) => {
     store.dispatch({
       type: '__APPINIT__',
       payload: undefined,
-      reducer: s => s,
       cons: initCons
     })
   }

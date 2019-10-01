@@ -4,7 +4,7 @@ export type Action<T extends string, P, S extends object> = {
   type: T
   error?: boolean
   sender?: string
-  reducer: Reducer<S, P>
+  reducer?: Reducer<S, P>
   payload: P
 }
 
