@@ -14,53 +14,47 @@ import {
 export const rebrickableReducer = (
   state: RebrickableState = initialRebrickableState,
   action: AppAction
-): RebrickableState => {
-  if (isLoadThemesInit(action)) {
-    return produce(state, draft => {
+): RebrickableState =>
+  produce(state, draft => {
+    if (isLoadThemesInit(action)) {
       draft.themes = {
         error: null,
         loading: true,
         data: null
       }
-    })
-  }
-  if (isLoadThemesError(action)) {
-    const { error } = action.payload
-    return produce(state, draft => {
+      return
+    }
+    if (isLoadThemesError(action)) {
+      const { error } = action.payload
       draft.themes.loading = false
       draft.themes.error = error
-    })
-  }
-  if (isLoadThemesSuccess(action)) {
-    const { data } = action.payload
-    return produce(state, draft => {
+      return
+    }
+    if (isLoadThemesSuccess(action)) {
+      const { data } = action.payload
       draft.themes.loading = false
       draft.themes.data = data
-    })
-  }
-  if (isLoadSetsInit(action)) {
-    const { themeId } = action.payload
-    return produce(state, draft => {
+      return
+    }
+    if (isLoadSetsInit(action)) {
+      const { themeId } = action.payload
       draft.themes.data![themeId].sets = {
         loading: true,
         error: null,
         data: null
       }
-    })
-  }
-  if (isLoadSetsError(action)) {
-    const { themeId, error } = action.payload
-    return produce(state, draft => {
+      return
+    }
+    if (isLoadSetsError(action)) {
+      const { themeId, error } = action.payload
       draft.themes.data![themeId].sets.loading = false
       draft.themes.data![themeId].sets.error = error
-    })
-  }
-  if (isLoadSetsSuccess(action)) {
-    const { data, themeId } = action.payload
-    return produce(state, draft => {
+      return
+    }
+    if (isLoadSetsSuccess(action)) {
+      const { data, themeId } = action.payload
       draft.themes.data![themeId].sets.loading = false
       draft.themes.data![themeId].sets.data = data
-    })
-  }
-  return state
-}
+      return
+    }
+  })
