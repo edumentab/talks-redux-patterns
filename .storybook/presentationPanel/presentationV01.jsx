@@ -17,7 +17,9 @@ export const PresentationV01 = () => {
 ### Sorry for
 
 * Missing React tests
-* Sharp corners :)
+* Tiny example
+* Sharp corners
+* Unorthodoxness (sorry not sorry)
 `}
       />
     </div>

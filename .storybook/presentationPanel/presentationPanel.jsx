@@ -4,6 +4,7 @@ import './presentationPanel.css'
 import { useAddonState } from '@storybook/api'
 import { ButtonGroup, Button } from '@blueprintjs/core'
 
+import { PresentationV00 } from './presentationV00'
 import { PresentationV01 } from './presentationV01'
 import { PresentationV02 } from './presentationV02'
 import { PresentationV03 } from './presentationV03'
@@ -17,6 +18,7 @@ import { PresentationV10 } from './presentationV10'
 import { PresentationV11 } from './presentationV11'
 
 const pages = [
+  ['hello!', PresentationV00],
   ['start', PresentationV01],
   ['immer', PresentationV02],
   ['test', PresentationV03],

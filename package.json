@@ -4,8 +4,8 @@
     "test:ts": "res=$(tsc --noEmit --skipLibCheck | grep -v \"^node_modules\"); if [ -n \"$res\" ]; then echo $res && exit 1 ; fi",
     "test:unit": "jest",
     "test": "npm run test:ts && npm run test:lint && npm run test:unit",
-    "storybook": "start-storybook",
-    "build-storybook": "build-storybook -c .storybook -o .dist",
+    "storybook": "start-storybook -s ./static",
+    "build-storybook": "build-storybook -s ./static -c .storybook -o .dist",
     "local": "parcel ./runLocally/index.html"
   },
   "devDependencies": {

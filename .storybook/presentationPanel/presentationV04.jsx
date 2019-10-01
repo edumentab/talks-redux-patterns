@@ -8,7 +8,7 @@ export const PresentationV04 = () => {
         source={`
 ### In version 4 we...
 
-* introduce the action creator factory ([Inception](https://www.imdb.com/title/tt1375666/) much?)
+* introduce the action creator factory
 * switch all action creators to use it
 
 ### Rationale
