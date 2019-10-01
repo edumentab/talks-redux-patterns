@@ -6,22 +6,19 @@ import produce from 'immer'
 export const UIReducer = (
   state: UIState = initialUIState,
   action: AppAction
-): UIState => {
-  switch (action.type) {
-    case UIActionNames.SET_CURRENT_SET: {
-      const { setId } = action.payload
-      return produce(state, draft => {
+): UIState =>
+  produce(state, draft => {
+    switch (action.type) {
+      case UIActionNames.SET_CURRENT_SET: {
+        const { setId } = action.payload
         draft.currentSetId = setId
-      })
-    }
-    case UIActionNames.SET_CURRENT_THEME: {
-      const { themeId } = action.payload
-      return produce(state, draft => {
+        return
+      }
+      case UIActionNames.SET_CURRENT_THEME: {
+        const { themeId } = action.payload
         draft.currentThemeId = themeId
         draft.currentSetId = null
-      })
+        return
+      }
     }
-    default:
-      return state
-  }
-}
+  })

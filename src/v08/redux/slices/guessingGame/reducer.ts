@@ -19,6 +19,5 @@ export function guessingGameReducer(
       draft.guesses = []
       return
     }
-    return
   })
 }

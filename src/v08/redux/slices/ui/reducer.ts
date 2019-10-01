@@ -7,19 +7,17 @@ import { isSetCurrentSet, isSetCurrentTheme } from './actions'
 export const UIReducer = (
   state: UIState = initialUIState,
   action: AppAction
-): UIState => {
-  if (isSetCurrentSet(action)) {
-    const { setId } = action.payload
-    return produce(state, draft => {
+): UIState =>
+  produce(state, draft => {
+    if (isSetCurrentSet(action)) {
+      const { setId } = action.payload
       draft.currentSetId = setId
-    })
-  }
-  if (isSetCurrentTheme(action)) {
-    const { themeId } = action.payload
-    return produce(state, draft => {
+      return
+    }
+    if (isSetCurrentTheme(action)) {
+      const { themeId } = action.payload
       draft.currentThemeId = themeId
       draft.currentSetId = null
-    })
-  }
-  return state
-}
+      return
+    }
+  })
