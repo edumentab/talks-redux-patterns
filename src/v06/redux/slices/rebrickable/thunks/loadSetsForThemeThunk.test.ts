@@ -17,16 +17,17 @@ import {
 } from '../actions'
 import { fakePromise, nextTick } from '../../../../utils'
 
+const themeId = 666
+
+const themeSuccessAction = loadThemesSuccess({
+  data: { [themeId]: rebrickableService.fixtureTheme }
+})
+
 describe('the loadSetsForThemeThunk creator', () => {
   it('handles happy path', async () => {
     const actionLog: any[] = []
     const { dispatch } = makeStore({ actionLog })
-    const themeId = 666
-    dispatch(
-      loadThemesSuccess({
-        data: { [themeId]: rebrickableService.fixtureTheme }
-      })
-    )
+    dispatch(themeSuccessAction)
 
     const { promise, resolve } = fakePromise()
     ;(rebrickableService.getSetsForTheme as any).mockReturnValue(promise)
@@ -46,12 +47,7 @@ describe('the loadSetsForThemeThunk creator', () => {
   it('handles sad path', async () => {
     const actionLog: any[] = []
     const { dispatch } = makeStore({ actionLog })
-    const themeId = 666
-    dispatch(
-      loadThemesSuccess({
-        data: { [themeId]: rebrickableService.fixtureTheme }
-      })
-    )
+    dispatch(themeSuccessAction)
 
     const { promise, reject } = fakePromise()
     ;(rebrickableService.getSetsForTheme as any).mockReturnValue(promise)
