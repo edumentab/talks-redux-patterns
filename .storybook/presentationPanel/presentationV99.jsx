@@ -11,7 +11,7 @@ export const PresentationV99 = () => {
 * [https://github.com/edumentab/talks-redux-patterns](https://github.com/edumentab/talks-redux-patterns)
 * [https://blog.krawaller.se/](https://blog.krawaller.se/)
 * [https://edument.se/](https://edument.se/)
-* [mailto:david@krawaller.se](david@krawaller.se)
+* [david@krawaller.se](mailto:david@krawaller.se)
 
 `}
       />
