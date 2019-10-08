@@ -30,7 +30,7 @@ describe('the loadSetsInit action consequence', () => {
     const { dispatch } = makeStore({ actionLog, deps, consGetter })
     dispatch(loadThemesSuccess({ data: fakeThemeData }))
 
-    dispatch(loadSetsInit({ themeId }))
+    dispatch(loadSetsInit(themeId))
 
     expect(deps.rebrickable.getSetsForTheme).toHaveBeenCalledWith(themeId)
 
@@ -51,7 +51,7 @@ describe('the loadSetsInit action consequence', () => {
     const { dispatch } = makeStore({ actionLog, deps, consGetter })
     dispatch(loadThemesSuccess({ data: fakeThemeData }))
 
-    dispatch(loadSetsInit({ themeId }))
+    dispatch(loadSetsInit(themeId))
 
     const error = 'KABLAM!!'
     reject(error)

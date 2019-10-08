@@ -4,9 +4,7 @@ import produce from 'immer'
 import { loadSetsSuccess } from './loadSetsSuccess'
 import { loadSetsError } from './loadSetsError'
 
-type LoadSetsInitPayload = {
-  themeId: number
-}
+type LoadSetsInitPayload = number // the themeId for which to load sets
 
 export type LoadSetsInitAction = AppActionMould<
   'LOAD_SETS_INIT',
@@ -15,18 +13,16 @@ export type LoadSetsInitAction = AppActionMould<
 
 export const [loadSetsInit, isLoadSetsInit] = factory<LoadSetsInitAction>({
   type: 'LOAD_SETS_INIT',
-  reducer: (state, payload) => {
-    const { themeId } = payload
-    return produce(state, draft => {
-      draft.rebrickable.themes.data![themeId].sets = {
+  reducer: (state, payload) =>
+    produce(state, draft => {
+      draft.rebrickable.themes.data![payload].sets = {
         loading: true,
         error: null,
         data: null
       }
-    })
-  },
+    }),
   cons: ({ action, dispatch, deps }) => {
-    const { themeId } = action.payload
+    const themeId = action.payload
     deps.rebrickable
       .getSetsForTheme(themeId)
       .then(data => dispatch(loadSetsSuccess({ themeId, data })))

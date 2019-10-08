@@ -25,7 +25,7 @@ export const [setCurrentTheme, isSetCurrentTheme] = factory<
     const themeId = getState().ui.currentThemeId!
     const { sets } = getState().rebrickable.themes.data![themeId]
     if (!sets || (!sets!.data && !sets!.loading)) {
-      dispatch(loadSetsInit({ themeId }))
+      dispatch(loadSetsInit(themeId))
     }
   }
 })

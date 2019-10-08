@@ -33,7 +33,7 @@ describe('the loadSetsForThemeThunk creator', () => {
     ;(rebrickableService.getSetsForTheme as any).mockReturnValue(promise)
 
     dispatch(loadSetsForThemeThunk(themeId))
-    expect(actionLog[actionLog.length - 1]).toEqual(loadSetsInit({ themeId }))
+    expect(actionLog[actionLog.length - 1]).toEqual(loadSetsInit(themeId))
     expect(rebrickableService.getSetsForTheme).toHaveBeenCalledWith(themeId)
 
     const fakeData = { 5: rebrickableService.fixtureSet }

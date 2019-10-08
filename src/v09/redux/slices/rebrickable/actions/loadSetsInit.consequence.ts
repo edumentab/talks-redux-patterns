@@ -9,7 +9,7 @@ export const loadSetsInitConsequence: AppCons = ({
   deps
 }) => {
   if (isLoadSetsInit(action)) {
-    const { themeId } = action.payload
+    const themeId = action.payload
     deps.rebrickable
       .getSetsForTheme(themeId)
       .then(data => dispatch(loadSetsSuccess({ themeId, data })))

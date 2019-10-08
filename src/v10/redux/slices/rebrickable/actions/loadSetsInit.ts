@@ -2,9 +2,7 @@ import { AppActionMould } from '../../../types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 
-type LoadSetsInitPayload = {
-  themeId: number
-}
+type LoadSetsInitPayload = number // the themeId for which to load sets
 
 export type LoadSetsInitAction = AppActionMould<
   'LOAD_SETS_INIT',
@@ -13,14 +11,12 @@ export type LoadSetsInitAction = AppActionMould<
 
 export const [loadSetsInit, isLoadSetsInit] = factory<LoadSetsInitAction>({
   type: 'LOAD_SETS_INIT',
-  reducer: (state, payload) => {
-    const { themeId } = payload
-    return produce(state, draft => {
-      draft.rebrickable.themes.data![themeId].sets = {
+  reducer: (state, payload) =>
+    produce(state, draft => {
+      draft.rebrickable.themes.data![payload].sets = {
         loading: true,
         error: null,
         data: null
       }
     })
-  }
 })

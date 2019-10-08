@@ -9,7 +9,7 @@ describe('the loadSetsInit action', () => {
     dispatch(
       loadSetsError({ themeId: 666, error: 'error we want to be cleared' })
     )
-    dispatch(loadSetsInit({ themeId: 666 }))
+    dispatch(loadSetsInit(666))
     expect(getState().rebrickable.themes.data![666].sets.error).toBe(null)
     expect(getState().rebrickable.themes.data![666].sets.loading).toBe(true)
   })

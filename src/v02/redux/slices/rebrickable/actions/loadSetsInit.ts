@@ -1,9 +1,7 @@
 import { RebrickableActionNames } from '../types/actionNames'
 import { Action } from '../../../lib/types/action'
 
-type LoadSetsInitPayload = {
-  themeId: number
-}
+type LoadSetsInitPayload = number // the themeId for which to load sets
 
 export type LoadSetsInitAction = Action<
   RebrickableActionNames.LOAD_SETS_INIT,
@@ -12,5 +10,5 @@ export type LoadSetsInitAction = Action<
 
 export const loadSetsInit = (themeId: number): LoadSetsInitAction => ({
   type: RebrickableActionNames.LOAD_SETS_INIT,
-  payload: { themeId }
+  payload: themeId
 })

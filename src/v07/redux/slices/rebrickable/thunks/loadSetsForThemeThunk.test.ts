@@ -31,7 +31,7 @@ describe('the loadSetsForThemeThunk creator', () => {
 
     dispatch(loadSetsForThemeThunk(themeId))
 
-    expect(actionLog[actionLog.length - 1]).toEqual(loadSetsInit({ themeId }))
+    expect(actionLog[actionLog.length - 1]).toEqual(loadSetsInit(themeId))
     expect(deps.rebrickable.getSetsForTheme).toHaveBeenCalledWith(themeId)
 
     const fakeSetData = { 5: fixtureSet }

@@ -37,7 +37,7 @@ export const rebrickableReducer = (
       return
     }
     if (isLoadSetsInit(action)) {
-      const { themeId } = action.payload
+      const themeId = action.payload
       draft.themes.data![themeId].sets = {
         loading: true,
         error: null,
