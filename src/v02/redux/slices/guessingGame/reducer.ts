@@ -11,8 +11,7 @@ export const guessingGameReducer = (
   produce(state, draft => {
     switch (action.type) {
       case GuessingGameActionNames.MAKE_GUESS: {
-        const { guess } = action.payload
-        draft.guesses.push(guess)
+        draft.guesses.push(action.payload)
         return
       }
       case UIActionNames.SET_CURRENT_SET:

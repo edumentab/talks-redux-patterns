@@ -11,8 +11,7 @@ export const guessingGameReducer = (
 ): GuessingGameState =>
   produce(state, draft => {
     if (isMakeGuess(action)) {
-      const { guess } = action.payload
-      draft.guesses.push(guess)
+      draft.guesses.push(action.payload)
       return
     }
     if (isSetCurrentSet(action) || isSetCurrentTheme(action)) {

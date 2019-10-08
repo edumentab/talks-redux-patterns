@@ -9,10 +9,9 @@ export function guessingGameReducer(
 ): GuessingGameState {
   switch (action.type) {
     case GuessingGameActionNames.MAKE_GUESS: {
-      const { guess } = action.payload
       return {
         ...state,
-        guesses: state.guesses.concat(guess)
+        guesses: state.guesses.concat(action.payload)
       }
     }
     case UIActionNames.SET_CURRENT_SET:

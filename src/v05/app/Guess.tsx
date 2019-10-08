@@ -28,7 +28,7 @@ export const Guess: FunctionComponent = () => {
       inputRef.current!.value = ''
       inputRef.current!.focus()
       if (!isNaN(newGuess)) {
-        dispatch(makeGuess({ guess: newGuess }))
+        dispatch(makeGuess(newGuess))
       }
     },
     [dispatch]
