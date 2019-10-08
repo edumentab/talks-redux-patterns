@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const { execSync, exec } = require('child_process')
-const diff = require('diff')
 
 const root = path.join(__dirname, 'src')
 const res = {}
@@ -18,9 +17,17 @@ versions.forEach(version => {
         dirs.push(here)
       } else {
         const minusRoot = here.replace(path.join(root, version) + '/', '')
-        res[minusRoot] = res[minusRoot] || { versions: {}, name: minusRoot }
+        res[minusRoot] = res[minusRoot] || {
+          versions: {},
+          name: minusRoot,
+          raw: []
+        }
+        const file = fs.readFileSync(here).toString()
+        if (!res[minusRoot].raw.includes(file)) {
+          res[minusRoot].raw.push(file)
+        }
         res[minusRoot].versions[version] = {
-          file: fs.readFileSync(here).toString()
+          which: res[minusRoot].raw.indexOf(file)
         }
       }
     })
@@ -31,22 +38,20 @@ for (const file in res) {
   const f = res[file]
   f.allStates = []
   versions.forEach((v, n) => {
-    const fileV = f.versions[v] || (f.versions[v] = { file: '' })
+    const fileV = f.versions[v] || (f.versions[v] = { which: null })
     const prevV = versions[n - 1]
-    const prevFileV = (prevV && f.versions[prevV]) || {}
-    fileV.state = !fileV.file
-      ? prevFileV.file
-        ? 'deleted'
-        : 'nonexistent'
-      : !prevFileV.file
-      ? 'created'
-      : prevFileV.file === fileV.file
-      ? 'unchanged'
-      : 'edited'
+    const prevFileV = (prevV && f.versions[prevV]) || { which: null }
+    fileV.state =
+      fileV.which === null
+        ? prevFileV.which !== null
+          ? 'deleted'
+          : 'nonexistent'
+        : prevFileV.which === null
+        ? 'created'
+        : prevFileV.which === fileV.which
+        ? 'unchanged'
+        : 'edited'
     f.allStates.push(fileV.state)
-    if (fileV.state === 'edited') {
-      fileV.diff = diff.diffChars(prevFileV.file, fileV.file)
-    }
   })
   if (f.allStates.slice(1).filter(s => s !== 'unchanged').length === 0) {
     f.allStates = versions.map(() => 'eternal')

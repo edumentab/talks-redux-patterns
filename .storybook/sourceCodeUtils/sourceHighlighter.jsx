@@ -4,14 +4,16 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import createElement from 'react-syntax-highlighter/dist/create-element'
 import classNames from 'classnames'
+import { diffWords } from 'diff'
 
 const HighlighterInner = props => {
-  const {
-    fileInfo = { file: '' },
-    language = 'typescript',
-    onLinkClick
-  } = props
-  const { file: code, diff } = fileInfo
+  const { fileInfo, language = 'typescript', version, onLinkClick } = props
+  const fileVersion = (fileInfo && fileInfo.versions[version]) || {}
+  const code = ((fileInfo && fileInfo.raw) || [])[fileVersion.which] || ''
+  const diff =
+    fileVersion.state === 'edited' &&
+    diffWords(fileInfo.raw[fileVersion.which - 1], code)
+
   const handleLinkClick = useCallback(
     e => {
       const link =
