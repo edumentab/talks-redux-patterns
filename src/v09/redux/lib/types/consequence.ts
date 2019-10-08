@@ -1,10 +1,16 @@
 import { Action } from './action'
 
-export type ConsequenceAPI<S extends object, D extends object> = {
-  dispatch: (action: Action<string, any>) => void
+export type ConsequenceGetterAPI<S extends object, D extends object> = {
   getState: () => S
   deps: D
   action: Action<string, any>
+}
+
+export type ConsequenceAPI<
+  S extends object,
+  D extends object
+> = ConsequenceGetterAPI<S, D> & {
+  dispatch: (action: Action<string, any>) => void
 }
 
 export type Consequence<S extends object, D extends object> = ((
@@ -14,5 +20,5 @@ export type Consequence<S extends object, D extends object> = ((
 }
 
 export type ConsequenceGetter<S extends object, D extends object> = (
-  api: ConsequenceAPI<S, D>
+  api: ConsequenceGetterAPI<S, D>
 ) => Consequence<S, D>[]
