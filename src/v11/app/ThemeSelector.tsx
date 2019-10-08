@@ -52,7 +52,7 @@ export const ThemeSelector: FunctionComponent = () => {
     <Select
       items={themesArray.filter(t => t.name.match(query))}
       itemRenderer={renderItem}
-      onItemSelect={theme => dispatch(setCurrentTheme({ themeId: theme.id }))}
+      onItemSelect={theme => dispatch(setCurrentTheme(theme.id))}
       popoverProps={{ minimal: true }}
       onQueryChange={setQuery}
     >

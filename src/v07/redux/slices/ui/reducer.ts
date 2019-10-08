@@ -10,13 +10,11 @@ export const UIReducer = (
 ): UIState =>
   produce(state, draft => {
     if (isSetCurrentSet(action)) {
-      const { setId } = action.payload
-      draft.currentSetId = setId
+      draft.currentSetId = action.payload
       return
     }
     if (isSetCurrentTheme(action)) {
-      const { themeId } = action.payload
-      draft.currentThemeId = themeId
+      draft.currentThemeId = action.payload
       draft.currentSetId = null
       return
     }

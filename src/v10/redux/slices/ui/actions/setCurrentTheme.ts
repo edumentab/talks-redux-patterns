@@ -2,9 +2,7 @@ import { AppActionMould } from '../../../types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 
-type SetCurrentThemePayload = {
-  themeId: number
-}
+type SetCurrentThemePayload = number
 
 export type SetCurrentThemeAction = AppActionMould<
   'SET_CURRENT_THEME',
@@ -16,9 +14,8 @@ export const [setCurrentTheme, isSetCurrentTheme] = factory<
 >({
   type: 'SET_CURRENT_THEME',
   reducer: (state, payload) => {
-    const { themeId } = payload
     return produce(state, draft => {
-      draft.ui.currentThemeId = themeId
+      draft.ui.currentThemeId = payload
       draft.ui.currentSetId = null
       draft.guessingGame.guesses = []
     })

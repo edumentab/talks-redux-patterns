@@ -58,7 +58,7 @@ export const SetSelector: FunctionComponent = () => {
     <Select
       items={setsArray.filter(t => t.name.match(query))}
       itemRenderer={renderItem}
-      onItemSelect={set => dispatch(setCurrentSet({ setId: set.set_num }))}
+      onItemSelect={set => dispatch(setCurrentSet(set.set_num))}
       popoverProps={{ minimal: true }}
       onQueryChange={setQuery}
     >

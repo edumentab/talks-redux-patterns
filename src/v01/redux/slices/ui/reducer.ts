@@ -8,17 +8,15 @@ export const UIReducer = (
 ): UIState => {
   switch (action.type) {
     case UIActionNames.SET_CURRENT_SET: {
-      const { setId } = action.payload
       return {
         ...state,
-        currentSetId: setId
+        currentSetId: action.payload
       }
     }
     case UIActionNames.SET_CURRENT_THEME: {
-      const { themeId } = action.payload
       return {
         ...state,
-        currentThemeId: themeId,
+        currentThemeId: action.payload,
         currentSetId: null
       }
     }

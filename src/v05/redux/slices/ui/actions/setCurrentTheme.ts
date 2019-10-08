@@ -2,9 +2,7 @@ import { Action } from '../../../lib/types/action'
 import { UIActionNames } from '../types'
 import { factory } from '../../../lib/factory'
 
-type SetCurrentThemePayload = {
-  themeId: number
-}
+type SetCurrentThemePayload = number
 
 export type SetCurrentThemeAction = Action<
   UIActionNames.SET_CURRENT_THEME,

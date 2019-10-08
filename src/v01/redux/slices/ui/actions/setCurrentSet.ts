@@ -1,9 +1,7 @@
 import { Action } from '../../../lib/types/action'
 import { UIActionNames } from '../types'
 
-type SetCurrentSetPayload = {
-  setId: string
-}
+type SetCurrentSetPayload = string // SetId looks like for example "6080_2"
 
 export type SetCurrentSetAction = Action<
   UIActionNames.SET_CURRENT_SET,
@@ -12,5 +10,5 @@ export type SetCurrentSetAction = Action<
 
 export const setCurrentSet = (setId: string): SetCurrentSetAction => ({
   type: UIActionNames.SET_CURRENT_SET,
-  payload: { setId }
+  payload: setId
 })

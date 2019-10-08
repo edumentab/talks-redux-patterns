@@ -2,9 +2,7 @@ import { AppActionMould } from '../../../types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 
-type SetCurrentSetPayload = {
-  setId: string
-}
+type SetCurrentSetPayload = string // SetId looks like for example "6080_2"
 
 export type SetCurrentSetAction = AppActionMould<
   'SET_CURRENT_SET',
@@ -14,9 +12,8 @@ export type SetCurrentSetAction = AppActionMould<
 export const [setCurrentSet, isSetCurrentSet] = factory<SetCurrentSetAction>({
   type: 'SET_CURRENT_SET',
   reducer: (state, payload) => {
-    const { setId } = payload
     return produce(state, draft => {
-      draft.ui.currentSetId = setId
+      draft.ui.currentSetId = payload
       draft.guessingGame.guesses = []
     })
   }

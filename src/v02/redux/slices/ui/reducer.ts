@@ -10,13 +10,11 @@ export const UIReducer = (
   produce(state, draft => {
     switch (action.type) {
       case UIActionNames.SET_CURRENT_SET: {
-        const { setId } = action.payload
-        draft.currentSetId = setId
+        draft.currentSetId = action.payload
         return
       }
       case UIActionNames.SET_CURRENT_THEME: {
-        const { themeId } = action.payload
-        draft.currentThemeId = themeId
+        draft.currentThemeId = action.payload
         draft.currentSetId = null
         return
       }

@@ -1,9 +1,7 @@
 import { Action } from '../../../lib/types/action'
 import { UIActionNames } from '../types'
 
-type SetCurrentThemePayload = {
-  themeId: number
-}
+type SetCurrentThemePayload = number
 
 export type SetCurrentThemeAction = Action<
   UIActionNames.SET_CURRENT_THEME,
@@ -12,5 +10,5 @@ export type SetCurrentThemeAction = Action<
 
 export const setCurrentTheme = (themeId: number): SetCurrentThemeAction => ({
   type: UIActionNames.SET_CURRENT_THEME,
-  payload: { themeId }
+  payload: themeId
 })

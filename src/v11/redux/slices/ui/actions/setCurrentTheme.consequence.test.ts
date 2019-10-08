@@ -22,7 +22,7 @@ describe('the loadThemesSuccess consequence', () => {
     const { dispatch } = makeStore({ actionLog, consGetter })
     dispatch(loadThemesSuccess({ data: fakeThemeData }))
 
-    dispatch(setCurrentTheme({ themeId }))
+    dispatch(setCurrentTheme(themeId))
 
     await nextTick(() => {
       expect(actionLog[actionLog.length - 1]).toMatchObject(
@@ -36,7 +36,7 @@ describe('the loadThemesSuccess consequence', () => {
     dispatch(loadThemesSuccess({ data: fakeThemeData }))
     dispatch(loadSetsSuccess({ data: fakeSetData, themeId }))
 
-    dispatch(setCurrentTheme({ themeId }))
+    dispatch(setCurrentTheme(themeId))
 
     await nextTick(() => {
       expect(actionLog[actionLog.length - 1]).not.toMatchObject(
@@ -50,7 +50,7 @@ describe('the loadThemesSuccess consequence', () => {
     dispatch(loadThemesSuccess({ data: fakeThemeData }))
     dispatch(loadSetsInit({ themeId }))
 
-    dispatch(setCurrentTheme({ themeId }))
+    dispatch(setCurrentTheme(themeId))
 
     await nextTick(() => {
       expect(actionLog[actionLog.length - 1]).not.toMatchObject(
