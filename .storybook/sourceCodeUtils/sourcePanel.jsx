@@ -5,7 +5,7 @@ import SourceCodePanelControls from './sourcePanel.controls'
 import { stateToIcon } from './stateToIcon'
 import './sourcePanel.css'
 
-import fileInfo from '../../fileDiff.json'
+import fileInfo from './_sourceCodes.json'
 import { Tag } from '@blueprintjs/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const fileDiff = fileInfo.files

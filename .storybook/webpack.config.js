@@ -1,4 +1,5 @@
 const path = require('path')
+const SourcePlugin = require('./sourceCodeUtils/sourcePlugin')
 
 module.exports = ({ config }) => {
   // remove Storybooks default CSS rules and replace with functioning CSS modules setup
@@ -57,6 +58,9 @@ module.exports = ({ config }) => {
       loader: require.resolve('babel-loader')
     }
   )
+
+  // add plugin that collects the source code
+  config.plugins.push(new SourcePlugin())
 
   return config
 }
