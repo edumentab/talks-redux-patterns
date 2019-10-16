@@ -2,14 +2,15 @@ import { createStore, compose } from 'redux'
 import { initialAppState } from './initialAppState'
 
 import { rootReducer } from './rootReducer'
-import { AppState } from './types'
+import { AppState, AppAction, AppStore } from './types'
 
-type MakeStoreOpts = {
+export type MakeStoreOpts = {
   initialState?: AppState
+  actionProcessor?: (a: AppAction) => AppAction
 }
 
 export const makeStore = (opts: MakeStoreOpts = {}) => {
-  const { initialState } = opts
+  const { initialState, actionProcessor } = opts
   const enhancers = []
 
   const devToolsExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION__
@@ -17,9 +18,15 @@ export const makeStore = (opts: MakeStoreOpts = {}) => {
     enhancers.push(devToolsExtension())
   }
 
-  return createStore(
+  const store = createStore(
     rootReducer,
     initialState || initialAppState,
     compose(...enhancers)
   )
+
+  return {
+    ...store,
+    dispatch: (a: AppAction) =>
+      store.dispatch(actionProcessor ? actionProcessor(a) : a)
+  } as AppStore
 }
