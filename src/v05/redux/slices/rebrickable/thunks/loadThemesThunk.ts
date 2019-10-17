@@ -1,4 +1,4 @@
-import { AppThunkCreator } from '../../../lib/types/thunk'
+import { AppThunkCreator } from '../../../../redux'
 import { rebrickableService } from '../../../../services'
 import { loadThemesInit, loadThemesError, loadThemesSuccess } from '../actions'
 

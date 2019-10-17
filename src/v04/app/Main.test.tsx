@@ -44,7 +44,7 @@ describe('The Main component', () => {
 
       expect(store.dispatch).toHaveBeenCalledTimes(2)
       expect(store.dispatch).toHaveBeenCalledWith(
-        loadThemesSuccess(fakeResponse)
+        loadThemesSuccess({ data: fakeResponse })
       )
     })
     it('handles sad path', async () => {
@@ -57,7 +57,9 @@ describe('The Main component', () => {
       reject('oh no')
       await nextTick()
 
-      expect(store.dispatch).toHaveBeenCalledWith(loadThemesError('oh no'))
+      expect(store.dispatch).toHaveBeenCalledWith(
+        loadThemesError({ error: 'oh no' })
+      )
     })
   })
 })

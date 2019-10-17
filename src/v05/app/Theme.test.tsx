@@ -1,22 +1,23 @@
 import React from 'react'
+jest.mock('../redux', () => ({
+  ...jest.requireActual('../redux'),
+  loadSetsForThemeThunk: jest.fn()
+}))
 import {
   loadThemesSuccess,
   loadSetsInit,
   loadSetsSuccess,
-  loadSetsError,
   setCurrentTheme,
-  setCurrentSet
+  setCurrentSet,
+  loadSetsForThemeThunk
 } from '../redux'
 import { Theme } from './Theme'
-import { ById } from '../types'
 import {
   testRender,
   makeTestStore,
   TestStore,
-  nextTick,
   rigAsyncMock
 } from '../testUtils'
-import { waitForElement } from '@testing-library/react'
 
 jest.mock('./SetSelector', () => ({ SetSelector: jest.fn(() => null) }))
 import { SetSelector } from './SetSelector'
@@ -25,17 +26,14 @@ jest.mock('./Set', () => ({ Set: jest.fn(() => null) }))
 import { Set } from './Set'
 
 jest.mock('../services/rebrickable')
-import {
-  fixtureTheme,
-  fixtureSet,
-  getSetsForTheme
-} from '../services/rebrickable'
-import { Set as SetType } from '../services/rebrickable/types'
+import { fixtureTheme, getSetsForTheme } from '../services/rebrickable'
 
 describe('The Theme component', () => {
+  const fakeThunk = { type: 'fakethunk' }
   let store: TestStore
   const themeId = 123
   beforeEach(() => {
+    ;(loadSetsForThemeThunk as jest.Mock).mockReturnValue(fakeThunk)
     rigAsyncMock(getSetsForTheme)
     store = makeTestStore()
   })
@@ -66,34 +64,10 @@ describe('The Theme component', () => {
       expect(SetSelector).toHaveBeenCalled()
       expect(Set).not.toHaveBeenCalled()
     })
-    it('dispatches loadSetsForThemeInit, calls service, handles happy path', async () => {
-      const { resolve } = rigAsyncMock(getSetsForTheme)
-
+    it('dispatches loadSetsForThemeThunk', () => {
       testRender(<Theme />, { store })
 
-      expect(store.dispatch).toHaveBeenCalledWith(loadSetsInit(themeId))
-      expect(getSetsForTheme).toHaveBeenCalledWith(themeId)
-
-      const fakeResponse: ById<SetType> = { '6090': fixtureSet }
-
-      resolve(fakeResponse)
-      await nextTick()
-
-      expect(store.dispatch).toHaveBeenCalledWith(
-        loadSetsSuccess({ themeId, data: fakeResponse })
-      )
-    })
-    it('handles sad path', () => {
-      const { reject } = rigAsyncMock(getSetsForTheme)
-      testRender(<Theme />, { store })
-
-      waitForElement(() => {
-        reject('oh no')
-
-        expect(store.dispatch).toHaveBeenCalledWith(
-          loadSetsError({ themeId, error: 'oh no' })
-        )
-      })
+      expect(store.dispatch).toHaveBeenCalledWith(fakeThunk)
     })
     describe('when we are loading sets for the theme', () => {
       beforeEach(() => {

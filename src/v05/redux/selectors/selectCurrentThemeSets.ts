@@ -1,6 +1,6 @@
 import { AppState } from '../types'
 import { Set } from '../../services/rebrickable/types'
-import { LoadableData, ById } from '../../utils'
+import { LoadableData, ById } from '../../types'
 import { selectCurrentTheme } from './selectCurrentTheme'
 
 export const selectCurrentThemeSets = (

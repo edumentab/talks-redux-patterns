@@ -1,64 +1,77 @@
-import { makeStore } from '../../../makeStore'
 import { loadSetsForThemeThunk } from '.'
 
-jest.mock('../../../../services', () => ({
-  rebrickableService: {
-    ...require.requireActual('../../../../services').rebrickableService,
-    getSetsForTheme: jest.fn()
-  }
+jest.mock('../../../../services/rebrickable', () => ({
+  ...jest.requireActual('../../../../services/rebrickable'),
+  getSetsForTheme: jest.fn()
 }))
 
-import { rebrickableService } from '../../../../services'
+import {
+  getSetsForTheme,
+  fixtureTheme,
+  fixtureSet
+} from '../../../../services/rebrickable'
 import {
   loadSetsInit,
   loadSetsError,
   loadSetsSuccess,
   loadThemesSuccess
 } from '../actions'
-import { fakePromise, nextTick } from '../../../../utils'
+import {
+  rigAsyncMock,
+  nextTick,
+  makeTestStore,
+  TestStore
+} from '../../../../testUtils'
 
 const themeId = 666
 
 const themeSuccessAction = loadThemesSuccess({
-  data: { [themeId]: rebrickableService.fixtureTheme }
+  data: { [themeId]: fixtureTheme }
 })
 
 describe('the loadSetsForThemeThunk creator', () => {
+  let store: TestStore
+  beforeEach(() => {
+    rigAsyncMock(getSetsForTheme)
+    store = makeTestStore()
+    store.dispatch(
+      loadThemesSuccess({
+        data: { [themeId]: fixtureTheme }
+      })
+    )
+  })
   it('handles happy path', async () => {
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog })
-    dispatch(themeSuccessAction)
+    const { resolve } = rigAsyncMock(getSetsForTheme)
 
-    const { promise, resolve } = fakePromise()
-    ;(rebrickableService.getSetsForTheme as any).mockReturnValue(promise)
+    store.dispatch(loadSetsForThemeThunk(themeId))
 
-    dispatch(loadSetsForThemeThunk(themeId))
-    expect(actionLog[actionLog.length - 1]).toEqual(loadSetsInit(themeId))
-    expect(rebrickableService.getSetsForTheme).toHaveBeenCalledWith(themeId)
+    await nextTick()
 
-    const fakeData = { 5: rebrickableService.fixtureSet }
+    expect(store.dispatch).toHaveBeenCalledWith(loadSetsInit(themeId))
+    expect(getSetsForTheme).toHaveBeenCalledWith(themeId)
+
+    const fakeData = { 5: fixtureSet }
     resolve(fakeData)
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toEqual(
-        loadSetsSuccess({ data: fakeData, themeId })
-      )
-    })
+
+    await nextTick()
+
+    expect(store.dispatch).toHaveBeenCalledWith(
+      loadSetsSuccess({ data: fakeData, themeId })
+    )
   })
   it('handles sad path', async () => {
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog })
-    dispatch(themeSuccessAction)
+    store.dispatch(themeSuccessAction)
 
-    const { promise, reject } = fakePromise()
-    ;(rebrickableService.getSetsForTheme as any).mockReturnValue(promise)
-    dispatch(loadSetsForThemeThunk(themeId))
+    const { reject } = rigAsyncMock(getSetsForTheme)
+
+    store.dispatch(loadSetsForThemeThunk(themeId))
 
     const error = 'oh no'
     reject(error)
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toEqual(
-        loadSetsError({ themeId, error })
-      )
-    })
+    await nextTick()
+
+    expect(store.dispatch).toHaveBeenCalledWith(
+      loadSetsError({ themeId, error })
+    )
   })
 })

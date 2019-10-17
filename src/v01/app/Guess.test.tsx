@@ -1,5 +1,5 @@
 import React from 'react'
-import { testRender, makeTestStore, nextTick } from '../testUtils'
+import { testRender, makeTestStore } from '../testUtils'
 import { fireEvent } from '@testing-library/react'
 import { fixtureTheme, fixtureSet } from '../services/rebrickable'
 import {
