@@ -3,5 +3,8 @@ module.exports = {
     '\\.m?[tj]sx?$': 'babel-jest'
   },
   clearMocks: true,
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect']
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom/extend-expect',
+    './jest.setup.js'
+  ]
 }

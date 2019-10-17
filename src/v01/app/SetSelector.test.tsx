@@ -1,6 +1,6 @@
 import React from 'react'
 import { testRender, makeTestStore, TestStore } from '../testUtils'
-import { fireEvent } from '@testing-library/react'
+import { fireEvent, waitForElement } from '@testing-library/react'
 import { fixtureTheme, fixtureSet } from '../services/rebrickable'
 import {
   loadThemesSuccess,
@@ -29,7 +29,7 @@ describe('the SetSelector component', () => {
     beforeEach(() => {
       store.dispatch(loadSetsInit(themeId))
     })
-    it('shows "loading', () => {
+    it('shows "loading"', () => {
       const { getByTestId } = testRender(<SetSelector />, { store })
 
       expect(getByTestId('setselectortrigger')).toHaveTextContent('loading')
@@ -51,11 +51,16 @@ describe('the SetSelector component', () => {
         it('renders items and handles clicks', () => {
           const { getByTestId } = testRender(<SetSelector />, { store })
 
-          //fireEvent.click(getByTestId('setselectortrigger'))
+          fireEvent.click(getByTestId('setselectortrigger'))
+          const option = getByTestId(`setselector-option-${fixtureSet.set_num}`)
 
-          expect(
-            getByTestId(`setselector-option-${fixtureSet.set_num}`)
-          ).toHaveTextContent(fixtureSet.name)
+          expect(option).toHaveTextContent(fixtureSet.name)
+
+          fireEvent.click(option)
+
+          waitForElement(() => {
+            expect(store.dispatch).toHaveBeenCalledWith(setCurrentSet(setId))
+          })
         })
       })
     })
