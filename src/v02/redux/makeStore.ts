@@ -2,13 +2,13 @@ import { createStore, compose } from 'redux'
 import { initialAppState } from './initialAppState'
 
 import { rootReducer } from './rootReducer'
-import { AppState } from './types'
+import { AppState, AppStore } from './types'
 
-type MakeStoreOpts = {
+export type MakeStoreOpts = {
   initialState?: AppState
 }
 
-export const makeStore = (opts: MakeStoreOpts = {}) => {
+export const makeStore = (opts: MakeStoreOpts = {}): AppStore => {
   const { initialState } = opts
   const enhancers = []
 

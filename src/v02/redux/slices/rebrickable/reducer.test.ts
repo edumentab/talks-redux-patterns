@@ -8,7 +8,7 @@ import {
   loadSetsError
 } from './actions'
 import { rebrickableReducer } from './reducer'
-import { ById } from '../../../utils'
+import { ById } from '../../../types'
 import { Theme, Set } from '../../../services/rebrickable/types'
 import { fixtureSet, fixtureTheme } from '../../../services/rebrickable'
 import produce from 'immer'

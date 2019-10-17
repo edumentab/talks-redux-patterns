@@ -49,7 +49,6 @@ const SourceCodePanelControls = props => {
       history: fileState.history,
       idx: Math.min(fileState.idx + 1, fileState.history.length - 1)
     })
-
   const touched = files.filter(f => fileIsTouched(f, version)).sort(fileSorter)
   const untouched = files
     .filter(f => !fileIsTouched(f, version))
@@ -122,7 +121,7 @@ const SourceCodePanelControls = props => {
         onClick={handleForward}
       />
       <Select
-        key="files"
+        key={`files-${version}`}
         items={listFiles.filter(option =>
           option.name.toLowerCase().includes(query.toLowerCase())
         )}
