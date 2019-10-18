@@ -16,10 +16,9 @@ export const PresentationV01 = () => {
 
 ### Sorry for
 
-* Missing React tests
 * Tiny example
 * Sharp corners
-* No code comments (yet)
+* Not much code comments (yet)
 * Unorthodoxness (sorry not sorry)
 `}
       />

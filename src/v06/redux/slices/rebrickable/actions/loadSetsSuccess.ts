@@ -1,4 +1,4 @@
-import { ById } from '../../../../utils'
+import { ById } from '../../../../types'
 import { Action } from '../../../lib/types/action'
 import { Set } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'

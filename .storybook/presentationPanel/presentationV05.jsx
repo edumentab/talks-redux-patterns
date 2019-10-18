@@ -21,7 +21,6 @@ export const PresentationV05 = () => {
 
 * Still testing via store, don't test thunks separately
 * Separate thunk creators and action creators!
-* The missing React tests would be simplified in this step
 * Thunks aren't here to stay...
 
 `}
