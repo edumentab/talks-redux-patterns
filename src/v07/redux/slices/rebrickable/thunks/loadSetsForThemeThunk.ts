@@ -1,4 +1,4 @@
-import { AppThunkCreator } from '../../../lib/types/thunk'
+import { AppThunkCreator } from '../../../../redux'
 import { loadSetsInit, loadSetsSuccess, loadSetsError } from '../actions'
 
 export const loadSetsForThemeThunk: AppThunkCreator<number> = (

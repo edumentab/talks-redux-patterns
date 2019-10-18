@@ -1,49 +1,42 @@
-import { makeStore } from '../../../makeStore'
 import { loadThemesThunk } from '.'
 import { fixtureTheme } from '../../../../services/rebrickable'
 import { loadThemesInit, loadThemesSuccess, loadThemesError } from '../actions'
-import { fakePromise, nextTick } from '../../../../utils'
-
-const deps = {
-  rebrickable: {
-    getThemesByParent: jest.fn()
-  }
-}
+import { nextTick, rigAsyncMock, makeTestStore } from '../../../../testUtils'
+import { AppDeps } from '../../../types'
 
 describe('the loadThemesThunk creator', () => {
+  let deps: AppDeps
+  beforeEach(() => {
+    deps = {
+      rebrickable: ({
+        getThemesByParent: jest.fn()
+      } as unknown) as AppDeps['rebrickable']
+    }
+  })
   it('handles happy path', async () => {
-    const { promise, resolve } = fakePromise()
-    deps.rebrickable.getThemesByParent.mockReturnValue(promise)
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, deps })
+    const { dispatch } = makeTestStore({ deps })
+    const { resolve } = rigAsyncMock(deps.rebrickable.getThemesByParent)
 
     dispatch(loadThemesThunk())
-
-    expect(actionLog[actionLog.length - 1]).toEqual(loadThemesInit())
+    expect(dispatch).toHaveBeenCalledWith(loadThemesInit())
     expect(deps.rebrickable.getThemesByParent).toHaveBeenCalledWith(186)
 
     const fakeData = { 5: fixtureTheme }
     resolve(fakeData)
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toEqual(
-        loadThemesSuccess({ data: fakeData })
-      )
-    })
+    await nextTick()
+
+    expect(dispatch).toHaveBeenCalledWith(loadThemesSuccess({ data: fakeData }))
   })
   it('handles sad path', async () => {
-    const { promise, reject } = fakePromise()
-    deps.rebrickable.getThemesByParent.mockReturnValue(promise)
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, deps })
+    const { dispatch } = makeTestStore({ deps })
+    const { reject } = rigAsyncMock(deps.rebrickable.getThemesByParent)
 
     dispatch(loadThemesThunk())
 
     const error = 'oh no'
     reject(error)
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toEqual(
-        loadThemesError({ error })
-      )
-    })
+    await nextTick()
+
+    expect(dispatch).toHaveBeenCalledWith(loadThemesError({ error }))
   })
 })

@@ -25,10 +25,6 @@ import {
 
 const themeId = 666
 
-const themeSuccessAction = loadThemesSuccess({
-  data: { [themeId]: fixtureTheme }
-})
-
 describe('the loadSetsForThemeThunk creator', () => {
   let store: TestStore
   beforeEach(() => {
@@ -60,8 +56,6 @@ describe('the loadSetsForThemeThunk creator', () => {
     )
   })
   it('handles sad path', async () => {
-    store.dispatch(themeSuccessAction)
-
     const { reject } = rigAsyncMock(getSetsForTheme)
 
     store.dispatch(loadSetsForThemeThunk(themeId))

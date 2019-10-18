@@ -1,46 +1,36 @@
-import { createStore, compose, applyMiddleware } from 'redux'
+import { createStore, compose, applyMiddleware, StoreEnhancer } from 'redux'
 import { initialAppState } from './initialAppState'
 import createThunkMiddleware from './lib/thunk'
-import createActionLogMiddleware from './lib/actionLog'
 import { rootReducer } from './rootReducer'
-import { AppState, AppAction } from './types'
-import { AppThunk } from './lib/types/thunk'
+import { AppState, AppStore, AppDeps } from './types'
 import { rebrickableService } from '../services'
 
-type MakeStoreOpts = {
+export type MakeStoreOpts = {
   initialState?: AppState
-  actionLog?: AppAction[]
-  deps?: any
+  enhancers?: StoreEnhancer[]
+  deps?: AppDeps
 }
 
-export const makeStore = (opts: MakeStoreOpts = {}) => {
-  const { initialState, actionLog, deps } = opts
+export const makeStore = (opts: MakeStoreOpts = {}): AppStore => {
+  const { initialState, enhancers = [], deps } = opts
   const middlewares = [
     (createThunkMiddleware as typeof createThunkMiddleware & {
-      withExtraArgument: typeof createThunkMiddleware
+      withExtraArgument: any
     }).withExtraArgument(deps)
   ]
-  if (actionLog) {
-    middlewares.push(createActionLogMiddleware(actionLog))
-  }
-
-  const enhancers = [applyMiddleware(...middlewares)]
 
   const devToolsExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION__
   if (typeof devToolsExtension === 'function') {
-    enhancers.push(devToolsExtension())
+    enhancers.unshift(devToolsExtension())
   }
 
-  const store = createStore(
+  enhancers.unshift(applyMiddleware(...middlewares))
+
+  return createStore(
     rootReducer,
     initialState || initialAppState,
     compose(...enhancers)
   )
-
-  return store as {
-    getState: () => AppState
-    dispatch: (a: AppAction | AppThunk) => void
-  }
 }
 
 export const makeProdStore = () =>
