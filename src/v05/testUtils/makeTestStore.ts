@@ -10,7 +10,7 @@ dispatch method, allowing you to do stuff like this in your tests:
 expect(store.dispatch).toHaveBeenCalledWith(someActionCreator())
 ```
 
-Some extra cruft added so that it also records middleware calls.
+Some extra cruft added so that it also records dispatchers from other enhancers.
 */
 
 export type TestStore = AppStore & { dispatch: jest.Mock<AppStore['dispatch']> }
