@@ -1,4 +1,4 @@
-import { ById } from '../../utils'
+import { ById } from '../../types'
 import { Theme } from './types'
 import { getAllThemes } from './getAllThemes'
 

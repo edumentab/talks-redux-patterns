@@ -103,7 +103,7 @@ describe('The Theme component', () => {
         const prevCallCount = store.dispatch.mock.calls.length
         testRender(<Theme />, { store })
 
-        expect(store.dispatch.mock.calls.length).toBe(prevCallCount)
+        expect(store.dispatch).toHaveBeenCalledTimes(prevCallCount)
       })
       describe('when we have received an answer and selected a set', () => {
         const setId = '6090'
@@ -120,7 +120,7 @@ describe('The Theme component', () => {
           const prevCallCount = store.dispatch.mock.calls.length
           testRender(<Theme />, { store })
 
-          expect(store.dispatch.mock.calls.length).toBe(prevCallCount)
+          expect(store.dispatch).toHaveBeenCalledTimes(prevCallCount)
         })
       })
     })

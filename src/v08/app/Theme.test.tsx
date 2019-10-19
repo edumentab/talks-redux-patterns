@@ -1,23 +1,14 @@
 import React from 'react'
-jest.mock('../redux', () => ({
-  ...jest.requireActual('../redux'),
-  loadSetsForThemeThunk: jest.fn()
-}))
+
 import {
   loadThemesSuccess,
   loadSetsInit,
   loadSetsSuccess,
   setCurrentTheme,
-  setCurrentSet,
-  loadSetsForThemeThunk
+  setCurrentSet
 } from '../redux'
 import { Theme } from './Theme'
-import {
-  testRender,
-  makeTestStore,
-  TestStore,
-  rigAsyncMock
-} from '../testUtils'
+import { testRender, makeTestStore, TestStore } from '../testUtils'
 
 jest.mock('./SetSelector', () => ({ SetSelector: jest.fn(() => null) }))
 import { SetSelector } from './SetSelector'
@@ -29,12 +20,9 @@ jest.mock('../services/rebrickable')
 import { fixtureTheme, getSetsForTheme } from '../services/rebrickable'
 
 describe('The Theme component', () => {
-  const fakeThunk = { type: 'fakethunk' }
   let store: TestStore
   const themeId = 123
   beforeEach(() => {
-    ;(loadSetsForThemeThunk as jest.Mock).mockReturnValue(fakeThunk)
-    rigAsyncMock(getSetsForTheme)
     store = makeTestStore()
   })
   describe('when there is no theme', () => {
@@ -64,10 +52,10 @@ describe('The Theme component', () => {
       expect(SetSelector).toHaveBeenCalled()
       expect(Set).not.toHaveBeenCalled()
     })
-    it('dispatches loadSetsForThemeThunk', () => {
+    it('dispatches loadSetsInit', () => {
       testRender(<Theme />, { store })
 
-      expect(store.dispatch).toHaveBeenCalledWith(fakeThunk)
+      expect(store.dispatch).toHaveBeenCalledWith(loadSetsInit(themeId))
     })
     describe('when we are loading sets for the theme', () => {
       beforeEach(() => {
