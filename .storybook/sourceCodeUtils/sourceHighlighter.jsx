@@ -12,7 +12,7 @@ const HighlighterInner = props => {
   const code = ((fileInfo && fileInfo.raw) || [])[fileVersion.which] || ''
   const diff =
     fileVersion.state === 'edited' &&
-    diffWords(fileInfo.raw[fileVersion.which - 1], code)
+    diffWords(fileInfo.raw[fileVersion.previous], code)
 
   const handleLinkClick = useCallback(
     e => {

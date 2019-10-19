@@ -54,6 +54,9 @@ function readSource() {
           ? 'unchanged'
           : 'edited'
       f.allStates.push(fileV.state)
+      if (fileV.state === 'edited') {
+        fileV.previous = prevFileV.which
+      }
     })
     if (f.allStates.slice(1).filter(s => s !== 'unchanged').length === 0) {
       f.allStates = versions.map(() => 'eternal')
