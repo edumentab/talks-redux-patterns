@@ -1,5 +1,5 @@
 import { AppActionMould } from '../../../types'
-import { ById } from '../../../../utils'
+import { ById } from '../../../../types'
 import { Theme } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'

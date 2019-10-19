@@ -40,6 +40,7 @@ export const ThemeSelector: FunctionComponent = () => {
           text={option.name}
           shouldDismissPopover={false}
           onClick={handleClick}
+          data-testid={`themeselector-option-${option.id}`}
         />
       )
     },
@@ -69,6 +70,7 @@ export const ThemeSelector: FunctionComponent = () => {
           isLoadingThemes || !themes ? 'blank' : 'double-caret-vertical'
         }
         className="themeSelector"
+        data-testid={`themeselectortrigger`}
       />
     </Select>
   )

@@ -1,4 +1,4 @@
-import { ById } from '../../../../utils'
+import { ById } from '../../../../types'
 import { AppActionMould } from '../../../types'
 import { Set } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
