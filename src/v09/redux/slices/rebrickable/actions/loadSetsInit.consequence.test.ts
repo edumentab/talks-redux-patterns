@@ -1,6 +1,5 @@
-import { makeStore } from '../../../makeStore'
 import { fixtureTheme, fixtureSet } from '../../../../services/rebrickable'
-import { fakePromise, nextTick } from '../../../../utils'
+import { nextTick, makeTestStore, rigAsyncMock } from '../../../../testUtils'
 import { AppConsGetter } from '../../../types'
 import {
   loadSetsInitConsequence,
@@ -23,10 +22,8 @@ const deps = {
 
 describe('the loadSetsInit action consequence', () => {
   it('calls service, handles happy path', async () => {
-    const { promise, resolve } = fakePromise()
-    deps.rebrickable.getSetsForTheme.mockReturnValue(promise)
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, deps, consGetter })
+    const { resolve } = rigAsyncMock(deps.rebrickable.getSetsForTheme)
+    const { dispatch } = makeTestStore({ deps, consGetter })
     dispatch(loadThemesSuccess({ data: fakeThemeData }))
 
     dispatch(loadSetsInit(themeId))
@@ -36,18 +33,18 @@ describe('the loadSetsInit action consequence', () => {
     const fakeData = { 5: fixtureSet }
     resolve(fakeData)
 
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toMatchObject(
-        loadSetsSuccess({ data: fakeData, themeId })
-      )
+    await nextTick()
+
+    expect(dispatch).toHaveBeenCalledWith({
+      ...loadSetsSuccess({ data: fakeData, themeId }),
+      sender: 'CONSEQUENCE(loadSetsInitConsequence)'
     })
   })
 
   it('handles sad path', async () => {
-    const { promise, reject } = fakePromise()
-    deps.rebrickable.getSetsForTheme.mockReturnValue(promise)
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, deps, consGetter })
+    const { reject } = rigAsyncMock(deps.rebrickable.getSetsForTheme)
+
+    const { dispatch } = makeTestStore({ deps, consGetter })
     dispatch(loadThemesSuccess({ data: fakeThemeData }))
 
     dispatch(loadSetsInit(themeId))
@@ -55,10 +52,11 @@ describe('the loadSetsInit action consequence', () => {
     const error = 'KABLAM!!'
     reject(error)
 
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toMatchObject(
-        loadSetsError({ error, themeId })
-      )
+    await nextTick()
+
+    expect(dispatch).toHaveBeenCalledWith({
+      ...loadSetsError({ error, themeId }),
+      sender: 'CONSEQUENCE(loadSetsInitConsequence)'
     })
   })
 })
