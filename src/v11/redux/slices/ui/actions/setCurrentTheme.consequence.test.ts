@@ -1,4 +1,3 @@
-import { makeStore } from '../../../makeStore'
 import { fixtureTheme, fixtureSet } from '../../../../services/rebrickable'
 import {
   loadThemesSuccess,
@@ -6,7 +5,7 @@ import {
   loadSetsSuccess
 } from '../../rebrickable/actions'
 import { setCurrentTheme, isSetCurrentTheme } from '.'
-import { nextTick } from '../../../../utils'
+import { makeTestStore, nextTick } from '../../../../testUtils'
 import { AppConsGetter } from '../../../types'
 
 const consGetter: AppConsGetter = ({ action }) =>
@@ -15,47 +14,39 @@ const consGetter: AppConsGetter = ({ action }) =>
 const themeId = 666
 const fakeThemeData = { [themeId]: fixtureTheme }
 const fakeSetData = { 777: fixtureSet }
+const loadThemesAction = {
+  ...loadSetsInit(themeId),
+  sender: 'CONSEQUENCE(SET_CURRENT_THEME)'
+}
 
 describe('the loadThemesSuccess consequence', () => {
   it('dispatches loadSetsInit', async () => {
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, consGetter })
+    const { dispatch } = makeTestStore({ consGetter })
     dispatch(loadThemesSuccess({ data: fakeThemeData }))
 
     dispatch(setCurrentTheme(themeId))
 
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toMatchObject(
-        loadSetsInit(themeId)
-      )
-    })
+    await nextTick()
+    expect(dispatch).toHaveBeenCalledWith(loadThemesAction)
   })
   it('doesnt dispatch if we already have sets for that theme', async () => {
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, consGetter })
+    const { dispatch } = makeTestStore({ consGetter })
     dispatch(loadThemesSuccess({ data: fakeThemeData }))
     dispatch(loadSetsSuccess({ data: fakeSetData, themeId }))
 
     dispatch(setCurrentTheme(themeId))
 
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).not.toMatchObject(
-        loadSetsInit(themeId)
-      )
-    })
+    await nextTick()
+    expect(dispatch).not.toHaveBeenCalledWith(loadThemesAction)
   })
   it('doesnt dispatch if we are already loading', async () => {
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, consGetter })
+    const { dispatch } = makeTestStore({ consGetter })
     dispatch(loadThemesSuccess({ data: fakeThemeData }))
     dispatch(loadSetsInit(themeId))
 
     dispatch(setCurrentTheme(themeId))
 
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).not.toMatchObject(
-        loadSetsInit(themeId)
-      )
-    })
+    await nextTick()
+    expect(dispatch).not.toHaveBeenCalledWith(loadThemesAction)
   })
 })

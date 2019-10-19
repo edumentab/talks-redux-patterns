@@ -9,7 +9,11 @@ export const Set: FunctionComponent = () => {
   return (
     <div style={{ display: 'flex', marginTop: '10px' }}>
       <div className="setPic" style={{ flexGrow: 1, position: 'relative' }}>
-        <img src={set.set_img_url} style={{ maxWidth: '100%' }} />
+        <img
+          src={set.set_img_url}
+          style={{ maxWidth: '100%' }}
+          data-testid="setimg"
+        />
       </div>
       <div
         style={{

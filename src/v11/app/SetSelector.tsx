@@ -47,6 +47,7 @@ export const SetSelector: FunctionComponent = () => {
           text={option.name}
           shouldDismissPopover={false}
           onClick={handleClick}
+          data-testid={`setselector-option-${option.set_num}`}
         />
       )
     },
@@ -78,6 +79,7 @@ export const SetSelector: FunctionComponent = () => {
         }
         rightIcon={setsArray.length ? 'double-caret-vertical' : 'blank'}
         className="setSelector"
+        data-testid="setselectortrigger"
       />
     </Select>
   )

@@ -46,12 +46,13 @@ export const Guess: FunctionComponent = () => {
   }
   return (
     <Fragment>
-      <form onSubmit={handleGuess}>
+      <form onSubmit={handleGuess} data-testid="guessform">
         <input
           className={Classes.INPUT}
           style={{ width: '100%' }}
           ref={inputRef}
           placeholder="Guess # of pieces!"
+          data-testid="guessinput"
         />
       </form>
       <div
@@ -60,6 +61,7 @@ export const Guess: FunctionComponent = () => {
           flexDirection: 'column',
           alignItems: 'center'
         }}
+        data-testid="guesslist"
       >
         {guesses
           .slice()

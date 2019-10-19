@@ -1,4 +1,3 @@
-import { makeStore } from '../../../makeStore'
 import { fixtureTheme } from '../../../../services/rebrickable'
 import {
   loadThemesInit,
@@ -6,7 +5,7 @@ import {
   loadThemesError,
   isLoadThemesInit
 } from '.'
-import { fakePromise, nextTick } from '../../../../utils'
+import { nextTick, makeTestStore, rigAsyncMock } from '../../../../testUtils'
 import { AppConsGetter } from '../../../types'
 
 const consGetter: AppConsGetter = ({ action }) =>
@@ -20,10 +19,8 @@ const deps = {
 
 describe('the loadThemesInit consequence', () => {
   it('calls service, handles happy path', async () => {
-    const { promise, resolve } = fakePromise()
-    deps.rebrickable.getThemesByParent.mockReturnValue(promise)
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, deps, consGetter })
+    const { resolve } = rigAsyncMock(deps.rebrickable.getThemesByParent)
+    const { dispatch } = makeTestStore({ deps, consGetter })
 
     dispatch(loadThemesInit())
 
@@ -31,27 +28,26 @@ describe('the loadThemesInit consequence', () => {
 
     const fakeData = { 5: fixtureTheme }
     resolve(fakeData)
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toMatchObject(
-        loadThemesSuccess({ data: fakeData })
-      )
+    await nextTick()
+
+    expect(dispatch).toHaveBeenCalledWith({
+      ...loadThemesSuccess({ data: fakeData }),
+      sender: 'CONSEQUENCE(LOAD_THEMES_INIT)'
     })
   })
   it('handles sad path', async () => {
-    const { promise, reject } = fakePromise()
-    deps.rebrickable.getThemesByParent.mockReturnValue(promise)
-    const actionLog: any[] = []
-    const { dispatch } = makeStore({ actionLog, deps, consGetter })
+    const { reject } = rigAsyncMock(deps.rebrickable.getThemesByParent)
+    const { dispatch } = makeTestStore({ deps, consGetter })
 
     dispatch(loadThemesInit())
 
     const error = 'oh no'
     reject(error)
+    await nextTick()
 
-    await nextTick(() => {
-      expect(actionLog[actionLog.length - 1]).toMatchObject(
-        loadThemesError({ error })
-      )
+    expect(dispatch).toHaveBeenCalledWith({
+      ...loadThemesError({ error }),
+      sender: 'CONSEQUENCE(LOAD_THEMES_INIT)'
     })
   })
 })
