@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { execSync, exec } = require('child_process')
+const { diffWords } = require('diff')
 
 const root = path.join(__dirname, '../../src')
 
@@ -53,8 +54,26 @@ function readSource() {
           : prevFileV.which === fileV.which
           ? 'unchanged'
           : 'edited'
+      if (fileV.state === 'edited') {
+        const { added, removed } = diffWords(
+          f.raw[prevFileV.which],
+          f.raw[fileV.which]
+        ).reduce(
+          (mem, d) => ({
+            added: mem.added || d.added,
+            removed: mem.removed || d.removed
+          }),
+          { added: false, removed: false }
+        )
+        if (removed && !added) {
+          fileV.state = 'pruned'
+        }
+        if (!removed && added) {
+          fileV.state = 'grown'
+        }
+      }
       f.allStates.push(fileV.state)
-      if (fileV.state === 'edited' || fileV.state === 'deleted') {
+      if (['edited', 'deleted', 'pruned', 'grown'].includes(fileV.state)) {
         fileV.previous = prevFileV.which
       }
     })

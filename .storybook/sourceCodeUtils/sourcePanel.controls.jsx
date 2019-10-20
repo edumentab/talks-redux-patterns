@@ -18,8 +18,8 @@ const fileSorter = (o1, o2) => (o1.name < o2.name ? -1 : 1)
 
 const fileIsTouched = (file, version) =>
   (version === 'v01'
-    ? ['created', 'edited', 'eternal', 'unchanged']
-    : ['created', 'edited']
+    ? ['created', 'edited', 'pruned', 'grown', 'eternal', 'unchanged']
+    : ['created', 'edited', 'pruned', 'grown']
   ).includes(file.versions[version].state)
 
 const SourceCodePanelControls = props => {

@@ -15,6 +15,8 @@ const stateExplanation = {
   nonexistent: `Doesn't exist in this version`,
   created: `Created in this version`,
   unchanged: `Unchanged from previous version`,
+  pruned: `Some code removed in this version (see diff below source)`,
+  grown: `Some code added in this version (see diff below source)`,
   edited: `Edited in this version (see diff below source)`,
   eternal: 'No changes in any version'
 }

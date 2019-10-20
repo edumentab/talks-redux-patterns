@@ -4,7 +4,9 @@ import {
   faStar,
   faEllipsisH,
   faPen,
-  faInfinity
+  faInfinity,
+  faCut,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons'
 
 export const stateToIcon = {
@@ -13,5 +15,7 @@ export const stateToIcon = {
   created: faStar,
   unchanged: faEllipsisH,
   edited: faPen,
-  eternal: faInfinity
+  eternal: faInfinity,
+  pruned: faCut,
+  grown: faPlus
 }

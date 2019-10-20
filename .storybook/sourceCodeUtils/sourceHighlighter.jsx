@@ -14,7 +14,7 @@ const HighlighterInner = props => {
       fileVersion.state === 'deleted' ? fileVersion.previous : fileVersion.which
     ] || ''
   const diff =
-    fileVersion.state === 'edited' &&
+    ['edited', 'pruned', 'grown'].includes(fileVersion.state) &&
     diffWords(fileInfo.raw[fileVersion.previous], code)
 
   const handleLinkClick = useCallback(
