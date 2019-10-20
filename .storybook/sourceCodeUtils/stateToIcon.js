@@ -6,7 +6,8 @@ import {
   faPen,
   faInfinity,
   faCut,
-  faPlus
+  faPlus,
+  faArrowsAltH
 } from '@fortawesome/free-solid-svg-icons'
 
 export const stateToIcon = {
@@ -17,5 +18,6 @@ export const stateToIcon = {
   edited: faPen,
   eternal: faInfinity,
   pruned: faCut,
-  grown: faPlus
+  grown: faPlus,
+  replaced: faArrowsAltH
 }

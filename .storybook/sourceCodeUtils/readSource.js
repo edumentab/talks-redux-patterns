@@ -55,25 +55,42 @@ function readSource() {
           ? 'unchanged'
           : 'edited'
       if (fileV.state === 'edited') {
-        const { added, removed } = diffWords(
-          f.raw[prevFileV.which],
-          f.raw[fileV.which]
-        ).reduce(
+        const diff = diffWords(f.raw[prevFileV.which], f.raw[fileV.which])
+        const processedDiff = []
+        // merge a "removed" followed by "added" into a single "replaced"
+        while (diff.length) {
+          if (diff[0].removed && diff[1] && diff[1].added) {
+            processedDiff.push({ replaced: true })
+            diff.shift()
+            diff.shift()
+          } else {
+            processedDiff.push(diff.shift())
+          }
+        }
+        const { added, removed, replaced } = processedDiff.reduce(
           (mem, d) => ({
             added: mem.added || d.added,
-            removed: mem.removed || d.removed
+            removed: mem.removed || d.removed,
+            replaced: mem.replaced || d.replaced
           }),
-          { added: false, removed: false }
+          { added: false, removed: false, replaced: false }
         )
-        if (removed && !added) {
+        if (removed && !added && !replaced) {
           fileV.state = 'pruned'
         }
-        if (!removed && added) {
+        if (!removed && added && !replaced) {
           fileV.state = 'grown'
+        }
+        if (!removed && !added && replaced) {
+          fileV.state = 'replaced'
         }
       }
       f.allStates.push(fileV.state)
-      if (['edited', 'deleted', 'pruned', 'grown'].includes(fileV.state)) {
+      if (
+        ['edited', 'deleted', 'pruned', 'grown', 'replaced'].includes(
+          fileV.state
+        )
+      ) {
         fileV.previous = prevFileV.which
       }
     })
