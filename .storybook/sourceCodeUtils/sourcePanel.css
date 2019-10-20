@@ -43,10 +43,15 @@
   color: #999 !important;
 }
 
-.firstUntouchedItem {
+.firstUntouchedItem,
+.firstDeletedItem {
   border-top: 1px solid black;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.deletedItem {
+  color: lightcoral !important;
 }
 
 .bp3-control-group > :last-child div {

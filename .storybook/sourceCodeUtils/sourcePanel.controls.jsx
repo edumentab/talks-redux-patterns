@@ -18,8 +18,8 @@ const fileSorter = (o1, o2) => (o1.name < o2.name ? -1 : 1)
 
 const fileIsTouched = (file, version) =>
   (version === 'v01'
-    ? ['deleted', 'created', 'edited', 'eternal', 'unchanged']
-    : ['deleted', 'created', 'edited']
+    ? ['created', 'edited', 'eternal', 'unchanged']
+    : ['created', 'edited']
   ).includes(file.versions[version].state)
 
 const SourceCodePanelControls = props => {
@@ -50,10 +50,13 @@ const SourceCodePanelControls = props => {
       idx: Math.min(fileState.idx + 1, fileState.history.length - 1)
     })
   const touched = files.filter(f => fileIsTouched(f, version)).sort(fileSorter)
-  const untouched = files
-    .filter(f => !fileIsTouched(f, version))
+  const deleted = files
+    .filter(f => f.versions[version].state === 'deleted')
     .sort(fileSorter)
-  const listFiles = touched.concat(untouched)
+  const untouched = files
+    .filter(f => !fileIsTouched(f, version) && !deleted.includes(f))
+    .sort(fileSorter)
+  const listFiles = touched.concat(deleted).concat(untouched)
 
   const renderFileItem = useCallback(
     (option, { modifiers, handleClick }) => {
@@ -64,7 +67,9 @@ const SourceCodePanelControls = props => {
           className={classNames(
             Classes.TEXT_SMALL,
             !fileIsTouched(option, version) && 'untouchedItem',
-            option === untouched[0] && 'firstUntouchedItem'
+            option === untouched[0] && 'firstUntouchedItem',
+            option.versions[version].state === 'deleted' && 'deletedItem',
+            option === deleted[0] && 'firstDeletedItem'
           )}
           key={option.name}
           icon={
@@ -78,7 +83,7 @@ const SourceCodePanelControls = props => {
         />
       )
     },
-    [filePath, version, untouched]
+    [filePath, version, untouched, deleted]
   )
 
   const renderVersionItem = useCallback(
