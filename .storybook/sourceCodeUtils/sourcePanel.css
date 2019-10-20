@@ -54,6 +54,11 @@
   color: lightcoral !important;
 }
 
+.source-code.deleted code {
+  text-decoration-line: line-through;
+  text-decoration-color: rgba(0, 0, 0, 0.3);
+}
+
 .bp3-control-group > :last-child div {
   border-radius: inherit;
 }

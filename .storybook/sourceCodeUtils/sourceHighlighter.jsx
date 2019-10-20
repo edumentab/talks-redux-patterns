@@ -9,7 +9,10 @@ import { diffWords } from 'diff'
 const HighlighterInner = props => {
   const { fileInfo, language = 'typescript', version, onLinkClick } = props
   const fileVersion = (fileInfo && fileInfo.versions[version]) || {}
-  const code = ((fileInfo && fileInfo.raw) || [])[fileVersion.which] || ''
+  const code =
+    ((fileInfo && fileInfo.raw) || [])[
+      fileVersion.state === 'deleted' ? fileVersion.previous : fileVersion.which
+    ] || ''
   const diff =
     fileVersion.state === 'edited' &&
     diffWords(fileInfo.raw[fileVersion.previous], code)
@@ -27,7 +30,10 @@ const HighlighterInner = props => {
   )
   return (
     <React.Fragment>
-      <div className="source-code" onClick={handleLinkClick}>
+      <div
+        className={classNames('source-code', fileVersion.state)}
+        onClick={handleLinkClick}
+      >
         <SyntaxHighlighter
           style={prism}
           customStyle={{ backgroundColor: 'transparent', fontSize: '0.8em' }}

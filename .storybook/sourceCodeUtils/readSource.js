@@ -54,7 +54,7 @@ function readSource() {
           ? 'unchanged'
           : 'edited'
       f.allStates.push(fileV.state)
-      if (fileV.state === 'edited') {
+      if (fileV.state === 'edited' || fileV.state === 'deleted') {
         fileV.previous = prevFileV.which
       }
     })

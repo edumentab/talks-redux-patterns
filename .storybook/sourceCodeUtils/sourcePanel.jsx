@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const fileDiff = fileInfo.files
 
 const stateExplanation = {
-  deleted: 'Deleted in this version',
+  deleted: 'Deleted in this version (previous file shown below)',
   nonexistent: `Doesn't exist in this version`,
   created: `Created in this version`,
   unchanged: `Unchanged from previous version`,
