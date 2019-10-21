@@ -5,6 +5,8 @@ const { diffWords } = require('diff')
 
 const root = path.join(__dirname, '../../src')
 
+const findRefacComment = /^\/* REFAC|EDITCOMMENT[\n\r]([\s\S]*?)\*\/[\s]*([\s\S]*)$/
+
 function readSource() {
   const res = {}
 
@@ -25,12 +27,19 @@ function readSource() {
             name: minusRoot,
             raw: []
           }
-          const file = fs.readFileSync(here).toString()
+          let file = fs.readFileSync(here).toString()
+          const commMatch = file.match(findRefacComment)
+          if (commMatch) {
+            file = commMatch[2]
+          }
           if (!res[minusRoot].raw.includes(file)) {
             res[minusRoot].raw.push(file)
           }
           res[minusRoot].versions[version] = {
             which: res[minusRoot].raw.indexOf(file)
+          }
+          if (commMatch) {
+            res[minusRoot].versions[version].editComment = commMatch[1]
           }
         }
       })

@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+For deeply nested state changes, applying Immer will make the most difference. Notice especially the case for `LOAD_SETS_SUCCESS`!
+*/
+
 import { RebrickableState } from './types/state'
 import { AppAction } from '../../types/appAction'
 import { RebrickableActionNames } from './types/actionNames'

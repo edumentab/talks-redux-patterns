@@ -4,9 +4,10 @@ import path from 'path'
 import SourceCodePanelControls from './sourcePanel.controls'
 import { stateToIcon } from './stateToIcon'
 import './sourcePanel.css'
+import ReactMarkdown from 'react-markdown/with-html'
 
 import fileInfo from './_sourceCodes.json'
-import { Tag } from '@blueprintjs/core'
+import { Tag, Callout } from '@blueprintjs/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const fileDiff = fileInfo.files
 
@@ -89,7 +90,7 @@ const SourceCodePanel = props => {
     }
   }
 
-  const { state } =
+  const { state, editComment } =
     (filePath && fileInfo.files[filePath].versions[version]) || {}
 
   return (
@@ -110,6 +111,13 @@ const SourceCodePanel = props => {
             <FontAwesomeIcon icon={stateToIcon[state]} />
             {stateExplanation[state]}
           </Tag>
+        </div>
+      )}
+      {editComment && (
+        <div className="editComment">
+          <Callout icon="info-sign">
+            <ReactMarkdown source={editComment} />
+          </Callout>
         </div>
       )}
       <Highlighter

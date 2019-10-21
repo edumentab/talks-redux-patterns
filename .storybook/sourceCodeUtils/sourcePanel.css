@@ -35,6 +35,16 @@
   padding-top: 10px;
 }
 
+.sourcePanel .editComment {
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.sourcePanel .editComment .bp3-callout > :last-child {
+  margin-bottom: 0;
+}
+
 .sourcePanel .fileExplanation [data-icon] {
   margin-right: 10px;
 }
