@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+Note how we must now typecast our store as a Redux `Store` before we send it to the provider. This is because our store allows thunks to be sent to `.dispatch`, which isn't legal by Redux standards.
+*/
+
 import React, { FunctionComponent, useMemo } from 'react'
 
 import { Provider } from 'react-redux'
