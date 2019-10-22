@@ -2,6 +2,8 @@ import addonAPI, { types } from '@storybook/addons'
 import Panel from './sourcePanel'
 import React from 'react'
 
+import fileInfo from './_sourceCodes.json'
+
 addonAPI.register('edumentab/sourcecode', storybookAPI => {
   const channel = addonAPI.getChannel()
   addonAPI.add('edumentab/sourcecode/panel', {
@@ -13,6 +15,7 @@ addonAPI.register('edumentab/sourcecode', storybookAPI => {
     render: ({ active }) => {
       return React.createElement(Panel, {
         channel: addonAPI.getChannel(),
+        fileInfo,
         storybookAPI,
         active
       })

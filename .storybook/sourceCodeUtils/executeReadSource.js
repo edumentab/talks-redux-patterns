@@ -1,8 +1,9 @@
 const readSource = require('./readSource')
 const fs = require('fs')
 const path = require('path')
+const root = path.join(__dirname, '../../src')
 
-const sources = readSource()
+const sources = readSource(root)
 
 fs.writeFileSync(
   path.join(__dirname, '_sourceCodes.json'),

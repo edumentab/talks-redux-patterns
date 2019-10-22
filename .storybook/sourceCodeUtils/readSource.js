@@ -3,11 +3,9 @@ const path = require('path')
 const { execSync, exec } = require('child_process')
 const { diffWords } = require('diff')
 
-const root = path.join(__dirname, '../../src')
-
 const findRefacComment = /^\/* REFAC|EDITCOMMENT[\n\r]([\s\S]*?)\*\/[\s]*([\s\S]*)$/
 
-function readSource() {
+function readSource(root) {
   const res = {}
 
   const versions = fs.readdirSync(root)

@@ -6,10 +6,8 @@ import { stateToIcon } from './stateToIcon'
 import './sourcePanel.css'
 import ReactMarkdown from 'react-markdown/with-html'
 
-import fileInfo from './_sourceCodes.json'
 import { Tag, Callout } from '@blueprintjs/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-const fileDiff = fileInfo.files
 
 const stateExplanation = {
   deleted: 'Deleted in this version (previous file shown below)',
@@ -24,7 +22,8 @@ const stateExplanation = {
 }
 
 const SourceCodePanel = props => {
-  const { channel } = props
+  const { channel, fileInfo } = props
+  const fileDiff = fileInfo.files
   const [fileState, setFileState] = useState({ history: [], idx: 0 })
   const { filePath, version } = fileState.history[fileState.idx] || {
     filePath: '',
@@ -44,7 +43,7 @@ const SourceCodePanel = props => {
     fullPath => {
       const newVersion = (fullPath.match(/\.\/src\/(v[0-9]*)\//) || [])[1]
       const path = fullPath.replace(/\.\/src\/v[0-9]*\//, '')
-      const foundFile = matchPathToSource(path)
+      const foundFile = matchPathToSource(path, fileDiff)
       if (foundFile && foundFile.name !== filePath) {
         const newHistory = fileState.history
           .slice(0, fileState.idx + 1)
@@ -58,7 +57,7 @@ const SourceCodePanel = props => {
         )
       }
     },
-    [filePath, fileState.idx, fileState.history, version]
+    [filePath, fileState.idx, fileState.history, version, fileDiff]
   )
   useEffect(() => {
     channel.on('sourceCode/selectedStory', handleFileChange)
@@ -132,7 +131,7 @@ const SourceCodePanel = props => {
 
 export default SourceCodePanel
 
-function matchPathToSource(path) {
+function matchPathToSource(path, fileDiff) {
   const files = Object.values(fileDiff)
   return files.find(
     file => file.name.includes(path) || path.includes(file.name)
