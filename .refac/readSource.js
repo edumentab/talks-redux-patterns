@@ -110,7 +110,8 @@ function readSource(root) {
   }
   return {
     files: res,
-    versions
+    versions,
+    root
   }
 }
 

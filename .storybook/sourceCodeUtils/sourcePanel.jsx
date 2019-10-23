@@ -5,6 +5,7 @@ import SourceCodePanelControls from './sourcePanel.controls'
 import { stateToIcon } from './stateToIcon'
 import './sourcePanel.css'
 import ReactMarkdown from 'react-markdown/with-html'
+import { matchPathToFile } from '../../.refac'
 
 import { Tag, Callout } from '@blueprintjs/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -41,23 +42,26 @@ const SourceCodePanel = props => {
   )
   const handleFileChange = useCallback(
     fullPath => {
-      const newVersion = (fullPath.match(/\.\/src\/(v[0-9]*)\//) || [])[1]
-      const path = fullPath.replace(/\.\/src\/v[0-9]*\//, '')
-      const foundFile = matchPathToSource(path, fileDiff)
-      if (foundFile && foundFile.name !== filePath) {
+      const { version: newVersion, file: foundFile } =
+        matchPathToFile({
+          sourceData: fileInfo,
+          file: filePath,
+          path: fullPath,
+          version
+        }) || {}
+      if (!foundFile) {
+        console.warn('WARNING! Failed to find file', fullPath)
+        return
+      }
+      if (foundFile !== filePath || newVersion !== version) {
         const newHistory = fileState.history
           .slice(0, fileState.idx + 1)
-          .concat({ filePath: foundFile.name, version: newVersion || version })
+          .concat({ filePath: foundFile, version: newVersion || version })
         const newIdx = newHistory.length - 1
         setFileState({ history: newHistory, idx: newIdx })
-      } else {
-        console.warn(
-          'WARNING! Selected source path not found among files',
-          path
-        )
       }
     },
-    [filePath, fileState.idx, fileState.history, version, fileDiff]
+    [filePath, fileInfo, fileState.idx, fileState.history, version]
   )
   useEffect(() => {
     channel.on('sourceCode/selectedStory', handleFileChange)
@@ -65,29 +69,6 @@ const SourceCodePanel = props => {
   }, [channel, handleFileChange])
 
   if (!props.active) return null
-
-  const handleLinkClick = p => {
-    const rel = path.join(filePath.replace(/\/[^/]*$/, '/'), p)
-    const found = [
-      '/index.jsx',
-      '/index.js',
-      '/index.ts',
-      '/index.tsx',
-      '.jsx',
-      '.js',
-      '.tsx',
-      '.ts',
-      '.css',
-      ''
-    ]
-      .map(suff => rel + suff)
-      .find(p => !!fileDiff[p])
-    if (found) {
-      handleFileChange(found)
-    } else {
-      console.warn('WARNING - could not find corresponding file in list', rel)
-    }
-  }
 
   const { state, editComment } =
     (filePath && fileInfo.files[filePath].versions[version]) || {}
@@ -123,17 +104,10 @@ const SourceCodePanel = props => {
         language={filePath.match(/.css$/) ? 'css' : 'javascript'}
         fileInfo={fileDiff[filePath] && fileDiff[filePath]}
         version={version}
-        onLinkClick={handleLinkClick}
+        onLinkClick={handleFileChange}
       />
     </div>
   )
 }
 
 export default SourceCodePanel
-
-function matchPathToSource(path, fileDiff) {
-  const files = Object.values(fileDiff)
-  return files.find(
-    file => file.name.includes(path) || path.includes(file.name)
-  )
-}

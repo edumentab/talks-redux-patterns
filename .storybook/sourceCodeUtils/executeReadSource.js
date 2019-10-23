@@ -1,4 +1,4 @@
-const readSource = require('./readSource')
+const readSource = require('../../.refac/readSource')
 const fs = require('fs')
 const path = require('path')
 const root = path.join(__dirname, '../../src')
