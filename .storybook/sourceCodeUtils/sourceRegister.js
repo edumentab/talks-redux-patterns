@@ -1,12 +1,15 @@
 import addonAPI, { types } from '@storybook/addons'
-import Panel from './sourcePanel'
+import Panel from '../../.refac/sourcePanel'
 import React from 'react'
 
-import { brain } from './sourceBrain'
+import { initBrain } from '../../.refac/initBrain'
 import sourceData from './_sourceCodes.json'
+
+export const brain = initBrain(sourceData)
 
 addonAPI.register('edumentab/sourcecode', storybookAPI => {
   const channel = addonAPI.getChannel()
+  // This emission was set up in the sourceDecorator
   channel.on('sourceCode/selectedStory', brain.clickLink)
   addonAPI.add('edumentab/sourcecode/panel', {
     type: types.TAB,

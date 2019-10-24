@@ -5,7 +5,7 @@ import SourceCodePanelControls from './sourcePanel.controls'
 import { stateToIcon } from './stateToIcon'
 import './sourcePanel.css'
 import ReactMarkdown from 'react-markdown/with-html'
-import { matchPathToFile } from '../../.refac'
+import { matchPathToFile } from '.'
 
 import { Tag, Callout } from '@blueprintjs/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
