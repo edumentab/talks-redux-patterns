@@ -58,5 +58,7 @@ module.exports = ({ config }) => {
     }
   )
 
+  config.mode = 'development'
+
   return config
 }
