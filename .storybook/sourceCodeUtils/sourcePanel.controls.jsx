@@ -31,32 +31,14 @@ const fileIsTouched = (file, version) =>
   ).includes(file.versions[version].state)
 
 const SourceCodePanelControls = props => {
-  const {
-    filePath,
-    fileState,
-    setFileState,
-    files,
-    handleToggleCompiled,
-    handleFileChange,
-    version,
-    versions,
-    handleVersionChange
-  } = props
+  const { codeState, brain, sourceData, versions } = props
+  const files = Object.values(sourceData.files)
+  let { file: filePath, version } = codeState || {}
 
   const file = files.filter(f => f.name === filePath)[0]
 
   const [query, setQuery] = useState('')
 
-  const handleBack = () =>
-    setFileState({
-      history: fileState.history,
-      idx: Math.max(0, fileState.idx - 1)
-    })
-  const handleForward = () =>
-    setFileState({
-      history: fileState.history,
-      idx: Math.min(fileState.idx + 1, fileState.history.length - 1)
-    })
   const touched = files.filter(f => fileIsTouched(f, version)).sort(fileSorter)
   const deleted = files
     .filter(f => f.versions[version].state === 'deleted')
@@ -124,14 +106,14 @@ const SourceCodePanelControls = props => {
   return (
     <ControlGroup>
       <Button
-        disabled={fileState.idx === 0}
+        disabled={!codeState.canGoBack}
         icon="step-backward"
-        onClick={handleBack}
+        onClick={brain.goBack}
       />
       <Button
-        disabled={fileState.idx === fileState.history.length - 1}
+        disabled={!codeState.canGoForward}
         icon="step-forward"
-        onClick={handleForward}
+        onClick={brain.goForward}
       />
       <Select
         key={`files-${version}`}
@@ -139,7 +121,7 @@ const SourceCodePanelControls = props => {
           option.name.toLowerCase().includes(query.toLowerCase())
         )}
         itemRenderer={renderFileItem}
-        onItemSelect={option => handleFileChange(option.name)}
+        onItemSelect={option => brain.clickLink(option.name)}
         popoverProps={{ minimal: true }}
         onQueryChange={setQuery}
         className="fileSelector"
@@ -152,7 +134,7 @@ const SourceCodePanelControls = props => {
         key="versions"
         items={versions}
         itemRenderer={renderVersionItem}
-        onItemSelect={handleVersionChange}
+        onItemSelect={brain.setVersion}
         popoverProps={{ minimal: true }}
         filterable={false}
       >

@@ -1,6 +1,11 @@
 const _path = require('path')
 
-export function matchPathToFile({ sourceData, path, file, version }) {
+export function matchPathToFile({
+  sourceData,
+  path = '',
+  file = '',
+  version = ''
+}) {
   const [, folder] = sourceData.root.match(/\/([^/]*)$/)
   let fixed = (path[0] === '.'
     ? _path.join(file.replace(/\/[^/]*$/, '/'), path)

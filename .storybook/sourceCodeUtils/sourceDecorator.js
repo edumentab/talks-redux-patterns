@@ -5,7 +5,10 @@ export default makeDecorator({
   parameterName: 'sourceCode',
   wrapper: (getStory, context) => {
     const channel = addons.getChannel()
-    channel.emit('sourceCode/selectedStory', context.parameters.fileName)
+    channel.emit(
+      'sourceCode/selectedStory',
+      context.parameters.fileName.toString().replace(/^\.\//, '')
+    )
     return getStory(context)
   }
 })

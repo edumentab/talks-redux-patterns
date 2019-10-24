@@ -23,70 +23,31 @@ const stateExplanation = {
 }
 
 const SourceCodePanel = props => {
-  const { channel, fileInfo } = props
-  const fileDiff = fileInfo.files
-  const [fileState, setFileState] = useState({ history: [], idx: 0 })
-  const { filePath, version } = fileState.history[fileState.idx] || {
-    filePath: '',
-    version: 'v01'
-  }
-  const handleVersionChange = useCallback(
-    newVersion => {
-      const newHistory = fileState.history
-        .slice(0, fileState.idx + 1)
-        .concat({ filePath, version: newVersion })
-      const newIdx = newHistory.length - 1
-      setFileState({ history: newHistory, idx: newIdx })
-    },
-    [filePath, fileState.idx, fileState.history]
-  )
-  const handleFileChange = useCallback(
-    fullPath => {
-      const { version: newVersion, file: foundFile } =
-        matchPathToFile({
-          sourceData: fileInfo,
-          file: filePath,
-          path: fullPath,
-          version
-        }) || {}
-      if (!foundFile) {
-        console.warn('WARNING! Failed to find file', fullPath)
-        return
-      }
-      if (foundFile !== filePath || newVersion !== version) {
-        const newHistory = fileState.history
-          .slice(0, fileState.idx + 1)
-          .concat({ filePath: foundFile, version: newVersion || version })
-        const newIdx = newHistory.length - 1
-        setFileState({ history: newHistory, idx: newIdx })
-      }
-    },
-    [filePath, fileInfo, fileState.idx, fileState.history, version]
-  )
+  const { sourceData, brain } = props
+  const [codeState, setCodeState] = useState(brain.getState().code)
   useEffect(() => {
-    channel.on('sourceCode/selectedStory', handleFileChange)
-    return () => channel.removeListener('sourceCode/selectedStory')
-  }, [channel, handleFileChange])
+    brain.subscribe(brainState => {
+      setCodeState(brainState.code)
+    })
+  }, [brain])
+
+  const { file = '', version } = codeState || {}
 
   if (!props.active) return null
 
   const { state, editComment } =
-    (filePath && fileInfo.files[filePath].versions[version]) || {}
+    (file && sourceData.files[file].versions[version]) || {}
 
   return (
     <div className="sourcePanel">
       <SourceCodePanelControls
-        filePath={filePath}
-        fileState={fileState}
-        setFileState={setFileState}
-        files={Object.values(fileDiff)}
-        handleVersionChange={handleVersionChange}
-        handleFileChange={handleFileChange}
-        version={version}
-        versions={fileInfo.versions}
+        codeState={codeState}
+        sourceData={sourceData}
+        brain={brain}
+        versions={sourceData.versions}
       />
       {state && (
-        <div key={filePath + version} className="fileExplanation">
+        <div key={file + version} className="fileExplanation">
           <Tag multiline>
             <FontAwesomeIcon icon={stateToIcon[state]} />
             {stateExplanation[state]}
@@ -100,12 +61,14 @@ const SourceCodePanel = props => {
           </Callout>
         </div>
       )}
-      <Highlighter
-        language={filePath.match(/.css$/) ? 'css' : 'javascript'}
-        fileInfo={fileDiff[filePath] && fileDiff[filePath]}
-        version={version}
-        onLinkClick={handleFileChange}
-      />
+      {sourceData.files[file] ? (
+        <Highlighter
+          language={file.match(/.css$/) ? 'css' : 'javascript'}
+          fileInfo={sourceData.files[file]}
+          version={version}
+          onLinkClick={brain.clickLink}
+        />
+      ) : null}
     </div>
   )
 }
