@@ -4,7 +4,7 @@ import path from 'path'
 import SourceCodePanelControls from './sourcePanel.controls'
 import { stateToIcon } from './stateToIcon'
 import './sourcePanel.css'
-import ReactMarkdown from 'react-markdown/with-html'
+import { Markdown } from './markdown'
 import { matchPathToFile } from '.'
 
 import { Tag, Callout } from '@blueprintjs/core'
@@ -57,7 +57,7 @@ const SourceCodePanel = props => {
       {editComment && (
         <div className="editComment">
           <Callout icon="info-sign">
-            <ReactMarkdown source={editComment} />
+            <Markdown markdown={editComment} onLinkClick={brain.clickLink} />
           </Callout>
         </div>
       )}

@@ -1,0 +1,11 @@
+[data-file-link] {
+  color: rgb(0, 119, 170);
+  cursor: pointer;
+  background-color: #f2f2fe;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+[data-file-link]:hover {
+  box-shadow: 0 0 3px blue;
+}
