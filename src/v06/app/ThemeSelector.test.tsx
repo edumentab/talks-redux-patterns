@@ -26,9 +26,7 @@ describe('the ThemeSelector component', () => {
     })
     describe('when themes in memory', () => {
       beforeEach(() => {
-        store.dispatch(
-          loadThemesSuccess({ data: { [fixtureTheme.id]: fixtureTheme } })
-        )
+        store.dispatch(loadThemesSuccess({ [fixtureTheme.id]: fixtureTheme }))
       })
       it('tells us to select a theme', () => {
         const { getByTestId } = testRender(<ThemeSelector />, { store })

@@ -24,7 +24,7 @@ describe('the loadSetsInit action consequence', () => {
   it('calls service, handles happy path', async () => {
     const { resolve } = rigAsyncMock(deps.rebrickable.getSetsForTheme)
     const { dispatch } = makeTestStore({ deps, consGetter })
-    dispatch(loadThemesSuccess({ data: fakeThemeData }))
+    dispatch(loadThemesSuccess(fakeThemeData))
 
     dispatch(loadSetsInit(themeId))
 
@@ -44,7 +44,7 @@ describe('the loadSetsInit action consequence', () => {
     const { reject } = rigAsyncMock(deps.rebrickable.getSetsForTheme)
 
     const { dispatch } = makeTestStore({ deps, consGetter })
-    dispatch(loadThemesSuccess({ data: fakeThemeData }))
+    dispatch(loadThemesSuccess(fakeThemeData))
 
     dispatch(loadSetsInit(themeId))
 

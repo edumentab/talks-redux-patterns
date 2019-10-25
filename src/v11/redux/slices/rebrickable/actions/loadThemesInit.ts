@@ -21,7 +21,7 @@ export const [loadThemesInit, isLoadThemesInit] = factory<LoadThemesInitAction>(
     cons: ({ dispatch, deps }) =>
       deps.rebrickable
         .getThemesByParent(186)
-        .then(data => dispatch(loadThemesSuccess({ data })))
+        .then(data => dispatch(loadThemesSuccess(data)))
         .catch(error => dispatch(loadThemesError({ error })))
   }
 )

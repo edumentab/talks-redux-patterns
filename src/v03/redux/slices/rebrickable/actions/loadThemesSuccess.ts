@@ -3,9 +3,7 @@ import { Action } from '../../../lib/types/action'
 import { ById } from '../../../../types'
 import { Theme } from '../../../../services/rebrickable/types'
 
-type LoadThemesSuccessPayload = {
-  data: ById<Theme>
-}
+type LoadThemesSuccessPayload = ById<Theme>
 
 export type LoadThemesSuccessAction = Action<
   RebrickableActionNames.LOAD_THEMES_SUCCESS,
@@ -16,5 +14,5 @@ export const loadThemesSuccess = (
   data: ById<Theme>
 ): LoadThemesSuccessAction => ({
   type: RebrickableActionNames.LOAD_THEMES_SUCCESS,
-  payload: { data }
+  payload: data
 })

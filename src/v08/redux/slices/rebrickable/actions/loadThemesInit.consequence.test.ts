@@ -29,7 +29,7 @@ describe('the loadThemesInit consequence', () => {
     resolve(fakeData)
     await nextTick()
 
-    expect(dispatch).toHaveBeenCalledWith(loadThemesSuccess({ data: fakeData }))
+    expect(dispatch).toHaveBeenCalledWith(loadThemesSuccess(fakeData))
   })
   it('handles sad path', async () => {
     const { reject } = rigAsyncMock(deps.rebrickable.getThemesByParent)

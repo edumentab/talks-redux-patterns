@@ -32,7 +32,7 @@ describe('the loadSetsForThemeThunk creator', () => {
     store = makeTestStore()
     store.dispatch(
       loadThemesSuccess({
-        data: { [themeId]: fixtureTheme }
+        [themeId]: fixtureTheme
       })
     )
   })

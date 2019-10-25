@@ -22,7 +22,7 @@ const loadThemesAction = {
 describe('the loadThemesSuccess consequence', () => {
   it('dispatches loadSetsInit', async () => {
     const { dispatch } = makeTestStore({ consGetter })
-    dispatch(loadThemesSuccess({ data: fakeThemeData }))
+    dispatch(loadThemesSuccess(fakeThemeData))
 
     dispatch(setCurrentTheme(themeId))
 
@@ -31,7 +31,7 @@ describe('the loadThemesSuccess consequence', () => {
   })
   it('doesnt dispatch if we already have sets for that theme', async () => {
     const { dispatch } = makeTestStore({ consGetter })
-    dispatch(loadThemesSuccess({ data: fakeThemeData }))
+    dispatch(loadThemesSuccess(fakeThemeData))
     dispatch(loadSetsSuccess({ data: fakeSetData, themeId }))
 
     dispatch(setCurrentTheme(themeId))
@@ -41,7 +41,7 @@ describe('the loadThemesSuccess consequence', () => {
   })
   it('doesnt dispatch if we are already loading', async () => {
     const { dispatch } = makeTestStore({ consGetter })
-    dispatch(loadThemesSuccess({ data: fakeThemeData }))
+    dispatch(loadThemesSuccess(fakeThemeData))
     dispatch(loadSetsInit(themeId))
 
     dispatch(setCurrentTheme(themeId))

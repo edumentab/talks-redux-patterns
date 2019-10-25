@@ -29,7 +29,7 @@ describe('the loadSetsForThemeThunk creator', () => {
     store = makeTestStore({ deps })
     store.dispatch(
       loadThemesSuccess({
-        data: { [themeId]: fixtureTheme }
+        [themeId]: fixtureTheme
       })
     )
   })

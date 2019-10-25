@@ -31,7 +31,7 @@ describe('the loadThemesInit consequence', () => {
     await nextTick()
 
     expect(dispatch).toHaveBeenCalledWith({
-      ...loadThemesSuccess({ data: fakeData }),
+      ...loadThemesSuccess(fakeData),
       sender: 'CONSEQUENCE(LOAD_THEMES_INIT)'
     })
   })

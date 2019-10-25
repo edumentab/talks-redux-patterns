@@ -55,7 +55,7 @@ describe('The Theme component', () => {
   })
   describe('when we have currentTheme', () => {
     beforeEach(() => {
-      store.dispatch(loadThemesSuccess({ data: { [themeId]: fixtureTheme } }))
+      store.dispatch(loadThemesSuccess({ [themeId]: fixtureTheme }))
       store.dispatch(setCurrentTheme(themeId))
     })
     it('renders SetSelector but no Set', () => {

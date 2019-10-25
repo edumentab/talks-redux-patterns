@@ -16,7 +16,7 @@ describe('the Set component', () => {
     const themeId = 123
     const setId = '6086'
     const setImageUrl = 'fake_image_url'
-    store.dispatch(loadThemesSuccess({ data: { [themeId]: fixtureTheme } }))
+    store.dispatch(loadThemesSuccess({ [themeId]: fixtureTheme }))
     store.dispatch(
       loadSetsSuccess({
         themeId,

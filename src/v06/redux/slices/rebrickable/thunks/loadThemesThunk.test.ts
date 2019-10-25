@@ -25,7 +25,7 @@ describe('the loadThemesThunk creator', () => {
     resolve(fakeData)
     await nextTick()
 
-    expect(dispatch).toHaveBeenCalledWith(loadThemesSuccess({ data: fakeData }))
+    expect(dispatch).toHaveBeenCalledWith(loadThemesSuccess(fakeData))
   })
   it('handles sad path', async () => {
     const { dispatch } = makeTestStore()

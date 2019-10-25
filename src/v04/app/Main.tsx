@@ -17,7 +17,7 @@ export const Main: FunctionComponent<MainProps> = ({ version }) => {
     dispatch(loadThemesInit())
     rebrickableService
       .getThemesByParent(186)
-      .then(data => dispatch(loadThemesSuccess({ data })))
+      .then(data => dispatch(loadThemesSuccess(data)))
       .catch(error => dispatch(loadThemesError({ error })))
   }, [dispatch])
 

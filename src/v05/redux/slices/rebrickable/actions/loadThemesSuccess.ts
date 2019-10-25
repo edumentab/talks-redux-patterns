@@ -4,9 +4,7 @@ import { ById } from '../../../../types'
 import { Theme } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
 
-type LoadThemesSuccessPayload = {
-  data: ById<Theme>
-}
+type LoadThemesSuccessPayload = ById<Theme>
 
 export type LoadThemesSuccessAction = Action<
   RebrickableActionNames.LOAD_THEMES_SUCCESS,

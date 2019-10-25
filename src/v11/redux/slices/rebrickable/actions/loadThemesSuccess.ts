@@ -4,9 +4,7 @@ import { Theme } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 
-type LoadThemesSuccessPayload = {
-  data: ById<Theme>
-}
+type LoadThemesSuccessPayload = ById<Theme>
 
 export type LoadThemesSuccessAction = AppActionMould<
   'LOAD_THEMES_SUCCESS',
@@ -18,7 +16,7 @@ export const [loadThemesSuccess, isLoadThemesSuccess] = factory<
 >({
   type: 'LOAD_THEMES_SUCCESS',
   reducer: (state, payload) => {
-    const { data } = payload
+    const data = payload
     return produce(state, draft => {
       draft.rebrickable.themes.loading = false
       draft.rebrickable.themes.data = data

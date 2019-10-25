@@ -44,7 +44,7 @@ describe('The Main component', () => {
 
       expect(store.dispatch).toHaveBeenCalledTimes(2)
       expect(store.dispatch).toHaveBeenCalledWith(
-        loadThemesSuccess({ data: fakeResponse })
+        loadThemesSuccess(fakeResponse)
       )
     })
     it('handles sad path', async () => {

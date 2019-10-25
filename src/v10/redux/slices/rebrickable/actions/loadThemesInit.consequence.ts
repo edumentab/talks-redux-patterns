@@ -11,7 +11,7 @@ export const loadThemesInitConsequence: AppCons = ({
   if (isLoadThemesInit(action)) {
     deps.rebrickable
       .getThemesByParent(186)
-      .then(data => dispatch(loadThemesSuccess({ data })))
+      .then(data => dispatch(loadThemesSuccess(data)))
       .catch(error => dispatch(loadThemesError({ error })))
   }
 }

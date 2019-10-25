@@ -29,7 +29,7 @@ export const rebrickableReducer = (
       }
     }
     case RebrickableActionNames.LOAD_THEMES_SUCCESS: {
-      const { data } = action.payload
+      const data = action.payload
       return {
         ...state,
         themes: {

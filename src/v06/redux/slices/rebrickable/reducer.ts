@@ -31,7 +31,7 @@ export const rebrickableReducer = (
       return
     }
     if (isLoadThemesSuccess(action)) {
-      const { data } = action.payload
+      const data = action.payload
       draft.themes.loading = false
       draft.themes.data = data
       return

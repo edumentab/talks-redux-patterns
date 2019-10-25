@@ -17,7 +17,7 @@ describe('the Guess component', () => {
     const themeId = 123
     const setId = '6086'
     const partCount = 50
-    store.dispatch(loadThemesSuccess({ data: { [themeId]: fixtureTheme } }))
+    store.dispatch(loadThemesSuccess({ [themeId]: fixtureTheme }))
     store.dispatch(
       loadSetsSuccess({
         themeId,
