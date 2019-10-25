@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+Here as in <span data-file-link="./setCurrentSet.test.ts">the <code>setCurrentSet</code> tests</span> we get the benefit of co-location. Since the `setCurrentTheme` action affects two different state slices, the old reducer tests never showed the full picture. By testing the actions instead we now see all consequences across all slices in a single place.
+*/
+
 import { setCurrentTheme } from '.'
 import { makeGuess } from '../../guessingGame/actions'
 import { makeStore } from '../../../makeStore'

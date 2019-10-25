@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+Improving "fake immutable" code with Immer isn't limited to reducers; we can frequently benefit in other places too. Like here in the test file where we want to tweak a common initial state without mutating it!
+*/
+
 import { initialRebrickableState } from './initialState'
 import {
   loadThemesInit,
