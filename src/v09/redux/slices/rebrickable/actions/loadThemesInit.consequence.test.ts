@@ -45,7 +45,7 @@ describe('the loadThemesInit consequence', () => {
     await nextTick()
 
     expect(dispatch).toHaveBeenCalledWith({
-      ...loadThemesError({ error }),
+      ...loadThemesError(error),
       sender: 'CONSEQUENCE(loadThemesInitConsequence)'
     })
   })

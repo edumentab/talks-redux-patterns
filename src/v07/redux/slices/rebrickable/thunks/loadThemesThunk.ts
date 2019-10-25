@@ -10,5 +10,5 @@ export const loadThemesThunk: AppThunkCreator = () => (
   deps.rebrickable
     .getThemesByParent(186)
     .then(data => dispatch(loadThemesSuccess(data)))
-    .catch(error => dispatch(loadThemesError({ error })))
+    .catch(err => dispatch(loadThemesError(err)))
 }

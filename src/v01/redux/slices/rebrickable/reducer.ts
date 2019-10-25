@@ -18,7 +18,7 @@ export const rebrickableReducer = (
         }
       }
     case RebrickableActionNames.LOAD_THEMES_ERROR: {
-      const { error } = action.payload
+      const error = action.payload
       return {
         ...state,
         themes: {

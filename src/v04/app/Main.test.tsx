@@ -57,9 +57,7 @@ describe('The Main component', () => {
       reject('oh no')
       await nextTick()
 
-      expect(store.dispatch).toHaveBeenCalledWith(
-        loadThemesError({ error: 'oh no' })
-      )
+      expect(store.dispatch).toHaveBeenCalledWith(loadThemesError('oh no'))
     })
   })
 })

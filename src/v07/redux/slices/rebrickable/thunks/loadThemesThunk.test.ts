@@ -37,6 +37,6 @@ describe('the loadThemesThunk creator', () => {
     reject(error)
     await nextTick()
 
-    expect(dispatch).toHaveBeenCalledWith(loadThemesError({ error }))
+    expect(dispatch).toHaveBeenCalledWith(loadThemesError(error))
   })
 })

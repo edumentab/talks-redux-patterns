@@ -25,7 +25,7 @@ export const rebrickableReducer = (
       return
     }
     if (isLoadThemesError(action)) {
-      const { error } = action.payload
+      const error = action.payload
       draft.themes.loading = false
       draft.themes.error = error
       return
