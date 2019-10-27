@@ -46,6 +46,11 @@ function readSource(root) {
 
   for (const file in res) {
     const f = res[file]
+    const potentialTest =
+      file.match(/\.tsx?$/) && file.replace(/\.ts(x?)$/, '.test.ts$1')
+    if (res[potentialTest]) {
+      f.testedIn = potentialTest
+    }
     f.allStates = []
     versions.forEach((v, n) => {
       const fileV = f.versions[v] || (f.versions[v] = { which: null })
