@@ -134,7 +134,7 @@ const SourceCodePanelControls = props => {
         key="versions"
         items={versions}
         itemRenderer={renderVersionItem}
-        onItemSelect={brain.setVersion}
+        onItemSelect={brain.clickLink}
         popoverProps={{ minimal: true }}
         filterable={false}
       >

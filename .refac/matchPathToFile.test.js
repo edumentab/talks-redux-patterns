@@ -6,7 +6,7 @@ const sourceData = {
     'bar/index.ts': {},
     'baz/blarp.js': {}
   },
-  versions: ['v01', 'v02'],
+  versions: ['v01', 'v02', 'v03', 'v04'],
   root: 'poop/src'
 }
 
@@ -70,6 +70,17 @@ const testCases = {
     expected: {
       file: 'baz/blarp.js',
       version: 'v03'
+    }
+  },
+  'to version, no file': {
+    input: {
+      file: 'foo/gnurp.js',
+      path: 'v04',
+      version: 'v03'
+    },
+    expected: {
+      file: 'foo/gnurp.js',
+      version: 'v04'
     }
   }
 }

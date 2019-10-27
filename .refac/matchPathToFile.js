@@ -18,9 +18,11 @@ export function matchPathToFile({
   let newVersion = sourceData.versions.find(
     v => fixed.substr(0, v.length) === v
   )
-
   if (newVersion) {
     fixed = fixed.replace(newVersion + '/', '')
+    if (fixed === newVersion) {
+      fixed = file
+    }
   } else {
     newVersion = version
   }

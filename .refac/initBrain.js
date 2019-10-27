@@ -62,21 +62,6 @@ export function initBrain(sourceData) {
       })
       notify()
     },
-    setVersion(version) {
-      if (version !== state.code.history[state.code.idx].version) {
-        state = produce(state, draft => {
-          const newHistory = draft.code.history
-            .slice(0, draft.code.idx + 1)
-            .concat({
-              file: draft.code.history[draft.code.idx].file,
-              version
-            })
-          const newIdx = newHistory.length - 1
-          draft.code = { history: newHistory, idx: newIdx }
-        })
-        notify()
-      }
-    },
     clickLink(path) {
       const {
         code: { history, idx }
