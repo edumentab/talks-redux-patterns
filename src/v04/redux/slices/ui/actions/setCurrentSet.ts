@@ -9,6 +9,6 @@ export type SetCurrentSetAction = Action<
   SetCurrentSetPayload
 >
 
-export const setCurrentSet = factory<SetCurrentSetAction>(
-  UIActionNames.SET_CURRENT_SET
-)
+export const setCurrentSet = factory<SetCurrentSetAction>({
+  type: UIActionNames.SET_CURRENT_SET
+})

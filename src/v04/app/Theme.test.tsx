@@ -80,7 +80,7 @@ describe('The Theme component', () => {
       await nextTick()
 
       expect(store.dispatch).toHaveBeenCalledWith(
-        loadSetsSuccess({ themeId, data: fakeResponse })
+        loadSetsSuccess(themeId, fakeResponse)
       )
     })
     it('handles sad path', () => {
@@ -91,7 +91,7 @@ describe('The Theme component', () => {
         reject('oh no')
 
         expect(store.dispatch).toHaveBeenCalledWith(
-          loadSetsError({ themeId, error: 'oh no' })
+          loadSetsError(themeId, 'oh no')
         )
       })
     })
@@ -108,7 +108,7 @@ describe('The Theme component', () => {
       describe('when we have received an answer and selected a set', () => {
         const setId = '6090'
         beforeEach(() => {
-          store.dispatch(loadSetsSuccess({ themeId, data: {} }))
+          store.dispatch(loadSetsSuccess(themeId, {}))
           store.dispatch(setCurrentSet(setId))
         })
         it('renders a Set', () => {

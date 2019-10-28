@@ -29,12 +29,8 @@ export const Theme: FunctionComponent = () => {
       dispatch(loadSetsInit(currentThemeId))
       rebrickableService
         .getSetsForTheme(currentThemeId)
-        .then(data =>
-          dispatch(loadSetsSuccess({ themeId: currentThemeId, data }))
-        )
-        .catch(error =>
-          dispatch(loadSetsError({ themeId: currentThemeId, error }))
-        )
+        .then(data => dispatch(loadSetsSuccess(currentThemeId, data)))
+        .catch(error => dispatch(loadSetsError(currentThemeId, error)))
     }
   }, [currentThemeId, sets, dispatch])
 
