@@ -15,6 +15,7 @@ export const stateToIcon = {
   nonexistent: faGhost,
   created: faStar,
   unchanged: faEllipsisH,
+  initial: faEllipsisH,
   edited: faPen,
   eternal: faInfinity,
   pruned: faCut,

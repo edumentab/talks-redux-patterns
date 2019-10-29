@@ -61,6 +61,8 @@ function readSource(root) {
           ? prevFileV.which !== null
             ? 'deleted'
             : 'nonexistent'
+          : n === 0
+          ? 'initial'
           : prevFileV.which === null
           ? 'created'
           : prevFileV.which === fileV.which
