@@ -35,9 +35,7 @@ describe('the loadSetsInit action consequence', () => {
 
     await nextTick()
 
-    expect(dispatch).toHaveBeenCalledWith(
-      loadSetsSuccess({ data: fakeData, themeId })
-    )
+    expect(dispatch).toHaveBeenCalledWith(loadSetsSuccess(themeId, fakeData))
   })
 
   it('handles sad path', async () => {
@@ -53,6 +51,6 @@ describe('the loadSetsInit action consequence', () => {
 
     await nextTick()
 
-    expect(dispatch).toHaveBeenCalledWith(loadSetsError({ error, themeId }))
+    expect(dispatch).toHaveBeenCalledWith(loadSetsError(themeId, error))
   })
 })

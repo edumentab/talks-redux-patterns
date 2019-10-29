@@ -18,13 +18,10 @@ describe('the Set component', () => {
     const setImageUrl = 'fake_image_url'
     store.dispatch(loadThemesSuccess({ [themeId]: fixtureTheme }))
     store.dispatch(
-      loadSetsSuccess({
-        themeId,
-        data: {
-          [setId]: {
-            ...fixtureSet,
-            set_img_url: setImageUrl
-          }
+      loadSetsSuccess(themeId, {
+        [setId]: {
+          ...fixtureSet,
+          set_img_url: setImageUrl
         }
       })
     )

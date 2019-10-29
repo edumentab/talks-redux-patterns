@@ -10,4 +10,4 @@ export type LoadThemesErrorAction = Action<
 
 export const [loadThemesError, isLoadThemesError] = factory<
   LoadThemesErrorAction
->('LOAD_THEMES_ERROR', true)
+>({ type: 'LOAD_THEMES_ERROR', isError: true })

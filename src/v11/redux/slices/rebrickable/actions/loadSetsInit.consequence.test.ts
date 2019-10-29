@@ -37,7 +37,7 @@ describe('the loadSetsInit action consequence', () => {
     await nextTick()
 
     expect(dispatch).toHaveBeenCalledWith({
-      ...loadSetsSuccess({ data: fakeData, themeId }),
+      ...loadSetsSuccess(themeId, fakeData),
       sender: 'CONSEQUENCE(LOAD_SETS_INIT)'
     })
   })
@@ -56,7 +56,7 @@ describe('the loadSetsInit action consequence', () => {
     await nextTick()
 
     expect(dispatch).toHaveBeenCalledWith({
-      ...loadSetsError({ error, themeId }),
+      ...loadSetsError(themeId, error),
       sender: 'CONSEQUENCE(LOAD_SETS_INIT)'
     })
   })

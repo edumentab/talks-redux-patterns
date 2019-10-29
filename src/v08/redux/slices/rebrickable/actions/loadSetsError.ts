@@ -11,7 +11,11 @@ export type LoadSetsErrorAction = Action<
   LoadSetsErrorPayload
 >
 
-export const [loadSetsError, isLoadSetsError] = factory<LoadSetsErrorAction>(
-  'LOAD_SETS_ERROR',
-  true
-)
+export const [loadSetsError, isLoadSetsError] = factory<
+  LoadSetsErrorAction,
+  [number, string]
+>({
+  type: 'LOAD_SETS_ERROR',
+  isError: true,
+  mapper: (themeId: number, error: string) => ({ themeId, error })
+})

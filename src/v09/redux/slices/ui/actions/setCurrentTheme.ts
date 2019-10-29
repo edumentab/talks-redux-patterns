@@ -10,4 +10,4 @@ export type SetCurrentThemeAction = Action<
 
 export const [setCurrentTheme, isSetCurrentTheme] = factory<
   SetCurrentThemeAction
->('SET_CURRENT_THEME')
+>({ type: 'SET_CURRENT_THEME' })

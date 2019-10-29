@@ -25,7 +25,7 @@ export const [loadSetsInit, isLoadSetsInit] = factory<LoadSetsInitAction>({
     const themeId = action.payload
     deps.rebrickable
       .getSetsForTheme(themeId)
-      .then(data => dispatch(loadSetsSuccess({ themeId, data })))
-      .catch(error => dispatch(loadSetsError({ themeId, error })))
+      .then(data => dispatch(loadSetsSuccess(themeId, data)))
+      .catch(error => dispatch(loadSetsError(themeId, error)))
   }
 })

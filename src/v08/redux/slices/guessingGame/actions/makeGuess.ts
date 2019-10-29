@@ -5,4 +5,6 @@ type MakeGuessPayload = number // Just need the actual guess, setnumber is in UI
 
 export type MakeGuessAction = Action<'MAKE_GUESS', MakeGuessPayload>
 
-export const [makeGuess, isMakeGuess] = factory<MakeGuessAction>('MAKE_GUESS')
+export const [makeGuess, isMakeGuess] = factory<MakeGuessAction>({
+  type: 'MAKE_GUESS'
+})

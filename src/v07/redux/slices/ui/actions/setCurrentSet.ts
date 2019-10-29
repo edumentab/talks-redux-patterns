@@ -8,6 +8,6 @@ export type SetCurrentSetAction = Action<
   SetCurrentSetPayload
 >
 
-export const [setCurrentSet, isSetCurrentSet] = factory<SetCurrentSetAction>(
-  'SET_CURRENT_SET'
-)
+export const [setCurrentSet, isSetCurrentSet] = factory<SetCurrentSetAction>({
+  type: 'SET_CURRENT_SET'
+})

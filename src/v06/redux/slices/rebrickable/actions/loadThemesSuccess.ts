@@ -12,4 +12,4 @@ export type LoadThemesSuccessAction = Action<
 
 export const [loadThemesSuccess, isLoadThemesSuccess] = factory<
   LoadThemesSuccessAction
->('LOAD_THEMES_SUCCESS')
+>({ type: 'LOAD_THEMES_SUCCESS' })

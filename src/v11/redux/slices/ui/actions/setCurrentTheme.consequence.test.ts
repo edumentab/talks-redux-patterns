@@ -32,7 +32,7 @@ describe('the loadThemesSuccess consequence', () => {
   it('doesnt dispatch if we already have sets for that theme', async () => {
     const { dispatch } = makeTestStore({ consGetter })
     dispatch(loadThemesSuccess(fakeThemeData))
-    dispatch(loadSetsSuccess({ data: fakeSetData, themeId }))
+    dispatch(loadSetsSuccess(themeId, fakeSetData))
 
     dispatch(setCurrentTheme(themeId))
 

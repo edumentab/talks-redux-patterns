@@ -14,5 +14,9 @@ export type LoadSetsSuccessAction = Action<
 >
 
 export const [loadSetsSuccess, isLoadSetsSuccess] = factory<
-  LoadSetsSuccessAction
->('LOAD_SETS_SUCCESS')
+  LoadSetsSuccessAction,
+  [number, ById<Set>]
+>({
+  type: 'LOAD_SETS_SUCCESS',
+  mapper: (themeId: number, data: ById<Set>) => ({ themeId, data })
+})

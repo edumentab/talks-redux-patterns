@@ -37,11 +37,8 @@ describe('the SetSelector component', () => {
     describe('when sets in memory', () => {
       beforeEach(() => {
         store.dispatch(
-          loadSetsSuccess({
-            themeId,
-            data: {
-              [fixtureSet.set_num]: fixtureSet
-            }
+          loadSetsSuccess(themeId, {
+            [fixtureSet.set_num]: fixtureSet
           })
         )
       })

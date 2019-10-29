@@ -14,6 +14,10 @@ export type LoadSetsSuccessAction = Action<
   LoadSetsSuccessPayload
 >
 
-export const loadSetsSuccess = factory<LoadSetsSuccessAction>(
-  RebrickableActionNames.LOAD_SETS_SUCCESS
-)
+export const loadSetsSuccess = factory<
+  LoadSetsSuccessAction,
+  [number, ById<Set>]
+>({
+  type: RebrickableActionNames.LOAD_SETS_SUCCESS,
+  mapper: (themeId: number, data: ById<Set>) => ({ themeId, data })
+})

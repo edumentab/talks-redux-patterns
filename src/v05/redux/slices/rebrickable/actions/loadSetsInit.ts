@@ -9,6 +9,6 @@ export type LoadSetsInitAction = Action<
   LoadSetsInitPayload
 >
 
-export const loadSetsInit = factory<LoadSetsInitAction>(
-  RebrickableActionNames.LOAD_SETS_INIT
-)
+export const loadSetsInit = factory<LoadSetsInitAction>({
+  type: RebrickableActionNames.LOAD_SETS_INIT
+})

@@ -9,6 +9,6 @@ export type MakeGuessAction = Action<
   MakeGuessPayload
 >
 
-export const makeGuess = factory<MakeGuessAction>(
-  GuessingGameActionNames.MAKE_GUESS
-)
+export const makeGuess = factory<MakeGuessAction>({
+  type: GuessingGameActionNames.MAKE_GUESS
+})

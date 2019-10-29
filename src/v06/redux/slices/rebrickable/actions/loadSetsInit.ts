@@ -5,6 +5,6 @@ type LoadSetsInitPayload = number // the themeId for which to load sets
 
 export type LoadSetsInitAction = Action<'LOAD_SETS_INIT', LoadSetsInitPayload>
 
-export const [loadSetsInit, isLoadSetsInit] = factory<LoadSetsInitAction>(
-  'LOAD_SETS_INIT'
-)
+export const [loadSetsInit, isLoadSetsInit] = factory<LoadSetsInitAction>({
+  type: 'LOAD_SETS_INIT'
+})

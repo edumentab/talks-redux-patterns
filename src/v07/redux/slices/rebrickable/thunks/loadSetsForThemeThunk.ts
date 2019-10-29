@@ -7,6 +7,6 @@ export const loadSetsForThemeThunk: AppThunkCreator<number> = (
   dispatch(loadSetsInit(themeId))
   deps.rebrickable
     .getSetsForTheme(themeId)
-    .then(data => dispatch(loadSetsSuccess({ themeId, data })))
-    .catch(error => dispatch(loadSetsError({ themeId, error })))
+    .then(data => dispatch(loadSetsSuccess(themeId, data)))
+    .catch(error => dispatch(loadSetsError(themeId, error)))
 }

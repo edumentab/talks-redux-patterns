@@ -19,13 +19,10 @@ describe('the Guess component', () => {
     const partCount = 50
     store.dispatch(loadThemesSuccess({ [themeId]: fixtureTheme }))
     store.dispatch(
-      loadSetsSuccess({
-        themeId,
-        data: {
-          [setId]: {
-            ...fixtureSet,
-            num_parts: partCount
-          }
+      loadSetsSuccess(themeId, {
+        [setId]: {
+          ...fixtureSet,
+          num_parts: partCount
         }
       })
     )

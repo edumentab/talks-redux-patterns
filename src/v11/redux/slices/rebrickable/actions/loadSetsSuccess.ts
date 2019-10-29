@@ -15,9 +15,11 @@ export type LoadSetsSuccessAction = AppActionMould<
 >
 
 export const [loadSetsSuccess, isLoadSetsSuccess] = factory<
-  LoadSetsSuccessAction
+  LoadSetsSuccessAction,
+  [number, ById<Set>]
 >({
   type: 'LOAD_SETS_SUCCESS',
+  mapper: (themeId: number, data: ById<Set>) => ({ themeId, data }),
   reducer: (state, payload) => {
     const { data, themeId } = payload
     return produce(state, draft => {

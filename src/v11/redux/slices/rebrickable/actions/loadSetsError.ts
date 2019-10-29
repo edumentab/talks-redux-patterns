@@ -12,9 +12,13 @@ export type LoadSetsErrorAction = AppActionMould<
   LoadSetsErrorPayload
 >
 
-export const [loadSetsError, isLoadSetsError] = factory<LoadSetsErrorAction>({
+export const [loadSetsError, isLoadSetsError] = factory<
+  LoadSetsErrorAction,
+  [number, string]
+>({
   type: 'LOAD_SETS_ERROR',
   isError: true,
+  mapper: (themeId: number, error: string) => ({ themeId, error }),
   reducer: (state, payload) => {
     const { themeId, error } = payload
     return produce(state, draft => {

@@ -1,18 +1,21 @@
 import { Action, ActionPayload, ActionType } from './action'
 
-export type ActionCreator<A extends Action<string, any>> = ActionPayload<
-  A
-> extends undefined
+export type ActionCreator<
+  A extends Action<string, any>,
+  Sig extends Array<any> & { 0: any } = [ActionPayload<A>]
+> = ActionPayload<A> extends undefined
   ? NakedActionCreator<A>
-  : PayloadActionCreator<A>
+  : PayloadActionCreator<A, Sig>
 
 interface WithActionType<T = string> {
   actionType: T
 }
 
-export interface PayloadActionCreator<A extends Action<string, any>>
-  extends WithActionType<ActionType<A>> {
-  (payload: ActionPayload<A>): {
+export interface PayloadActionCreator<
+  A extends Action<string, any>,
+  Sig extends Array<any> & { 0: any }
+> extends WithActionType<ActionType<A>> {
+  (...args: Sig): {
     type: ActionType<A>
     payload: ActionPayload<A>
   }

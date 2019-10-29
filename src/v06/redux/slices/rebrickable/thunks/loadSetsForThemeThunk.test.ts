@@ -52,7 +52,7 @@ describe('the loadSetsForThemeThunk creator', () => {
     await nextTick()
 
     expect(store.dispatch).toHaveBeenCalledWith(
-      loadSetsSuccess({ data: fakeData, themeId })
+      loadSetsSuccess(themeId, fakeData)
     )
   })
   it('handles sad path', async () => {
@@ -64,8 +64,6 @@ describe('the loadSetsForThemeThunk creator', () => {
     reject(error)
     await nextTick()
 
-    expect(store.dispatch).toHaveBeenCalledWith(
-      loadSetsError({ themeId, error })
-    )
+    expect(store.dispatch).toHaveBeenCalledWith(loadSetsError(themeId, error))
   })
 })

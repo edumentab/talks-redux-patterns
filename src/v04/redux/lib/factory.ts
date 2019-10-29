@@ -1,7 +1,7 @@
 import { ActionCreator } from './types/creator'
 import { Action, ActionType, ActionPayload } from './types/action'
 
-type CreatorBlueprint<
+type FactoryOpts<
   A extends Action<string, any>,
   Signature extends Array<any> & { 0: any } = [ActionPayload<A>]
 > = {
@@ -14,7 +14,7 @@ export const factory = <
   A extends Action<string, any>,
   Sig extends Array<any> & { 0: any } = [ActionPayload<A>]
 >(
-  blueprint: CreatorBlueprint<A, Sig>
+  blueprint: FactoryOpts<A, Sig>
 ) => {
   const { type, isError, mapper } = blueprint
   const creator = ((...args: Sig) => ({

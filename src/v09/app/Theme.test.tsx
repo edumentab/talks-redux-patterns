@@ -73,7 +73,7 @@ describe('The Theme component', () => {
       describe('when we have received an answer and selected a set', () => {
         const setId = '6090'
         beforeEach(() => {
-          store.dispatch(loadSetsSuccess({ themeId, data: {} }))
+          store.dispatch(loadSetsSuccess(themeId, {}))
           store.dispatch(setCurrentSet(setId))
         })
         it('renders a Set', () => {
