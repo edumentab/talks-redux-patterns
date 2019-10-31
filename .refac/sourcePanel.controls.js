@@ -23,12 +23,13 @@ const fileIsTouched = (file, version) =>
         'edited',
         'pruned',
         'grown',
+        'initial',
         'replaced',
         'eternal',
         'unchanged'
       ]
     : ['created', 'edited', 'pruned', 'grown', 'replaced']
-  ).includes(file.versions[version].state)
+  ).includes((file.versions[version] || {}).state)
 
 const SourceCodePanelControls = props => {
   const { codeState, brain, sourceData, versions } = props
@@ -41,7 +42,7 @@ const SourceCodePanelControls = props => {
 
   const touched = files.filter(f => fileIsTouched(f, version)).sort(fileSorter)
   const deleted = files
-    .filter(f => f.versions[version].state === 'deleted')
+    .filter(f => (f.versions[version] || {}).state === 'deleted')
     .sort(fileSorter)
   const untouched = files
     .filter(f => !fileIsTouched(f, version) && !deleted.includes(f))
@@ -52,6 +53,7 @@ const SourceCodePanelControls = props => {
     (option, { modifiers, handleClick }) => {
       const curV = option.versions[version]
       const currentlySelected = filePath === option.name
+      if (!option.versions[version]) return null
       return (
         <MenuItem
           className={classNames(
@@ -79,6 +81,7 @@ const SourceCodePanelControls = props => {
   const renderVersionItem = useCallback(
     (option, { modifiers, handleClick }) => {
       const currentlySelected = version === option
+      if (!file || !file.versions[option]) return null
       return (
         <MenuItem
           className={`${Classes.TEXT_SMALL} Editor_Menu_Item`}

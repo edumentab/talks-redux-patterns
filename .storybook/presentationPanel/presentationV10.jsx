@@ -16,9 +16,6 @@ export const PresentationV10 = () => {
 * slice reducers are an artificial separation
 * everything regarding an action ends up in a single place
 
-### Notes
-
-* because of v02 we don't have to change tests!
 `}
       />
     </div>
