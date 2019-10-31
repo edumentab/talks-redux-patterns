@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+Our <span data-file-link="../redux/types/appStore.ts"><code>AppStore</code></span> type now allows us to dispatch <span data-file-link="../redux/types/appThunk.ts"><code>AppThunk</code></span> as well as <span data-file-link="../redux/types/appAction.ts"><code>AppAction</code></span>. This is not a valid Redux Store, which is why we now have to do the ugly casting here (the same thing happens in <span data-file-link="../app/App.tsx"><code>App.tsx</code></span>).
+*/
+
 import React, { FunctionComponent } from 'react'
 import { render, RenderOptions } from '@testing-library/react'
 import { Provider } from 'react-redux'

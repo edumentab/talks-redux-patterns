@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+Here we test our new <span data-file-link="./loadSetsForThemeThunk"><code>loadSetsForThemeThunk</code></span> <span data-file-link="../../../types/appThunk"><code>AppThunk</code></span>.
+
+Since `loadSetsForThemeThunk` contains side effect logic extracted from the <span data-file-link="../../../../app/Theme"><code>Theme.tsx</code></span> component, we can see that the tests here largely correspond to what's been removed from the <span data-file-link="../../../../app/Theme.test"><code>Theme</code> tests</span>.
+*/
+
 import { loadSetsForThemeThunk } from '.'
 
 jest.mock('../../../../services/rebrickable', () => ({

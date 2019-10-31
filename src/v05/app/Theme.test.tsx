@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+Since the side effect logic was moved from <span data-file-link="./Theme"><code>Theme</code></span> into <span data-file-link="../redux/slices/rebrickable/thunks/loadSetsForThemeThunk"><code>loadSetsForThemeThunk</code></span>, the tests for that logic moved from here into <span data-file-link="../redux/slices/rebrickable/thunks/loadSetsForThemeThunk.test"><code>loadSetsForThemeThunk.test</code></span>.
+*/
+
 import React from 'react'
 jest.mock('../redux', () => ({
   ...jest.requireActual('../redux'),

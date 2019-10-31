@@ -1,5 +1,5 @@
 /* REFAC|EDITCOMMENT
-Note how we must now typecast our store as a Redux `Store` before we send it to the provider. This is because our store allows thunks to be sent to `.dispatch`, which isn't legal by Redux standards.
+Our <span data-file-link="../redux/types/appStore.ts"><code>AppStore</code></span> type now allows us to dispatch <span data-file-link="../redux/types/appThunk.ts"><code>AppThunk</code></span> as well as <span data-file-link="../redux/types/appAction.ts"><code>AppAction</code></span>. This is not a valid Redux Store, which is why we now have to do the ugly casting here (the same thing happens in <span data-file-link="../testUtils/testRender"><code>TestRender</code></span>).
 */
 
 import React, { FunctionComponent, useMemo } from 'react'
