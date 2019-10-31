@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+Note how we here provide a `mapper` to the <span data-file-link="../../../lib/factory.ts"><code>factory</code></span>, to allow us to retain the `(themeId, data)` signature. 
+
+We do much the same thing in <span data-file-link="./loadSetsError.ts"><code>loadSetsError</code></span>.
+*/
+
 import { RebrickableActionNames } from '../types/actionNames'
 import { ById } from '../../../../types'
 import { Action } from '../../../lib/types/action'

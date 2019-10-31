@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+Like with all action creators, we refactor `loadThemesSuccess` to use the new <span data-file-link="../../../lib/factory.ts"><code>factory</code></span>.
+*/
+
 import { Action } from '../../../lib/types/action'
 import { UIActionNames } from '../types'
 import { factory } from '../../../lib/factory'
