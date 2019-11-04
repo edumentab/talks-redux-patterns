@@ -1,3 +1,13 @@
+/* REFAC|EDITCOMMENT
+Instead of just a creator, our factory now returns a tuple containing a creator and a guard.
+
+The guard will return true if the given action is of the creator type, and also tell TypeScript about the action type.
+
+These guards we'll now use inside our reducers (<span data-file-link="../slices/guessingGame/reducer"><code>guessingGameReducer</code></span>, <span data-file-link="../slices/rebrickable/reducer"><code>rebrickableReducer</code></span>, <span data-file-link="../slices/ui/reducer"><code>UIReducer</code></span>) instead of `switch`ing over `action.type`.
+
+This also means that we can simplify our central <span data-file-link="../types/appAction"><code>appAction</code></span> type.
+*/
+
 import { ActionCreator } from './types/creator'
 import { Action, ActionType, ActionPayload } from './types/action'
 

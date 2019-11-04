@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+Just like in <span data-file-link="../guessingGame/reducer"><code>guessingGameReducer</code></span> and <span data-file-link="../rebrickable/reducer"><code>rebrickableReducer</code></span>, we'll exchange the old `switch` statements for the new guards created by the action creator <span data-file-link="../../lib/factory"><code>factory</code></span>.
+
+This makes for more readable code, and we no longer need the <span data-file-link="./types/actionNames"><code>actionNames</code> type union</span>.
+*/
+
 import { UIState } from './types'
 import { AppAction } from '../../types/appAction'
 import { initialUIState } from './initialState'
