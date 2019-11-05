@@ -1,10 +1,10 @@
-import { AppActionMould } from '../../../types'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 
 type LoadThemesErrorPayload = string
 
-export type LoadThemesErrorAction = AppActionMould<
+export type LoadThemesErrorAction = AppAction<
   'LOAD_THEMES_ERROR',
   LoadThemesErrorPayload
 >

@@ -1,9 +1,9 @@
-import { Action } from '../../../lib/types/action'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 
 type SetCurrentThemePayload = number
 
-export type SetCurrentThemeAction = Action<
+export type SetCurrentThemeAction = AppAction<
   'SET_CURRENT_THEME',
   SetCurrentThemePayload
 >

@@ -1,4 +1,4 @@
-import { AppActionMould } from '../../../types'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 import { loadSetsSuccess } from './loadSetsSuccess'
@@ -6,7 +6,7 @@ import { loadSetsError } from './loadSetsError'
 
 type LoadSetsInitPayload = number // the themeId for which to load sets
 
-export type LoadSetsInitAction = AppActionMould<
+export type LoadSetsInitAction = AppAction<
   'LOAD_SETS_INIT',
   LoadSetsInitPayload
 >

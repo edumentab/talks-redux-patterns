@@ -1,11 +1,11 @@
-import { AppActionMould } from '../../../types'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 import { loadSetsInit } from '../../rebrickable/actions'
 
 type SetCurrentThemePayload = number
 
-export type SetCurrentThemeAction = AppActionMould<
+export type SetCurrentThemeAction = AppAction<
   'SET_CURRENT_THEME',
   SetCurrentThemePayload
 >

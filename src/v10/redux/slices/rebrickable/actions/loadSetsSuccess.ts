@@ -1,5 +1,5 @@
 import { ById } from '../../../../types'
-import { AppActionMould } from '../../../types'
+import { AppAction } from '../../../types/appAction'
 import { Set } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
@@ -9,7 +9,7 @@ type LoadSetsSuccessPayload = {
   themeId: number
 }
 
-export type LoadSetsSuccessAction = AppActionMould<
+export type LoadSetsSuccessAction = AppAction<
   'LOAD_SETS_SUCCESS',
   LoadSetsSuccessPayload
 >

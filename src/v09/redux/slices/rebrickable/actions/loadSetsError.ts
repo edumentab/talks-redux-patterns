@@ -1,4 +1,4 @@
-import { Action } from '../../../lib/types/action'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 
 type LoadSetsErrorPayload = {
@@ -6,7 +6,7 @@ type LoadSetsErrorPayload = {
   error: string
 }
 
-export type LoadSetsErrorAction = Action<
+export type LoadSetsErrorAction = AppAction<
   'LOAD_SETS_ERROR',
   LoadSetsErrorPayload
 >

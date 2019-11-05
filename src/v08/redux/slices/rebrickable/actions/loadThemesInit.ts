@@ -1,7 +1,7 @@
-import { Action } from '../../../lib/types/action'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 
-export type LoadThemesInitAction = Action<'LOAD_THEMES_INIT', undefined>
+export type LoadThemesInitAction = AppAction<'LOAD_THEMES_INIT', undefined>
 
 export const [loadThemesInit, isLoadThemesInit] = factory<LoadThemesInitAction>(
   {

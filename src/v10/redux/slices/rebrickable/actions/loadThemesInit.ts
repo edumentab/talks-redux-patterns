@@ -1,8 +1,8 @@
-import { AppActionMould } from '../../../types'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 
-export type LoadThemesInitAction = AppActionMould<'LOAD_THEMES_INIT', undefined>
+export type LoadThemesInitAction = AppAction<'LOAD_THEMES_INIT', undefined>
 
 export const [loadThemesInit, isLoadThemesInit] = factory<LoadThemesInitAction>(
   {

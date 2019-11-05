@@ -1,10 +1,10 @@
-import { AppActionMould } from '../../../types'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 
 type SetCurrentSetPayload = string // SetId looks like for example "6080_2"
 
-export type SetCurrentSetAction = AppActionMould<
+export type SetCurrentSetAction = AppAction<
   'SET_CURRENT_SET',
   SetCurrentSetPayload
 >

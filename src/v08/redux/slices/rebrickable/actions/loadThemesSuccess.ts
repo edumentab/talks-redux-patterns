@@ -1,11 +1,11 @@
-import { Action } from '../../../lib/types/action'
+import { AppAction } from '../../../types/appAction'
 import { ById } from '../../../../types'
 import { Theme } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
 
 type LoadThemesSuccessPayload = ById<Theme>
 
-export type LoadThemesSuccessAction = Action<
+export type LoadThemesSuccessAction = AppAction<
   'LOAD_THEMES_SUCCESS',
   LoadThemesSuccessPayload
 >

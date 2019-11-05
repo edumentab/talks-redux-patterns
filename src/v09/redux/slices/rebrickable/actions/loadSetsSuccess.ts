@@ -1,5 +1,5 @@
 import { ById } from '../../../../types'
-import { Action } from '../../../lib/types/action'
+import { AppAction } from '../../../types/appAction'
 import { Set } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
 
@@ -8,7 +8,7 @@ type LoadSetsSuccessPayload = {
   themeId: number
 }
 
-export type LoadSetsSuccessAction = Action<
+export type LoadSetsSuccessAction = AppAction<
   'LOAD_SETS_SUCCESS',
   LoadSetsSuccessPayload
 >

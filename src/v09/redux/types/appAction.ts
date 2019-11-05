@@ -1,3 +1,3 @@
 import { Action } from '../lib/types/action'
 
-export type AppAction = Action<string, any>
+export type AppAction<T extends string = string, P = any> = Action<T, P>

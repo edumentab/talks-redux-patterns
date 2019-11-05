@@ -1,9 +1,9 @@
-import { Action } from '../../../lib/types/action'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 
 type LoadThemesErrorPayload = string
 
-export type LoadThemesErrorAction = Action<
+export type LoadThemesErrorAction = AppAction<
   'LOAD_THEMES_ERROR',
   LoadThemesErrorPayload
 >

@@ -1,10 +1,10 @@
-import { AppActionMould } from '../../../types'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 
 type MakeGuessPayload = number // Just need the actual guess, setnumber is in UI state
 
-export type MakeGuessAction = AppActionMould<'MAKE_GUESS', MakeGuessPayload>
+export type MakeGuessAction = AppAction<'MAKE_GUESS', MakeGuessPayload>
 
 export const [makeGuess, isMakeGuess] = factory<MakeGuessAction>({
   type: 'MAKE_GUESS',

@@ -1,5 +1,4 @@
 export * from './appAction'
-export * from './appActionMould'
 export * from './appCons'
 export * from './appDeps'
 export * from './appState'

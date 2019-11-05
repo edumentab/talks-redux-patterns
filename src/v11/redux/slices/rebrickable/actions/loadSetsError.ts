@@ -1,4 +1,4 @@
-import { AppActionMould } from '../../../types'
+import { AppAction } from '../../../types/appAction'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 
@@ -7,7 +7,7 @@ type LoadSetsErrorPayload = {
   error: string
 }
 
-export type LoadSetsErrorAction = AppActionMould<
+export type LoadSetsErrorAction = AppAction<
   'LOAD_SETS_ERROR',
   LoadSetsErrorPayload
 >
