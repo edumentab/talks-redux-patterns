@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+We switch over to use the new <span data-file-link="../redux/makeStore"><code>makeProdStore</code></span> function which will provide the needed <span data-file-link="../redux/types/appDeps">AppDeps</span> for us.
+
+These will then be consumed by our <span data-file-link="../redux/types/appThunk">AppThunks</span> (<span data-file-link="../redux/slices/rebrickable/thunks/loadThemesThunk"><code>loadThemesThunk</code></span> and <span data-file-link="../redux/slices/rebrickable/thunks/loadSetsForThemeThunk"><code>loadSetsForThemeThunk</code></span>).
+*/
+
 import React, { FunctionComponent, useMemo } from 'react'
 
 import { Provider } from 'react-redux'

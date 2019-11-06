@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+Since <span data-file-link="./loadSetsForThemeThunk"><code>loadSetsForThemeThunk</code></span> now gets the <span data-file-link="../../../types/appDeps"><code>AppDeps</code></span> from <span data-file-link="../../../makeStore"><code>makeStore</code></span> via the <span data-file-link="../../../lib/thunk"><code>thunk</code></span> middleware, we can now pass in our mocks directly instead of mocking imports.
+
+The same thing applies to <span data-file-link="./loadThemesThunk.test">testing</span> the <span data-file-link="./loadThemesThunk"><code>loadThemesThunk</code></span>.
+*/
+
 import { loadSetsForThemeThunk } from '.'
 import { AppDeps } from '../../../types'
 
