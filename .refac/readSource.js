@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const { execSync, exec } = require('child_process')
 const { diffWords } = require('diff')
+const { matchPathToFile } = require('./matchPathToFile')
 
 const findRefacComment = /^\/* REFAC|EDITCOMMENT[\n\r]([\s\S]*?)\*\/[\s]*([\s\S]*)$/
 
@@ -115,11 +116,30 @@ function readSource(root) {
       })
     }
   }
-  return {
+  const sourceData = {
     files: res,
     versions,
     root
   }
+  for (const file in res) {
+    const f = res[file]
+    versions.forEach((v, n) => {
+      const fileV = f.versions[v] || (f.versions[v] = { which: null })
+      if (fileV.editComment) {
+        const matches = (
+          fileV.editComment.match(/data-file-link="[^"]*/g) || []
+        ).map(l => l.replace('data-file-link="', ''))
+        for (const path of matches) {
+          if (!matchPathToFile({ sourceData, path, version: v, file })) {
+            throw new Error(
+              `Faulty comment link in version ${v} of ${file}: ${path}`
+            )
+          }
+        }
+      }
+    })
+  }
+  return sourceData
 }
 
 module.exports = readSource

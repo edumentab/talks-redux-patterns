@@ -1,11 +1,6 @@
 const _path = require('path')
 
-export function matchPathToFile({
-  sourceData,
-  path = '',
-  file = '',
-  version = ''
-}) {
+function matchPathToFile({ sourceData, path = '', file = '', version = '' }) {
   const [, folder] = sourceData.root.match(/\/([^/]*)$/)
   let fixed = (path[0] === '.'
     ? _path.join(file.replace(/\/[^/]*$/, '/'), path)
@@ -49,3 +44,5 @@ const suffixes = [
   '.css',
   ''
 ]
+
+module.exports = { matchPathToFile }
