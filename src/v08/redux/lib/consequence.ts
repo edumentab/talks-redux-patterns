@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+A middleware to hook in <span data-file-link="./types/consequence"><code>consequences</code></span>, our new way of definining side effects.
+
+Used in <span data-file-link="../makeStore"><code>makeStore</code></span>.
+*/
+
 import { ConsequenceGetter } from './types/consequence'
 import { Middleware } from 'redux'
 

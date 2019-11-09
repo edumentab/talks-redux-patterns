@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+The <span data-file-link="./Theme"><code>Theme</code></span> component now dispatches a regular <span data-file-link="../redux/slices/rebrickable/actions/loadSetsInit"><code>loadSetsInit</code></span> action instead of a <span data-file-link="../redux/slices/rebrickable/thunks/loadSetsForThemeThunk"><code>loadSetsForThemeThunk</code></span>, so we don't need to deal with thunk mocking anymore.
+*/
+
 import React from 'react'
 
 import {
