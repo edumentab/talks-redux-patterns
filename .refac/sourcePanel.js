@@ -2,26 +2,12 @@ import React, { useEffect, useState, useCallback } from 'react'
 import Highlighter from './sourceHighlighter'
 import path from 'path'
 import SourceCodePanelControls from './sourcePanel.controls'
-import { stateToIcon } from './stateToIcon'
 import './sourcePanel.css'
 import { Markdown } from './markdown'
+import { FileBadge } from './fileBadge'
 import { matchPathToFile } from '.'
 
-import { Tag, Callout } from '@blueprintjs/core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-const stateExplanation = {
-  deleted: 'Deleted in this version (previous file shown below)',
-  nonexistent: `Doesn't exist in this version`,
-  created: `Created in this version`,
-  unchanged: `Unchanged from previous version`,
-  initial: `Initial version`,
-  pruned: `Some code removed in this version (see diff below source)`,
-  grown: `Some code added in this version (see diff below source)`,
-  replaced: `Some code replaced in this version (see diff below source)`,
-  edited: `Edited in this version (see diff below source)`,
-  eternal: 'No changes in any version'
-}
+import { Callout } from '@blueprintjs/core'
 
 const SourceCodePanel = props => {
   const { sourceData, brain } = props
@@ -48,12 +34,7 @@ const SourceCodePanel = props => {
         versions={sourceData.versions}
       />
       {state && (
-        <div key={file + version} className="fileExplanation">
-          <Tag multiline>
-            <FontAwesomeIcon icon={stateToIcon[state]} />
-            {stateExplanation[state]}
-          </Tag>
-        </div>
+        <FileBadge fileData={sourceData.files[file]} version={version} />
       )}
       {editComment && (
         <div className="editComment">
