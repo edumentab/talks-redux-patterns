@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+These tests for <span data-file-link="./loadThemesInit.consequence">the <code>loadThemesInit</code> consequences</span> are very similar to <span data-file-link="../thunks/loadThemesThunk.test">the old tests</span> for the replaced <span data-file-link="../thunks/loadThemesThunk"><code>loadThemesThunk</code></span>.
+*/
+
 import { fixtureTheme } from '../../../../services/rebrickable'
 import {
   loadThemesInit,

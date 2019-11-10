@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+These tests for <span data-file-link="./loadSetsInit.consequence">the <code>loadSetsInit</code> consequences</span> are very similar to <span data-file-link="../thunks/loadSetsForThemeThunk.test">the old tests</span> for the replaced <span data-file-link="../thunks/loadSetsForThemeThunk"><code>loadSetsForThemeThunk</code></span>.
+*/
+
 import { fixtureTheme, fixtureSet } from '../../../../services/rebrickable'
 import { nextTick, makeTestStore, rigAsyncMock } from '../../../../testUtils'
 import { AppConsGetter } from '../../../types'
