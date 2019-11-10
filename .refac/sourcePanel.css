@@ -49,22 +49,24 @@
   margin-right: 10px;
 }
 
-.untouchedItem {
+.group-nonexistent,
+.group-unchanged {
   color: #999 !important;
 }
 
-.firstUntouchedItem,
-.firstDeletedItem {
+.firstInGroup {
   border-top: 1px solid black;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-.deletedItem {
+.group-deleted {
   color: lightcoral !important;
 }
 
-.source-code.deleted code {
+.source-code.deleted code,
+.group-deleted,
+.group-nonexistent {
   text-decoration-line: line-through;
   text-decoration-color: rgba(0, 0, 0, 0.3);
 }

@@ -13,23 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import '@blueprintjs/core/lib/css/blueprint.css'
 import { stateToIcon } from './stateToIcon'
-
-const fileSorter = (o1, o2) => (o1.name < o2.name ? -1 : 1)
-
-const fileIsTouched = (file, version) =>
-  (version === 'v01'
-    ? [
-        'created',
-        'edited',
-        'pruned',
-        'grown',
-        'initial',
-        'replaced',
-        'eternal',
-        'unchanged'
-      ]
-    : ['created', 'edited', 'pruned', 'grown', 'replaced']
-  ).includes((file.versions[version] || {}).state)
+import { makeFileList } from './makeFileList'
 
 const SourceCodePanelControls = props => {
   const { codeState, brain, sourceData, versions } = props
@@ -40,28 +24,17 @@ const SourceCodePanelControls = props => {
 
   const [query, setQuery] = useState('')
 
-  const touched = files.filter(f => fileIsTouched(f, version)).sort(fileSorter)
-  const deleted = files
-    .filter(f => (f.versions[version] || {}).state === 'deleted')
-    .sort(fileSorter)
-  const untouched = files
-    .filter(f => !fileIsTouched(f, version) && !deleted.includes(f))
-    .sort(fileSorter)
-  const listFiles = touched.concat(deleted).concat(untouched)
+  const listFiles = makeFileList(sourceData, version)
 
   const renderFileItem = useCallback(
     (option, { modifiers, handleClick }) => {
-      const curV = option.versions[version]
       const currentlySelected = filePath === option.name
-      if (!option.versions[version]) return null
       return (
         <MenuItem
           className={classNames(
             Classes.TEXT_SMALL,
-            !fileIsTouched(option, version) && 'untouchedItem',
-            option === untouched[0] && 'firstUntouchedItem',
-            option.versions[version].state === 'deleted' && 'deletedItem',
-            option === deleted[0] && 'firstDeletedItem'
+            `group-${option.group}`,
+            option.firstInGroup && 'firstInGroup'
           )}
           key={option.name}
           icon={
@@ -71,11 +44,11 @@ const SourceCodePanelControls = props => {
           text={option.name}
           shouldDismissPopover={false}
           onClick={handleClick}
-          labelElement={<FontAwesomeIcon icon={stateToIcon[curV.state]} />}
+          labelElement={<FontAwesomeIcon icon={stateToIcon[option.state]} />}
         />
       )
     },
-    [filePath, version, untouched, deleted]
+    [filePath]
   )
 
   const renderVersionItem = useCallback(
