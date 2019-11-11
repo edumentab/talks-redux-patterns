@@ -1,7 +1,7 @@
 /* REFAC|EDITCOMMENT
 The <span data-file-link="../redux/lib/types/action">basic <code>Action</code> shape</span> now contains a `.sender` property, so we switch to using the new <span data-file-link="./useDispatchWithSender"><code>useDispatchWithSender</code> hook</span> which will populate `.sender` correctly (this also means having to do a slight tweak to our <span data-file-link="./Main.test">tests</span>).
 
-The same change was made in <span data-file-link="./Guess"><code>Guess</code></span>, <span data-file-link="./SetSelector"><code>SetSelector</code></span> and <span data-file-link="./ThemeSelector"><code>ThemeSelector</code></span>.
+The same change was made in <span data-file-link="./Guess"><code>Guess</code></span>, <span data-file-link="./Theme"><code>Theme</code></span>, <span data-file-link="./SetSelector"><code>SetSelector</code></span> and <span data-file-link="./ThemeSelector"><code>ThemeSelector</code></span>.
 */
 
 import React, { FunctionComponent, useEffect } from 'react'

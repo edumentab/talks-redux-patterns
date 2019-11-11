@@ -1,7 +1,7 @@
 /* REFAC|EDITCOMMENT
 <span data-file-link="./SetSelector"><code>SetSelector</code></span> now uses the <span data-file-link="./useDispatchWithSender"><code>useDispatchWithSender</code> hook</span> which will populate the <span data-file-link="../redux/lib/types/action"><code>Action</code></span> with a `.sender` prop, so we have to accommodate for that here in the tests.
 
-The same change was made in the tests for <span data-file-link="./Guess.test"><code>Guess</code></span>, <span data-file-link="./Main.test"><code>Main</code></span> and <span data-file-link="./ThemeSelector.test"><code>ThemeSelector</code></span>.
+The same change was made in the tests for <span data-file-link="./Guess.test"><code>Guess</code></span>, <span data-file-link="./Main.test"><code>Main</code></span>, <span data-file-link="./Theme.test"><code>Theme</code></span> and <span data-file-link="./ThemeSelector.test"><code>ThemeSelector</code></span>.
 */
 
 import React from 'react'
