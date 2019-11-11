@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react'
 
-import { stateToIcon } from './stateToIcon'
-import './sourcePanel.css'
+import { StateIcon } from './stateIcon'
 
 import { Tag } from '@blueprintjs/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -58,7 +57,7 @@ export const FileBadge = props => {
   return (
     <div key={version + fileData.name} className="fileExplanation">
       <Tag multiline>
-        <FontAwesomeIcon icon={stateToIcon[state]} />
+        <StateIcon state={state} />
         <Markdown markdown={markdown} onLinkClick={onLinkClick} />
       </Tag>
     </div>

@@ -5,7 +5,7 @@ import SourceCodePanelControls from './sourcePanel.controls'
 import './sourcePanel.css'
 import { Markdown } from './markdown'
 import { FileBadge } from './fileBadge'
-import { matchPathToFile } from '.'
+import { matchPathToFile } from '..'
 
 import { Callout } from '@blueprintjs/core'
 

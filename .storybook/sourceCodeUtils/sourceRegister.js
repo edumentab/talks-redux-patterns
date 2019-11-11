@@ -1,5 +1,5 @@
 import addonAPI, { types } from '@storybook/addons'
-import Panel from '../../.refac/sourcePanel'
+import Panel from '../../.refac/components/sourcePanel'
 import React from 'react'
 
 import { initBrain } from '../../.refac/initBrain'

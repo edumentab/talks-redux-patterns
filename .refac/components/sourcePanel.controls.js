@@ -9,11 +9,10 @@ import {
   ControlGroup
 } from '@blueprintjs/core'
 import { Select } from '@blueprintjs/select'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import '@blueprintjs/core/lib/css/blueprint.css'
-import { stateToIcon } from './stateToIcon'
-import { makeFileList } from './makeFileList'
+import { StateIcon } from './stateIcon'
+import { makeFileList } from '../makeFileList'
 
 const SourceCodePanelControls = props => {
   const { codeState, brain, sourceData, versions } = props
@@ -44,7 +43,7 @@ const SourceCodePanelControls = props => {
           text={option.name}
           shouldDismissPopover={false}
           onClick={handleClick}
-          labelElement={<FontAwesomeIcon icon={stateToIcon[option.state]} />}
+          labelElement={<StateIcon state={option.state} />}
         />
       )
     },
@@ -67,11 +66,7 @@ const SourceCodePanelControls = props => {
           shouldDismissPopover={false}
           onClick={handleClick}
           labelElement={
-            file && (
-              <FontAwesomeIcon
-                icon={stateToIcon[file.versions[option].state]}
-              />
-            )
+            file && <StateIcon icon={file.versions[option].state} />
           }
         />
       )

@@ -1,3 +1,7 @@
+import React from 'react'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import {
   faSkullCrossbones,
   faGhost,
@@ -10,7 +14,7 @@ import {
   faArrowsAltH
 } from '@fortawesome/free-solid-svg-icons'
 
-export const stateToIcon = {
+const stateToIcon = {
   deleted: faSkullCrossbones,
   nonexistent: faGhost,
   created: faStar,
@@ -22,3 +26,7 @@ export const stateToIcon = {
   grown: faPlus,
   replaced: faArrowsAltH
 }
+
+export const StateIcon = ({ state }) => (
+  <FontAwesomeIcon icon={stateToIcon[state]} />
+)
