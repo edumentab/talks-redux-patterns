@@ -48,7 +48,7 @@ export const FileBadge = props => {
   }
   if (state !== 'created' && created)
     markdown += ` Created in ${vlink(created)}.`
-  if (!editStates.includes(state)) {
+  if (!editStates.includes(state) && edited.length) {
     markdown += ` Edited in ${edited.map(vlink).join(', ')}.`
   }
   if (state !== 'deleted' && deleted)

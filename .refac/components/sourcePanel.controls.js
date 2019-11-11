@@ -66,7 +66,7 @@ const SourceCodePanelControls = props => {
           shouldDismissPopover={false}
           onClick={handleClick}
           labelElement={
-            file && <StateIcon icon={file.versions[option].state} />
+            file && <StateIcon state={file.versions[option].state} />
           }
         />
       )
