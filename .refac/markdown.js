@@ -17,7 +17,7 @@ export const Markdown = props => {
     [onLinkClick]
   )
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick} className="markdownContent">
       <ReactMarkdown source={markdown} escapeHtml={false} />
     </div>
   )

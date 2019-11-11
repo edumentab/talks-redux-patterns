@@ -34,7 +34,11 @@ const SourceCodePanel = props => {
         versions={sourceData.versions}
       />
       {state && (
-        <FileBadge fileData={sourceData.files[file]} version={version} />
+        <FileBadge
+          fileData={sourceData.files[file]}
+          version={version}
+          onLinkClick={brain.clickLink}
+        />
       )}
       {editComment && (
         <div className="editComment">

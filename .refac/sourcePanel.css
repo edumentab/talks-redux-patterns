@@ -35,6 +35,18 @@
   padding-top: 10px;
 }
 
+.markdownContent [data-file-link] {
+  padding: 0 2px;
+}
+
+.fileExplanation .bp3-tag .bp3-fill {
+  display: flex;
+}
+
+.fileExplanation p:last-child {
+  margin-bottom: 0;
+}
+
 .sourcePanel .editComment {
   padding-left: 10px;
   padding-top: 10px;
