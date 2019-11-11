@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+We must tweak the tests to accommodate for the fact that <span data-file-link="../../../lib/consequence"><code>ConsequenceMiddleware</code></span> now populates the <span data-file-link="../../../lib/types/action"><code>Action</code></span> with a `.sender` property.
+
+The same change was made in the <span data-file-link="./loadThemesInit.consequence.test"><code>loadThemesInit</code> consequence tests</span>.
+*/
+
 import { fixtureTheme, fixtureSet } from '../../../../services/rebrickable'
 import { nextTick, makeTestStore, rigAsyncMock } from '../../../../testUtils'
 import { AppConsGetter } from '../../../types'

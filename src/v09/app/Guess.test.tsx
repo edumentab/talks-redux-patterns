@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+<span data-file-link="./Guess"><code>Guess</code></span> now uses the <span data-file-link="./useDispatchWithSender"><code>useDispatchWithSender</code> hook</span> which will populate the <span data-file-link="../redux/lib/types/action"><code>Action</code></span> with a `.sender` prop, so we have to accommodate for that here in the tests.
+
+The same change was made in the tests for <span data-file-link="./Main.test"><code>Main</code></span>, <span data-file-link="./SetSelector.test"><code>SetSelector</code></span> and <span data-file-link="./ThemeSelector.test"><code>ThemeSelector</code></span>.
+*/
+
 import React from 'react'
 import { testRender, makeTestStore } from '../testUtils'
 import { fireEvent } from '@testing-library/react'

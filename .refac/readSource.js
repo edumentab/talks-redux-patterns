@@ -131,7 +131,7 @@ function readSource(root) {
         ).map(l => l.replace('data-file-link="', ''))
         for (const path of matches) {
           if (!matchPathToFile({ sourceData, path, version: v, file })) {
-            throw new Error(
+            console.error(
               `Faulty comment link in version ${v} of ${file}: ${path}`
             )
           }
