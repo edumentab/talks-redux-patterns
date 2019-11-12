@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+The basic <span data-file-link="./types/action"><code>Action</code></span> shape can now take a `reducer`. We therefore add this to the factory options and <span data-file-link="./types/creator"><code>Creator</code></span> type, and make the returned creator populate every created action with the given reducer.
+
+These reducers are then consumed in the central <span data-file-link="../rootReducer"><code>rootReducer</code></span>.
+*/
+
 import { ActionCreator } from './types/creator'
 import { Action, ActionType, ActionState, ActionPayload } from './types/action'
 import { Reducer } from './types/reducer'

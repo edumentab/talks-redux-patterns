@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+The basic <span data-file-link="./action"><code>Action</code></span> shape generic parameter list now also includes app state, so we must pass that in here.
+*/
+
 import { Action } from './action'
 
 export type ConsequenceGetterAPI<S extends object, D extends object> = {
