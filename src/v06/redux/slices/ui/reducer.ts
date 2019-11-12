@@ -1,7 +1,7 @@
 /* REFAC|EDITCOMMENT
 Just like in <span data-file-link="../guessingGame/reducer"><code>guessingGameReducer</code></span> and <span data-file-link="../rebrickable/reducer"><code>rebrickableReducer</code></span>, we'll exchange the old `switch` statements for the new guards created by the action creator <span data-file-link="../../lib/factory"><code>factory</code></span>.
 
-This makes for more readable code, and we no longer need the <span data-file-link="./types/actionNames"><code>actionNames</code> type union</span>.
+This makes for more readable code, and we no longer need the <span data-file-link="./types/actionNames"><code>UIActionNames</code></span> type union.
 */
 
 import { UIState } from './types'
