@@ -31,11 +31,23 @@ function readSource(root) {
           if (commMatch) {
             file = commMatch[2]
           }
-          if (!res[minusRoot].raw.includes(file)) {
-            res[minusRoot].raw.push(file)
-          }
-          res[minusRoot].versions[version] = {
-            which: res[minusRoot].raw.indexOf(file)
+          file = file.replace(/^\W*/g, '')
+          if (file) {
+            const idx = res[minusRoot].raw.indexOf(file)
+            if (idx === -1) {
+              res[minusRoot].raw.push(file)
+              res[minusRoot].versions[version] = {
+                which: res[minusRoot].raw.length - 1
+              }
+            } else {
+              res[minusRoot].versions[version] = {
+                which: idx
+              }
+            }
+          } else {
+            res[minusRoot].versions[version] = {
+              which: null
+            }
           }
           if (commMatch) {
             res[minusRoot].versions[version].editComment = commMatch[1]
@@ -58,15 +70,15 @@ function readSource(root) {
       const prevV = versions[n - 1]
       const prevFileV = (prevV && f.versions[prevV]) || { which: null }
       fileV.state =
-        fileV.which === null
-          ? prevFileV.which !== null
+        fileV.which == null
+          ? prevFileV.which != null
             ? 'deleted'
             : 'nonexistent'
           : n === 0
           ? 'initial'
-          : prevFileV.which === null
+          : prevFileV.which == null
           ? 'created'
-          : prevFileV.which === fileV.which
+          : prevFileV.which == fileV.which
           ? 'unchanged'
           : 'edited'
       if (fileV.state === 'edited') {
@@ -109,6 +121,7 @@ function readSource(root) {
         fileV.previous = prevFileV.which
       }
     })
+    // if file unchanged after creation, set all states to 'eternal'
     if (f.allStates.slice(1).filter(s => s !== 'unchanged').length === 0) {
       f.allStates = versions.map(() => 'eternal')
       versions.forEach(v => {
@@ -121,6 +134,7 @@ function readSource(root) {
     versions,
     root
   }
+  // final sweep to check for errors
   for (const file in res) {
     const f = res[file]
     versions.forEach((v, n) => {
