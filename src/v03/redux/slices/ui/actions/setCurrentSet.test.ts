@@ -1,5 +1,5 @@
 /* REFAC|EDITCOMMENT
-Here as in <span data-file-link="./setCurrentTheme.test.ts">the <code>setCurrentTheme</code> tests</span> we get the benefit of co-location. Since the `setCurrentSet` action affects two different state slices, the old reducer tests never showed the full picture. By testing the actions instead we now see all consequences across all slices in a single place.
+This test was split out from <span data-file-link="../reducer.test.ts"><code>uiReducer.test</code></span>. Here as in <span data-file-link="./setCurrentTheme.test.ts">the <code>setCurrentTheme</code> tests</span> we get the benefit of co-location. Since the `setCurrentSet` action affects two different state slices, the old reducer tests never showed the full picture. By testing the actions instead we now see all consequences across all slices in a single place.
 */
 
 import { makeStore } from '../../../makeStore'
