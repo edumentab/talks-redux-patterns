@@ -1,7 +1,7 @@
 /* REFAC|EDITCOMMENT
 We replace the old <span data-file-link="./lib/thunk">thunk middleware</span> for a <span data-file-link="./lib/consequence">consequence middleware</span>, and add a `consGetter` to our options to pass on to the consequence middleware.
 
-For the production store we pass in a `consGetter` returning all the consequence definitions in our app (<span data-file-link="./slices/rebrickable/actions/loadSetsInit.consequence"><code>loadSetsInit</code></span> and <span data-file-link="./slices/rebrickable/actions/loadThemesInit.consequence"><code>loadThemesInit</code></span>.
+For the production store we pass in a `consGetter` returning all the consequence definitions in our app (<span data-file-link="./slices/rebrickable/actions/loadSetsInit.consequence"><code>loadSetsInit</code></span> and <span data-file-link="./slices/rebrickable/actions/loadThemesInit.consequence"><code>loadThemesInit</code></span>).
 */
 
 import { createStore, compose, applyMiddleware, StoreEnhancer } from 'redux'
