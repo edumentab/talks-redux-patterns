@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+Since the code for loading sets for a theme has been moved from the <span data-file-link="./Theme"><code>Theme</code></span> component into a <span data-file-link="../redux/slices/ui/actions/setCurrentTheme">consequence of <code>setCurrentTheme</code></span>, that logic is now tested in <span data-file-link="../redux/slices/ui/actions/setCurrentTheme.consequence.test"><code>setCurrentTheme.consequence.test</code></span> instead.
+*/
+
 import React from 'react'
 
 import {

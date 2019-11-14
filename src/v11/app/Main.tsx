@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+The responsibility of firing the <span data-file-link="../redux/slices/rebrickable/actions/loadThemesInit"><code>loadThemesInit</code></span> action has been moved from here into <span data-file-link="../redux/makeStore"><code>makeProdStore</code></span>.
+
+Our <span data-file-link="./Main.test">tests</span> for this components have thereby been simplified.
+*/
+
 import React, { FunctionComponent } from 'react'
 
 import { ThemeSelector } from './ThemeSelector'
