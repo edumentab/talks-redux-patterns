@@ -9,9 +9,9 @@ import { Reducer } from './reducer'
 export type Action<T extends string, P, S extends object> = {
   type: T
   error?: boolean
+  payload: P
   sender?: string
   reducer?: Reducer<S, P>
-  payload: P
 }
 
 export type ActionType<A> = A extends Action<infer T, any, any> ? T : never

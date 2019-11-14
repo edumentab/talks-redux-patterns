@@ -15,9 +15,9 @@ export interface Action<
 > {
   type: T
   error?: boolean
+  payload: P
   sender?: string
   reducer?: Reducer<S, P>
-  payload: P
   cons?: Consequence<S, D>
 }
 

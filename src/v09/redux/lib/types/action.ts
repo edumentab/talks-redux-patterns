@@ -10,12 +10,9 @@ In this version we introduce `sender` as part of the basic `Action` shape. This 
 export type Action<T extends string, P> = {
   type: T
   error?: boolean
+  payload: P
   sender?: string
-} & (P extends undefined
-  ? {}
-  : {
-      payload: P
-    })
+}
 
 export type ActionType<A> = A extends Action<infer T, any> ? T : never
 export type ActionPayload<A> = A extends Action<string, infer P> ? P : never
