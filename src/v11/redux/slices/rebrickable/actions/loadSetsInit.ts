@@ -1,10 +1,10 @@
 /* REFAC|EDITCOMMENT
-In this version we pass the consequence definitions to the <span data-file-link="../../../lib/factory"><code>factory</code></span> instead, so <span data-file-link="./loadSetsInit.consequence"><code>loadSetsInit.consequence</code></span> has now been inlined here.
+In this version we pass the consequence definitions directly to the <span data-file-link="../../../lib/factory"><code>factory</code></span> instead of making <span data-file-link="../../../makeStore"><code>makeProdStore</code></span> collect them in a `consGetter`.
 
-The same thing happened in <span data-file-link="./loadThemesInit"><code>loadThemesInit</code></span>.
+The same inlining happened in <span data-file-link="./loadThemesInit"><code>loadThemesInit</code></span>.
 */
 
-import { AppAction } from '../../../types/appAction'
+import { AppAction } from '../../../types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'
 import { loadSetsSuccess } from './loadSetsSuccess'

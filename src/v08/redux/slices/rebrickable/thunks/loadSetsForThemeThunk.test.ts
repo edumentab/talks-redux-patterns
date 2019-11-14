@@ -1,6 +1,6 @@
 /* REFAC|EDITCOMMENT
-The side effects in <span data-file-link="./loadSetsForThemeThunk"><code>loadSetsForThemeThunk</code></span> have now moved to be a <span data-file-link="../actions/loadSetsInit.consequence"><code>loadSetsInit</code> consequence</span>, and so these tests are replaced by <span data-file-link="../actions/loadSetsInit.consequence.test"><code>loadSetsInit.consequence.test</code></span>.
+The <span data-file-link="./loadSetsForThemeThunk"><code>loadSetsForThemeThunk</code></span> side effects have now moved to be a <span data-file-link="../../../lib/types/consequence"><code>Consequence</code></span> of <span data-file-link="../actions/loadSetsInit"><code>loadSetsInit</code></span>, and thus these tests are now covered in <span data-file-link="../actions/loadSetsInit.test"><code>loadSetsInit.test</code></span>.
 
-The same thing happened to <span data-file-link="./loadThemesThunk"><code>loadThemesThunk</code></span> and <span data-file-link="./loadThemesThunk.test"><code>loadThemesThunk.test</code></span>.
+Similarly <span data-file-link="./loadThemesThunk"><code>loadThemesThunk</code></span> was moved into <span data-file-link="../actions/loadThemesInit"><code>loadThemesInit</code></span>.
 */
 test.todo('This line prevents Jest from barfing at empty test file')

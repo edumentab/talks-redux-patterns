@@ -1,4 +1,4 @@
-import { AppAction } from '../../../types/appAction'
+import { AppAction } from '../../../types'
 import { ById } from '../../../../types'
 import { Theme } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'

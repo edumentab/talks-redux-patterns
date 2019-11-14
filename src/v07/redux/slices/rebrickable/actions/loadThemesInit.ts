@@ -1,4 +1,4 @@
-import { AppAction } from '../../../types/appAction'
+import { AppAction } from '../../../types'
 import { factory } from '../../../lib/factory'
 
 export type LoadThemesInitAction = AppAction<'LOAD_THEMES_INIT', undefined>

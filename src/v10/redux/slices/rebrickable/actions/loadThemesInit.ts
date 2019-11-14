@@ -6,8 +6,10 @@ Note how we don't have to change the <span data-file-link="./loadThemesInit.test
 We make the same change in every single action creator throughout the app.
 */
 
-import { AppAction } from '../../../types/appAction'
+import { AppAction, AppCons } from '../../../types'
 import { factory } from '../../../lib/factory'
+import { loadThemesSuccess } from './loadThemesSuccess'
+import { loadThemesError } from './loadThemesError'
 import produce from 'immer'
 
 export type LoadThemesInitAction = AppAction<'LOAD_THEMES_INIT', undefined>
@@ -26,3 +28,16 @@ export const [loadThemesInit, isLoadThemesInit] = factory<LoadThemesInitAction>(
     }
   }
 )
+
+export const loadThemesInitConsequence: AppCons = ({
+  action,
+  dispatch,
+  deps
+}) => {
+  if (isLoadThemesInit(action)) {
+    deps.rebrickable
+      .getThemesByParent(186)
+      .then(data => dispatch(loadThemesSuccess(data)))
+      .catch(err => dispatch(loadThemesError(err)))
+  }
+}

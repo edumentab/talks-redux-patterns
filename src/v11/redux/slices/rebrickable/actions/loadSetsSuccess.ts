@@ -1,5 +1,5 @@
 import { ById } from '../../../../types'
-import { AppAction } from '../../../types/appAction'
+import { AppAction } from '../../../types'
 import { Set } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
 import produce from 'immer'

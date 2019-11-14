@@ -1,4 +1,4 @@
-import { AppAction } from '../../../types/appAction'
+import { AppAction } from '../../../types'
 import { factory } from '../../../lib/factory'
 
 type LoadSetsInitPayload = number // the themeId for which to load sets

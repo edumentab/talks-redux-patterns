@@ -1,7 +1,7 @@
 /* REFAC|EDITCOMMENT
 The `AppCons` is our app-specific versions of the new <span data-file-link="../lib/types/consequence"><code>Consequence</code></span> type.
 
-It is consumsed by the consequence definitions for <span data-file-link="../slices/rebrickable/actions/loadSetsInit.consequence"><code>loadSetsInit</code></span> and <span data-file-link="../slices/rebrickable/actions/loadThemesInit.consequence"><code>loadThemesInit</code></span> (which replace the corresponding deleted thunks).
+It is consumsed by the consequence definitions for <span data-file-link="../slices/rebrickable/actions/loadSetsInit"><code>loadSetsInit</code></span> and <span data-file-link="../slices/rebrickable/actions/loadThemesInit"><code>loadThemesInit</code></span> (which replace the corresponding deleted thunks).
 */
 
 import { Consequence, ConsequenceGetter } from '../lib/types/consequence'

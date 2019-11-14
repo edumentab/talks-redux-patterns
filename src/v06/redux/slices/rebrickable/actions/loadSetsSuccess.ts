@@ -5,7 +5,7 @@ We also switch to use <span data-file-link="../../../types/appAction"><code>AppA
 */
 
 import { ById } from '../../../../types'
-import { AppAction } from '../../../types/appAction'
+import { AppAction } from '../../../types'
 import { Set } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'
 

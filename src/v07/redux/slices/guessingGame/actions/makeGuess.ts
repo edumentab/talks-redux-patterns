@@ -1,4 +1,4 @@
-import { AppAction } from '../../../types/appAction'
+import { AppAction } from '../../../types'
 import { factory } from '../../../lib/factory'
 
 type MakeGuessPayload = number // Just need the actual guess, setnumber is in UI state

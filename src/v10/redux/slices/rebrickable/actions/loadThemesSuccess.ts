@@ -6,7 +6,7 @@ Note how we don't have to change the <span data-file-link="./loadThemesSuccess.t
 We make the same change in every single action creator throughout the app.
 */
 
-import { AppAction } from '../../../types/appAction'
+import { AppAction } from '../../../types'
 import { ById } from '../../../../types'
 import { Theme } from '../../../../services/rebrickable/types'
 import { factory } from '../../../lib/factory'

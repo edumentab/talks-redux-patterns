@@ -1,4 +1,12 @@
-import { loadThemesInit, loadThemesError } from '.'
+import { fixtureTheme } from '../../../../services/rebrickable'
+import {
+  loadThemesInit,
+  loadThemesSuccess,
+  loadThemesError,
+  isLoadThemesInit
+} from '.'
+import { nextTick, makeTestStore, rigAsyncMock } from '../../../../testUtils'
+import { AppConsGetter } from '../../../types'
 import { makeStore } from '../../../makeStore'
 
 describe('the loadThemesInit action', () => {
@@ -8,5 +16,40 @@ describe('the loadThemesInit action', () => {
     dispatch(loadThemesInit())
     expect(getState().rebrickable.themes.error).toBe(null)
     expect(getState().rebrickable.themes.loading).toBe(true)
+  })
+  describe('the loadThemesInit consequence', () => {
+    const consGetter: AppConsGetter = ({ action }) =>
+      isLoadThemesInit(action) ? [action.cons!] : []
+    const deps = {
+      rebrickable: {
+        getThemesByParent: jest.fn()
+      }
+    }
+    it('calls service, handles happy path', async () => {
+      const { resolve } = rigAsyncMock(deps.rebrickable.getThemesByParent)
+      const { dispatch } = makeTestStore({ deps, consGetter })
+
+      dispatch(loadThemesInit())
+
+      expect(deps.rebrickable.getThemesByParent).toHaveBeenCalledWith(186)
+
+      const fakeData = { 5: fixtureTheme }
+      resolve(fakeData)
+      await nextTick()
+
+      expect(dispatch).toHaveBeenCalledWith(loadThemesSuccess(fakeData))
+    })
+    it('handles sad path', async () => {
+      const { reject } = rigAsyncMock(deps.rebrickable.getThemesByParent)
+      const { dispatch } = makeTestStore({ deps, consGetter })
+
+      dispatch(loadThemesInit())
+
+      const error = 'oh no'
+      reject(error)
+      await nextTick()
+
+      expect(dispatch).toHaveBeenCalledWith(loadThemesError(error))
+    })
   })
 })
