@@ -23,7 +23,7 @@ describe('The Main component', () => {
     expect(ThemeSelector).toHaveBeenCalled()
   })
   describe('on creation', () => {
-    it('dispatches loadThemesThunk', () => {
+    it('dispatches loadThemesInit', () => {
       const store = makeTestStore()
 
       testRender(<Main version={'foo'} />, { store })
