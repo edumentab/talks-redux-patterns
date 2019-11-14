@@ -2,9 +2,10 @@
 For shallow state manipulations such as in this reducer, introducing Immer isn't that big a win. See the <span data-file-link="redux/slices/rebrickable/reducer.ts">Rebrickable reducer</span> for a bigger gain!
 */
 
-import { GuessingGameState, GuessingGameActionNames } from './types'
+import { GuessingGameState } from './types/state'
+import { GuessingGameActionNames } from './types/actionNames'
 import { initialGuessingGameState } from './initialState'
-import { UIActionNames } from '../ui/types'
+import { UIActionNames } from '../ui/types/actionNames'
 import { AppAction } from '../../types'
 import produce from 'immer'
 

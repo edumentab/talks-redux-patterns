@@ -4,7 +4,7 @@ Just like in <span data-file-link="../rebrickable/reducer"><code>rebrickableRedu
 This makes for more readable code, and we no longer need the <span data-file-link="./types/actionNames"><code>GuessingGameActionNames</code></span> type union.
 */
 
-import { GuessingGameState } from './types'
+import { GuessingGameState } from './types/state'
 import { initialGuessingGameState } from './initialState'
 import { AppAction } from '../../types'
 import produce from 'immer'

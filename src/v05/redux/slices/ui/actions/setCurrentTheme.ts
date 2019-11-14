@@ -1,5 +1,5 @@
 import { Action } from '../../../lib/types/action'
-import { UIActionNames } from '../types'
+import { UIActionNames } from '../types/actionNames'
 import { factory } from '../../../lib/factory'
 
 type SetCurrentThemePayload = number

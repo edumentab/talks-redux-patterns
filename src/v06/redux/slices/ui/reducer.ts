@@ -4,7 +4,7 @@ Just like in <span data-file-link="../guessingGame/reducer"><code>guessingGameRe
 This makes for more readable code, and we no longer need the <span data-file-link="./types/actionNames"><code>UIActionNames</code></span> type union.
 */
 
-import { UIState } from './types'
+import { UIState } from './types/state'
 import { AppAction } from '../../types/appAction'
 import { initialUIState } from './initialState'
 import produce from 'immer'

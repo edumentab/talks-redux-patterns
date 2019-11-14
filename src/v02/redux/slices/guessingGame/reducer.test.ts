@@ -1,6 +1,6 @@
 import { guessingGameReducer } from './reducer'
 import { makeGuess } from './actions'
-import { GuessingGameState } from './types'
+import { GuessingGameState } from './types/state'
 import { setCurrentSet, setCurrentTheme } from '../ui/actions'
 import { initialGuessingGameState } from './initialState'
 

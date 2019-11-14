@@ -1,6 +1,7 @@
-import { GuessingGameState, GuessingGameActionNames } from './types'
+import { GuessingGameState } from './types/state'
+import { GuessingGameActionNames } from './types/actionNames'
 import { initialGuessingGameState } from './initialState'
-import { UIActionNames } from '../ui/types'
+import { UIActionNames } from '../ui/types/actionNames'
 import { AppAction } from '../../types'
 import produce from 'immer'
 

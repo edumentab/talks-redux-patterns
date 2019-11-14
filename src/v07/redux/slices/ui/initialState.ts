@@ -1,4 +1,4 @@
-import { UIState } from './types'
+import { UIState } from './types/state'
 
 export const initialUIState: UIState = {
   currentSetId: null,

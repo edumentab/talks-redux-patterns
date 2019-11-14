@@ -1,6 +1,6 @@
 import { UIReducer } from './reducer'
 import { initialUIState } from './initialState'
-import { UIState } from './types'
+import { UIState } from './types/state'
 import { setCurrentTheme, setCurrentSet } from './actions'
 
 describe('the UIReducer', () => {

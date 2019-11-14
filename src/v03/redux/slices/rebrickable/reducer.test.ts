@@ -3,3 +3,4 @@ We split the tests for <span data-file-link="./reducer"><code>rebrickableReducer
 
 The same was done with <span data-file-link="../guessingGame/reducer.test"><code>guessingGameReducer.test</code></span> and <span data-file-link="../ui/reducer.test"><code>uiReducer.test</code></span>.
 */
+test.todo('This line prevents Jest from barfing at empty test file')

@@ -4,7 +4,7 @@ const { execSync, exec } = require('child_process')
 const { diffWords } = require('diff')
 const { matchPathToFile } = require('./matchPathToFile')
 
-const findRefacComment = /^\/* REFAC|EDITCOMMENT[\n\r]([\s\S]*?)\*\/[\s]*([\s\S]*)$/
+const findRefacComment = /^\/* REFAC|EDITCOMMENT[\n\r]([\s\S]*?)\*\/[\s]*(?:test.todo\([^)]*\);?)?([\s\S]*)$/
 
 function readSource(root) {
   const res = {}

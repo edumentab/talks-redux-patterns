@@ -1,4 +1,4 @@
-import { UIState } from './types'
+import { UIState } from './types/state'
 import { AppAction } from '../../types/appAction'
 import { initialUIState } from './initialState'
 import produce from 'immer'

@@ -3,3 +3,4 @@ The side effects in <span data-file-link="./loadThemesThunk"><code>loadThemesThu
 
 The same thing happened to <span data-file-link="./loadSetsForThemeThunk"><code>loadSetsForThemeThunk</code></span> and <span data-file-link="./loadSetsForThemeThunk.test"><code>loadSetsForThemeThunk.test</code></span>.
 */
+test.todo('This line prevents Jest from barfing at empty test file')

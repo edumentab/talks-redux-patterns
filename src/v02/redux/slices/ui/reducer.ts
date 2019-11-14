@@ -2,7 +2,9 @@
 For shallow state manipulations such as in this reducer, introducing Immer isn't that big a win. See the <span data-file-link="redux/slices/rebrickable/reducer.ts">Rebrickable reducer</span> for a bigger gain!
 */
 
-import { UIActionNames, UIState } from './types'
+import { UIActionNames } from './types/actionNames'
+import { UIState } from './types/state'
+
 import { AppAction } from '../../types/appAction'
 import { initialUIState } from './initialState'
 import produce from 'immer'
