@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+We have to slightly tweak `Consequence` to accommodate for the fact that <span data-file-link="./action"><code>Action</code></span> now takes `Dependencies` as a fourth generic parameter.
+
+The same tweak was made in <span data-file-link="./creator"><code>Creator</code></span> and <span data-file-link="../../types/appAction"><code>AppAction</code></span>.
+*/
+
 import { Action } from './action'
 
 export type ConsequenceGetterAPI<S extends object, D extends object> = {
