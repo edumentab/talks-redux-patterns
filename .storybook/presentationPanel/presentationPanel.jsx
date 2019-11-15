@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import { Markdown } from '../../.refac/components/markdown'
 import './presentationPanel.css'
 import { useAddonState } from '@storybook/api'
 import { ButtonGroup, Button } from '@blueprintjs/core'
@@ -34,19 +34,34 @@ const pages = [
   ['bye!', PresentationV99]
 ]
 
+export const PanelF = ({ active }) => (active ? <h1>Hello!</h1> : null)
+
 export const Panel = props => {
-  const [page, setPage] = useAddonState('edumentab/presentation', 0)
+  const { sourceData, brain } = props
+  const [codeState, setCodeState] = useAddonState('FOO', brain.getState().code)
+  return null
   useEffect(() => {
-    document.body.addEventListener(
-      'keydown',
-      e => e.key === 'q' && toggleFullScreen()
-    )
-  }, [])
-  if (!props.active) return null
+    brain.subscribe(brainState => {
+      setCodeState(brainState.code)
+    })
+  }, [brain, setCodeState])
+  console.log('CODESTATE', codeState)
+  return null
+  // useEffect(() => {
+  //   document.body.addEventListener(
+  //     'keydown',
+  //     e => e.key === 'q' && toggleFullScreen()
+  //   )
+  // }, [])
+  if (!codeState || !sourceData || !sourceData.presentation) return null
+  const content = sourceData.presentation[codeState.version]
+  console.log('CONTENT', content)
+  if (!props.active || !content) return null
   const [title, Page] = pages[page]
   return (
     <div className="presentationPanel bp3-ui-text">
-      <div style={{ transform: 'scale(0.7, 0.7)', transformOrigin: 'left' }}>
+      <Markdown onLinkClick={brain.clickLink} markdown={content} />
+      {/* <div style={{ transform: 'scale(0.7, 0.7)', transformOrigin: 'left' }}>
         <ButtonGroup>
           {pages.map(([title], n) => (
             <Button
@@ -60,7 +75,7 @@ export const Panel = props => {
       </div>
       <div className="pageContent">
         <Page />
-      </div>
+      </div> */}
     </div>
   )
 }

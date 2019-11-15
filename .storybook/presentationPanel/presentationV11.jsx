@@ -17,10 +17,6 @@ export const PresentationV11 = () => {
 
 * domain logic should live in the redux layer
 * again; the dumber the app is...
-
-### Note
-
-* Missing React tests would be simplified in this step
 `}
       />
     </div>

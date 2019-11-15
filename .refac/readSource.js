@@ -8,6 +8,7 @@ const findRefacComment = /^\/* REFAC|EDITCOMMENT[\n\r]([\s\S]*?)\*\/[\s]*(?:test
 
 function readSource(root) {
   const res = {}
+  const presentation = {}
 
   const versions = fs.readdirSync(root)
 
@@ -15,18 +16,22 @@ function readSource(root) {
     const dirs = [path.join(root, version)]
     while (dirs.length) {
       const dir = dirs.shift()
-      fs.readdirSync(dir).forEach(p => {
+      for (const p of fs.readdirSync(dir)) {
         const here = path.join(dir, p)
         if (fs.statSync(here).isDirectory()) {
           dirs.push(here)
         } else {
           const minusRoot = here.replace(path.join(root, version) + '/', '')
+          let file = fs.readFileSync(here).toString()
+          if (minusRoot === '_presentation.md') {
+            presentation[version] = file
+            continue
+          }
           res[minusRoot] = res[minusRoot] || {
             versions: {},
             name: minusRoot,
             raw: []
           }
-          let file = fs.readFileSync(here).toString()
           const commMatch = file.match(findRefacComment)
           if (commMatch) {
             file = commMatch[2]
@@ -53,7 +58,7 @@ function readSource(root) {
             res[minusRoot].versions[version].editComment = commMatch[1]
           }
         }
-      })
+      }
     }
   })
 
@@ -132,7 +137,8 @@ function readSource(root) {
   const sourceData = {
     files: res,
     versions,
-    root
+    root,
+    presentation
   }
   // final sweep to check for errors
   for (const file in res) {
