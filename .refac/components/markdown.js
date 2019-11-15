@@ -7,11 +7,9 @@ export const Markdown = props => {
   const { markdown, onLinkClick } = props
   const handleClick = useCallback(
     e => {
-      const link = e.target
-        .closest('[data-file-link]')
-        .getAttribute('data-file-link')
+      const link = e.target.closest('[data-file-link]')
       if (link) {
-        onLinkClick(link)
+        onLinkClick(link.getAttribute('data-file-link'))
       }
     },
     [onLinkClick]

@@ -11,6 +11,7 @@ import { Callout } from '@blueprintjs/core'
 
 const SourceCodePanel = props => {
   const { sourceData, brain } = props
+  //  const codeState = brain.getState().code
   const [codeState, setCodeState] = useState(brain.getState().code)
   useEffect(() => {
     brain.subscribe(brainState => {

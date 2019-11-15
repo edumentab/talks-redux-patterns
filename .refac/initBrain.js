@@ -39,7 +39,7 @@ export function initBrain(sourceData) {
 
   return {
     getState() {
-      return state
+      return map(state)
     },
     subscribe(fn) {
       subscribers.push(fn)

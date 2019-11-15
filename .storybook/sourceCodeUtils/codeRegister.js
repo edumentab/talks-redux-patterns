@@ -10,13 +10,16 @@ export default function registerCodePanel({ brain, sourceData, storybookAPI }) {
     match: ({ viewMode }) => viewMode === 'sourceCode',
     // eslint-disable-next-line react/display-name
     render: ({ active }) => {
-      return React.createElement(Panel, {
-        channel: addonAPI.getChannel(),
-        sourceData,
-        storybookAPI,
-        active,
-        brain
-      })
+      return active
+        ? React.createElement(Panel, {
+            key: Math.random(),
+            channel: addonAPI.getChannel(),
+            sourceData,
+            storybookAPI,
+            active,
+            brain
+          })
+        : null
     }
   })
 }

@@ -15,13 +15,17 @@ export default function registerPresentation({
     match: ({ viewMode }) => viewMode === 'presentation',
     // eslint-disable-next-line react/display-name
     render: ({ active }) => {
-      return React.createElement(Panel, {
-        channel: addonAPI.getChannel(),
-        storybookAPI,
-        brain,
-        sourceData,
-        active
-      })
+      console.log('Rendering presentationRegister')
+      return active
+        ? React.createElement(Panel, {
+            key: Math.random(),
+            channel: addonAPI.getChannel(),
+            storybookAPI,
+            brain,
+            sourceData,
+            active
+          })
+        : null
     }
   })
 }
