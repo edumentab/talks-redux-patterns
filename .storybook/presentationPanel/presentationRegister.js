@@ -2,7 +2,7 @@ import addonAPI, { types } from '@storybook/addons'
 import { Panel } from './presentationPanel'
 import React from 'react'
 
-addonAPI.register('edumentab/presentation', storybookAPI => {
+export default function registerPresentation({ brain, storybookAPI }) {
   const channel = addonAPI.getChannel()
   addonAPI.add('edumentab/presentation/panel', {
     type: types.TAB,
@@ -18,4 +18,4 @@ addonAPI.register('edumentab/presentation', storybookAPI => {
       })
     }
   })
-})
+}
