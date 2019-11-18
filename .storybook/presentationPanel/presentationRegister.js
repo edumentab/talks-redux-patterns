@@ -15,7 +15,6 @@ export default function registerPresentation({
     match: ({ viewMode }) => viewMode === 'presentation',
     // eslint-disable-next-line react/display-name
     render: ({ active }) => {
-      console.log('Rendering presentationRegister')
       return active
         ? React.createElement(Panel, {
             key: Math.random(),

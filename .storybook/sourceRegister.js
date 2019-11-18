@@ -48,7 +48,6 @@ addonAPI.register('edumentab/sourcecode', storybookAPI => {
         )
       })
     }
-    console.log('AT CHANGE', storybookAPI.getUrlState(), sourceData.code)
   })
   registerCodePanel({ brain, sourceData, storybookAPI })
   registerPresentationPanel({ brain, sourceData, storybookAPI })
