@@ -7,12 +7,48 @@ import sourceData from './sourceCodeUtils/_sourceCodes.json'
 
 export const brain = initBrain(sourceData)
 
+const versionNames = {
+  // TODO - read & set dynamically
+  v01: 'start',
+  v02: 'immer',
+  v03: 'test',
+  v04: 'factory',
+  v05: 'thunk',
+  v06: 'guard',
+  v07: 'deps',
+  v08: 'cons',
+  v09: 'sender',
+  v10: 'reducer',
+  v11: 'cons-ii'
+}
+
 addonAPI.register('edumentab/sourcecode', storybookAPI => {
   const channel = addonAPI.getChannel()
   // This emission was set up in the sourceDecorator
   channel.on('sourceCode/selectedStory', storyPath => {
     const newVersion = storyPath.match(/^src\/([^\/]*)\//)[1]
-    brain.clickLink(brain.getState().code.file ? newVersion : storyPath)
+    if (brain.getState().code.version !== newVersion) {
+      brain.clickLink(newVersion)
+    } else {
+      if (!brain.getState().code.file) {
+        brain.clickLink(storyPath)
+      }
+    }
+  })
+  brain.subscribe(sourceData => {
+    const storyVersion = storybookAPI
+      .getUrlState()
+      .storyId.match(/sclpg--(.{3})/)[1] // TODO - dynamic
+    const brainVersion = sourceData.code.version
+    if (storyVersion !== brainVersion) {
+      setTimeout(() => {
+        storybookAPI.selectStory(
+          // TODO - dynamic
+          `sclpg--${brainVersion}-${versionNames[brainVersion]}`
+        )
+      })
+    }
+    console.log('AT CHANGE', storybookAPI.getUrlState(), sourceData.code)
   })
   registerCodePanel({ brain, sourceData, storybookAPI })
   registerPresentationPanel({ brain, sourceData, storybookAPI })

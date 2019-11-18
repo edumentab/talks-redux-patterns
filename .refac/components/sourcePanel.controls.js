@@ -101,7 +101,7 @@ const SourceCodePanelControls = props => {
           <span>{filePath || 'Select a file'}</span>
         </Button>
       </Select>
-      <Select
+      {/* <Select
         key="versions"
         items={versions}
         itemRenderer={renderVersionItem}
@@ -113,7 +113,7 @@ const SourceCodePanelControls = props => {
           text={version || 'Select a version'}
           rightIcon="double-caret-vertical"
         />
-      </Select>
+      </Select> */}
     </ControlGroup>
   )
 }
