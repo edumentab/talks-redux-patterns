@@ -1,5 +1,5 @@
 /* REFAC|EDITCOMMENT
-The <span data-file-link="../../../lib/factory">factory</span> now expects us to pass in a `reducer`, so we move the corresponding code to here from the now-deleted <span data-file-link="../reducer"><code>rebrickableReducer</code></span>.
+The <span data-file-link="../../../lib/factory">factory</span> now expects us to pass in a <span data-file-link="../../../lib/types/reducer"><code>Reducer</code></span>, so we move the corresponding code to here from the now-deleted <span data-file-link="../reducer"><code>rebrickableReducer</code></span>.
 
 Note how we don't have to change the <span data-file-link="./loadSetsSuccess.test">tests</span> because of the refactor we made in <span data-file-link="v03/redux/slices/rebrickable/actions/loadSetsSuccess.test">version 3</span>.
 

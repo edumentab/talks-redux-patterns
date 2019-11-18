@@ -1,5 +1,5 @@
 /* REFAC|EDITCOMMENT
-The <span data-file-link="../factory"><code>factory</code></span> will now pass a `reducer` to the creators which they will use to populate the <span data-file-link="./action"><code>Actions</code></span>.
+The <span data-file-link="../factory"><code>factory</code></span> will now pass a <span data-file-link="./reducer"><code>Reducer</code></span> to the creators which they will use to populate the <span data-file-link="./action"><code>Actions</code></span>.
 
 These reducers are then consumed in the central <span data-file-link="../../rootReducer"><code>rootReducer</code></span>.
 */
