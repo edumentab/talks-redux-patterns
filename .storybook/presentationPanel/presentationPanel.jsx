@@ -3,6 +3,7 @@ import { Markdown } from '../../.refac/components/markdown'
 import './presentationPanel.css'
 import { useAddonState } from '@storybook/api'
 import { ButtonGroup, Button } from '@blueprintjs/core'
+import { navigate } from '@storybook/router'
 
 const firstPage = `<img src="/reduxbook.png" data-presentation-link="slides" />`
 const lastPage = `<img src="/bye.gif" data-presentation-link="slides" />
@@ -15,7 +16,7 @@ const lastPage = `<img src="/bye.gif" data-presentation-link="slides" />
 `
 
 export const Panel = props => {
-  const { sourceData, brain } = props
+  const { sourceData, brain, storybookAPI } = props
   const [codeState, setCodeState] = useState(brain.getState().code)
   const [presentationState, setPresentationState] = useAddonState(
     'code-presentaiton',
@@ -33,44 +34,36 @@ export const Panel = props => {
   const content =
     presentationState === 'splash'
       ? firstPage
-      : presentationState === 'bye' || presentationState === null
+      : presentationState === 'bye'
       ? lastPage
       : sourceData.presentation[codeState.version]
   const handleImgClick = e => {
     const presLink = e.target.getAttribute('data-presentation-link')
-    if (presLink !== presentationState) {
+    if (presLink && presLink !== presentationState) {
       setPresentationState(presLink)
     }
   }
-  const handleBtnClick = () => {
+  const handleByeBtnClick = () => {
     setPresentationState('bye')
   }
+  const handleLinkClick = link => {
+    const currentPath = storybookAPI.getUrlState().path
+    const newPath = currentPath.replace(/^\/[^\/]*\//, '/sourceCode/')
+    navigate(newPath)
+    brain.clickLink(link)
+  }
   if (!props.active || !content) return null
+
   return (
     <div className="presentationPanel bp3-ui-text" onClick={handleImgClick}>
       <Markdown
         key={content}
-        onLinkClick={brain.clickLink}
+        onLinkClick={handleLinkClick}
         markdown={content}
       />
-      {/* <div style={{ transform: 'scale(0.7, 0.7)', transformOrigin: 'left' }}>
-        <ButtonGroup>
-          {pages.map(([title], n) => (
-            <Button
-              key={n}
-              onClick={() => setPage(n)}
-              active={n === page}
-              text={title}
-            />
-          ))}
-        </ButtonGroup>
-      </div>
-      <div className="pageContent">
-        <Page />
-      </div> */}
       {codeState.version === 'v11' && presentationState === 'slides' && (
         <div style={{ paddingTop: '10px' }}>
-          <Button onClick={handleBtnClick} text="Bye!" />
+          <Button onClick={handleByeBtnClick} text="Bye!" />
         </div>
       )}
     </div>
