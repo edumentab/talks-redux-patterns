@@ -12,7 +12,6 @@ export default function registerCodePanel({ brain, sourceData, storybookAPI }) {
     render: ({ active }) => {
       return active
         ? React.createElement(Panel, {
-            key: Math.random(),
             channel: addonAPI.getChannel(),
             sourceData,
             storybookAPI,

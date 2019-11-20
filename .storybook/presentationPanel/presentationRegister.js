@@ -17,7 +17,6 @@ export default function registerPresentation({
     render: ({ active }) => {
       return active
         ? React.createElement(Panel, {
-            key: Math.random(),
             channel: addonAPI.getChannel(),
             storybookAPI,
             brain,

@@ -23,7 +23,7 @@ export const Panel = props => {
     'splash'
   )
   useEffect(() => {
-    const fn = d => setTimeout(() => setCodeState(d.code))
+    const fn = d => setCodeState(d.code)
     brain.subscribe(fn)
     return () => brain.unsubscribe(fn)
   })
