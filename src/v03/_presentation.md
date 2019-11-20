@@ -1,7 +1,8 @@
 ### In version 3 we...
 
 - remove reducer tests
-- instead test through store
+- add individual action creator tests
+- test through store instead of calling reducers
 
 ### Rationale
 
@@ -12,3 +13,8 @@
 ### Notes
 
 - all action-related change tests are colocated
+
+### File highlights
+
+- colocation gain in <span data-file-link="redux/slices/ui/actions/setCurrentTheme.test"><code>setCurrentTheme.test</code></span>
+- colocation gain in <span data-file-link="redux/slices/ui/actions/setCurrentSet.test"><code>setCurrentSet.test</code></span>
