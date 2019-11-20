@@ -18,3 +18,14 @@
 .presentationPanel img[data-presentation-link] {
   cursor: pointer;
 }
+
+.presentationBtnContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 210px;
+  margin-bottom: 10px;
+}
+
+.presentationBtnContainer button {
+  width: 100px;
+}

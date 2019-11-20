@@ -45,7 +45,7 @@ export function initBrain(sourceData) {
       subscribers.push(fn)
     },
     unsubscribe(fn) {
-      subscribers = subscribers.filter(_fn => _fb !== fn)
+      subscribers = subscribers.filter(_fn => _fn !== fn)
     },
     goForward() {
       state = produce(state, draft => {

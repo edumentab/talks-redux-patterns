@@ -14,9 +14,9 @@ const SourceCodePanel = props => {
   //  const codeState = brain.getState().code
   const [codeState, setCodeState] = useState(brain.getState().code)
   useEffect(() => {
-    brain.subscribe(brainState => {
-      setCodeState(brainState.code)
-    })
+    const fn = brainState => setCodeState(brainState.code)
+    brain.subscribe(fn)
+    return () => brain.unsubscribe(fn)
   }, [brain])
 
   const { file = '', version } = codeState || {}

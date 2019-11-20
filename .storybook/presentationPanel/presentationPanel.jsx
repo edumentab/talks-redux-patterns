@@ -22,7 +22,11 @@ export const Panel = props => {
     'code-presentaiton',
     'splash'
   )
-  brain.subscribe(d => setTimeout(() => setCodeState(d.code)))
+  useEffect(() => {
+    const fn = d => setTimeout(() => setCodeState(d.code))
+    brain.subscribe(fn)
+    return () => brain.unsubscribe(fn)
+  })
 
   // useEffect(() => {
   //   document.body.addEventListener(
@@ -37,15 +41,32 @@ export const Panel = props => {
       : presentationState === 'bye'
       ? lastPage
       : sourceData.presentation[codeState.version]
+  const curVersionIdx = sourceData.versions.findIndex(
+    v => v === codeState.version
+  )
   const handleImgClick = e => {
     const presLink = e.target.getAttribute('data-presentation-link')
     if (presLink && presLink !== presentationState) {
       setPresentationState(presLink)
     }
   }
-  const handleByeBtnClick = () => {
-    setPresentationState('bye')
-  }
+  const leftBtn = curVersionIdx ? (
+    <Button
+      onClick={() => brain.clickLink(sourceData.versions[curVersionIdx - 1])}
+      text="Previous"
+    />
+  ) : (
+    <Button onClick={() => setPresentationState('splash')} text="Hello!" />
+  )
+  const rightBtn =
+    curVersionIdx === sourceData.versions.length - 1 ? (
+      <Button onClick={() => setPresentationState('bye')} text="Bye!" />
+    ) : (
+      <Button
+        onClick={() => brain.clickLink(sourceData.versions[curVersionIdx + 1])}
+        text="Next"
+      />
+    )
   const handleLinkClick = link => {
     const currentPath = storybookAPI.getUrlState().path
     const newPath = currentPath.replace(/^\/[^\/]*\//, '/sourceCode/')
@@ -56,16 +77,17 @@ export const Panel = props => {
 
   return (
     <div className="presentationPanel bp3-ui-text" onClick={handleImgClick}>
+      {presentationState === 'slides' && (
+        <div className="presentationBtnContainer">
+          {leftBtn}
+          {rightBtn}
+        </div>
+      )}
       <Markdown
         key={content}
         onLinkClick={handleLinkClick}
         markdown={content}
       />
-      {codeState.version === 'v11' && presentationState === 'slides' && (
-        <div style={{ paddingTop: '10px' }}>
-          <Button onClick={handleByeBtnClick} text="Bye!" />
-        </div>
-      )}
     </div>
   )
 }
