@@ -1,5 +1,5 @@
 /* REFAC|EDITCOMMENT
-Instead of just a creator, our factory now returns a tuple containing a creator and a guard.
+Instead of just a <span data-file-link="./types/creator"><code>Creator</code></span>, our factory now returns a tuple containing a creator and a guard.
 
 The guard will return true if the given action is of the creator type, and also tell TypeScript about the action type.
 
