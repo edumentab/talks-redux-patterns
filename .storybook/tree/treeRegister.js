@@ -11,7 +11,7 @@ export default function registerPresentation({
 
   addonAPI.add('edumentab/tree/panel', {
     type: types.TAB,
-    title: 'tree',
+    title: 'files',
     route: ({ storyId }) => `/tree/${storyId}`,
     match: ({ viewMode }) => viewMode === 'tree',
     // eslint-disable-next-line react/display-name

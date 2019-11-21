@@ -50,7 +50,7 @@ addonAPI.register('edumentab/sourcecode', storybookAPI => {
       })
     }
   })
-  registerCodePanel({ brain, sourceData, storybookAPI })
   registerPresentationPanel({ brain, sourceData, storybookAPI })
+  registerCodePanel({ brain, sourceData, storybookAPI })
   registerTreePanel({ brain, sourceData, storybookAPI })
 })
