@@ -68,9 +68,11 @@ export const Panel = props => {
       />
     )
   const handleLinkClick = link => {
-    const currentPath = storybookAPI.getUrlState().path
-    const newPath = currentPath.replace(/^\/[^\/]*\//, '/sourceCode/')
-    navigate(newPath)
+    if (!sourceData.versions.includes(link)) {
+      const currentPath = storybookAPI.getUrlState().path
+      const newPath = currentPath.replace(/^\/[^\/]*\//, '/sourceCode/')
+      navigate(newPath)
+    }
     brain.clickLink(link)
   }
   if (!props.active || !content) return null
