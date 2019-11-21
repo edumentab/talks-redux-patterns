@@ -2,6 +2,7 @@ import addonAPI, { types } from '@storybook/addons'
 import React from 'react'
 import registerCodePanel from './sourceCodeUtils/codeRegister'
 import registerPresentationPanel from './presentationPanel/presentationRegister'
+import registerTreePanel from './tree/treeRegister'
 import { initBrain } from '../.refac/initBrain'
 import sourceData from './sourceCodeUtils/_sourceCodes.json'
 
@@ -51,4 +52,5 @@ addonAPI.register('edumentab/sourcecode', storybookAPI => {
   })
   registerCodePanel({ brain, sourceData, storybookAPI })
   registerPresentationPanel({ brain, sourceData, storybookAPI })
+  registerTreePanel({ brain, sourceData, storybookAPI })
 })

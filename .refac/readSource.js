@@ -139,12 +139,14 @@ function readSource(root) {
   for (const file in res) {
     const steps = file.split('/')
     let parent = { childNodes: tree }
+    let id = ''
     for (const [i, step] of Object.entries(steps)) {
-      let me = parent.childNodes.find(entry => entry.label === step)
+      id += (id ? '/' : '') + step
+      let me = parent.childNodes.find(entry => entry.id === id)
       if (!me) {
         me = {
           label: step,
-          id: steps.slice(0, i + 1).join('/')
+          id
         }
         parent.childNodes.push(me)
       }
