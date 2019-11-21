@@ -156,12 +156,31 @@ function readSource(root) {
       }
     }
   }
+  function harmoniseTree(tree) {
+    tree.sort((n1, n2) => {
+      const n1Count = (n1.childNodes && n1.childNodes.length) || 0
+      const n2Count = (n2.childNodes && n2.childNodes.length) || 0
+      return n1.childNodes && !n2.childNodes
+        ? -1
+        : n2.childNodes && !n1.childNodes
+        ? 1
+        : n1.label < n2.label
+        ? -1
+        : 1
+    })
+    for (const n of tree) {
+      if (n.childNodes) {
+        harmoniseTree(n.childNodes)
+      }
+    }
+    return tree
+  }
   const sourceData = {
     files: res,
     versions,
     root,
     presentation,
-    tree
+    tree: harmoniseTree(tree)
   }
   // final sweep to check for errors
   for (const file in res) {
