@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { Tree, Classes } from '@blueprintjs/core'
 import { StateIcon } from './stateIcon'
+import { navigate } from '@storybook/router'
 
-const SourceTree = ({ sourceData, brain }) => {
+const SourceTree = ({ sourceData, brain, storybookAPI }) => {
   const [codeState, setCodeState] = useState(brain.getState().code)
   const { file = '', version } = codeState || {}
 
@@ -61,6 +62,11 @@ const SourceTree = ({ sourceData, brain }) => {
         ...expanded,
         [node.id]: !expanded[node.id]
       })
+    } else {
+      brain.clickLink(node.id)
+      const currentPath = storybookAPI.getUrlState().path
+      const newPath = currentPath.replace(/^\/[^\/]*\//, '/sourceCode/')
+      navigate(newPath)
     }
   }
 
