@@ -134,11 +134,32 @@ function readSource(root) {
       })
     }
   }
+  // add tree structure
+  let tree = []
+  for (const file in res) {
+    const steps = file.split('/')
+    let parent = { childNodes: tree }
+    for (const [i, step] of Object.entries(steps)) {
+      let me = parent.childNodes.find(entry => entry.label === step)
+      if (!me) {
+        me = {
+          label: step,
+          id: steps.slice(0, i + 1).join('/')
+        }
+        parent.childNodes.push(me)
+      }
+      if (i < steps.length - 1) {
+        me.childNodes = me.childNodes || []
+        parent = me
+      }
+    }
+  }
   const sourceData = {
     files: res,
     versions,
     root,
-    presentation
+    presentation,
+    tree
   }
   // final sweep to check for errors
   for (const file in res) {
