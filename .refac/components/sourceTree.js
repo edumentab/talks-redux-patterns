@@ -3,6 +3,8 @@ import { Tree, Classes } from '@blueprintjs/core'
 import { StateIcon } from './stateIcon'
 import { navigate } from '@storybook/router'
 
+import './sourceTree.css'
+
 const SourceTree = ({ sourceData, brain, storybookAPI }) => {
   const [codeState, setCodeState] = useState(brain.getState().code)
   const { file = '', version } = codeState || {}
@@ -54,20 +56,20 @@ const SourceTree = ({ sourceData, brain, storybookAPI }) => {
         isExpanded: !!expanded[node.id]
       }),
       ...(!node.childNodes && {
-        label: ['deleted', 'nonexistent'].includes(
-          sourceData.files[node.id].versions[version].state
-        ) ? (
-          <span style={{ textDecoration: 'line-through', color: '#CCC' }}>
+        label: (
+          <span
+            className={`treefile-${sourceData.files[node.id].versions[version].state}`}
+          >
             {node.label}
           </span>
-        ) : (
-          node.label
         ),
         icon: 'document',
         secondaryLabel: (
-          <StateIcon
-            state={sourceData.files[node.id].versions[version].state}
-          />
+          <span className="treeFileIconHolder">
+            <StateIcon
+              state={sourceData.files[node.id].versions[version].state}
+            />
+          </span>
         ),
         isSelected: node.id === file
       })
