@@ -1,3 +1,7 @@
+---
+name: deps
+---
+
 ### In version 7 we...
 
 - introduce notion of "app dependencies"

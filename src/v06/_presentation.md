@@ -1,3 +1,7 @@
+---
+name: guard
+---
+
 ### In version 6 we...
 
 - make creator factories also return a guard

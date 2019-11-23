@@ -1,4 +1,5 @@
 const fs = require('fs')
+const fm = require('front-matter')
 const path = require('path')
 const { execSync, exec } = require('child_process')
 const { diffWords } = require('diff')
@@ -9,7 +10,7 @@ const findRefacComment = /^\/* REFAC|EDITCOMMENT[\n\r]([\s\S]*?)\*\/[\s]*(?:test
 function readSource(root) {
   const res = {}
   const presentation = {}
-
+  const versionInfo = {}
   const versions = fs.readdirSync(root)
 
   versions.forEach(version => {
@@ -24,7 +25,9 @@ function readSource(root) {
           const minusRoot = here.replace(path.join(root, version) + '/', '')
           let file = fs.readFileSync(here).toString()
           if (minusRoot === '_presentation.md') {
-            presentation[version] = file
+            const { body, attributes } = fm(file)
+            versionInfo[version] = attributes
+            presentation[version] = body
             continue
           }
           res[minusRoot] = res[minusRoot] || {
@@ -180,6 +183,7 @@ function readSource(root) {
     versions,
     root,
     presentation,
+    versionInfo,
     tree: harmoniseTree(tree)
   }
   // final sweep to check for errors

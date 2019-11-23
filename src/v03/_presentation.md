@@ -1,3 +1,7 @@
+---
+name: test
+---
+
 ### In version 3 we...
 
 - remove reducer tests

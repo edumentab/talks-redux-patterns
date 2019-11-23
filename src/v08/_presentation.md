@@ -1,3 +1,7 @@
+---
+name: cons
+---
+
 ### In version 8 we...
 
 - introduce notion of "consequences"

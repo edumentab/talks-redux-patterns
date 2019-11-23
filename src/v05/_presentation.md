@@ -1,3 +1,7 @@
+---
+name: thunk
+---
+
 ### In version 5 we...
 
 - introduce [thunks](https://github.com/reduxjs/redux-thunk)

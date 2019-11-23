@@ -1,3 +1,7 @@
+---
+name: factory
+---
+
 ### In version 4 we...
 
 - introduce the action creator factory

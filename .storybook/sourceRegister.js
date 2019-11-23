@@ -9,21 +9,6 @@ import { navigate } from '@storybook/router'
 
 export const brain = initBrain(sourceData)
 
-const versionNames = {
-  // TODO - read & set dynamically
-  v01: 'start',
-  v02: 'immer',
-  v03: 'test',
-  v04: 'factory',
-  v05: 'thunk',
-  v06: 'guard',
-  v07: 'deps',
-  v08: 'cons',
-  v09: 'sender',
-  v10: 'reducer',
-  v11: 'cons-ii'
-}
-
 addonAPI.register('edumentab/sourcecode', storybookAPI => {
   const channel = addonAPI.getChannel()
   // This emission was set up in the sourceDecorator
@@ -37,16 +22,19 @@ addonAPI.register('edumentab/sourcecode', storybookAPI => {
       }
     }
   })
-  brain.subscribe(sourceData => {
+  brain.subscribe(brainState => {
     const storyVersion = storybookAPI
       .getUrlState()
       .storyId.match(/sclpg--(.{3})/)[1] // TODO - dynamic
-    const brainVersion = sourceData.code.version
-    if (storyVersion !== brainVersion) {
+    const newVersion = brainState.code.version
+    if (storyVersion !== newVersion) {
+      const newVersionName = sourceData.versionInfo[newVersion].name
+        .toLowerCase()
+        .replace(/ /g, '-')
       setTimeout(() => {
         storybookAPI.selectStory(
           // TODO - dynamic
-          `sclpg--${brainVersion}-${versionNames[brainVersion]}`
+          `sclpg--${newVersion}-${newVersionName}`
         )
       })
     }

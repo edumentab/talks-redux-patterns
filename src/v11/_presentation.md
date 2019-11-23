@@ -1,3 +1,7 @@
+---
+name: cons ii
+---
+
 ### In version 11 we...
 
 - allow action consequences to be passed into factory

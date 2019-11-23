@@ -1,3 +1,7 @@
+---
+name: reducer
+---
+
 ### In version 10 we...
 
 - allow actions to have their own reducer

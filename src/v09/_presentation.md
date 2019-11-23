@@ -1,3 +1,7 @@
+---
+name: sender
+---
+
 ### In version 9 we...
 
 - allow actions to have "sender"

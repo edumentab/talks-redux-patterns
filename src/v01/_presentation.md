@@ -1,3 +1,7 @@
+---
+name: start
+---
+
 ### In version 1 we already have...
 
 - Full app-redux split

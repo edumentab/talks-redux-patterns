@@ -1,3 +1,7 @@
+---
+name: immer
+---
+
 ### In version 2 we...
 
 - Introduce [Immer](https://github.com/immerjs/immer)
