@@ -12,13 +12,12 @@ export const brain = initBrain(sourceData)
 addonAPI.register('edumentab/sourcecode', storybookAPI => {
   const channel = addonAPI.getChannel()
   // This emission was set up in the sourceDecorator
-  channel.on('sourceCode/selectedStory', storyPath => {
-    const newVersion = storyPath.match(/^src\/([^\/]*)\//)[1]
+  channel.on('sourceCode/selectedVersion', newVersion => {
     if (brain.getState().code.version !== newVersion) {
       brain.clickLink(newVersion)
     } else {
       if (!brain.getState().code.file) {
-        brain.clickLink(storyPath)
+        brain.clickLink(newVersion + '/app/App')
       }
     }
   })

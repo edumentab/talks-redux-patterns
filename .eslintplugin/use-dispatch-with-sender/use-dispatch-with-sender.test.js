@@ -49,7 +49,7 @@ ruleTester.run('use-dispatch-with-sender', rule, {
       errors: [wrongHookError]
     },
     {
-      code: 'useDispatchWithSender("gnarp")',
+      code: 'useDispatchWithSender("sclpg")',
       filename: 'blarp',
       errors: [wrongNameError]
     }

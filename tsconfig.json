@@ -5,6 +5,7 @@
     "downlevelIteration": true,
     "module": "es2015",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "newLine": "LF",
     "target": "es5",
     "outDir": ".out",

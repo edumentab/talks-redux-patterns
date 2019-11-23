@@ -22,3 +22,5 @@ export const App: FunctionComponent<AppProps> = ({ version }) => {
     </Provider>
   )
 }
+
+export default App
