@@ -3,7 +3,6 @@ import { Markdown } from '../../.refac/components/markdown'
 import './presentationPanel.css'
 import { useAddonState } from '@storybook/api'
 import { ButtonGroup, Button } from '@blueprintjs/core'
-import { navigate } from '@storybook/router'
 
 const firstPage = `<img src="/reduxbook.png" data-presentation-link="slides" />`
 const lastPage = `<img src="/bye.gif" data-presentation-link="slides" />
@@ -16,7 +15,7 @@ const lastPage = `<img src="/bye.gif" data-presentation-link="slides" />
 `
 
 export const Panel = props => {
-  const { sourceData, brain, storybookAPI } = props
+  const { sourceData, brain, goToPanel } = props
   const [codeState, setCodeState] = useState(brain.getState().code)
   const [presentationState, setPresentationState] = useAddonState(
     'code-presentaiton',
@@ -69,9 +68,7 @@ export const Panel = props => {
     )
   const handleLinkClick = link => {
     if (!sourceData.versions.includes(link)) {
-      const currentPath = storybookAPI.getUrlState().path
-      const newPath = currentPath.replace(/^\/[^\/]*\//, '/sourceCode/')
-      navigate(newPath)
+      goToPanel('sourceCode')
     }
     brain.clickLink(link)
   }

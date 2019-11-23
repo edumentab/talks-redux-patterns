@@ -2,11 +2,7 @@ import addonAPI, { types } from '@storybook/addons'
 import Tree from '../../.refac/components/sourceTree'
 import React from 'react'
 
-export default function registerPresentation({
-  brain,
-  storybookAPI,
-  sourceData
-}) {
+export default function registerPresentation({ brain, goToPanel, sourceData }) {
   const channel = addonAPI.getChannel()
 
   addonAPI.add('edumentab/tree/panel', {
@@ -21,7 +17,7 @@ export default function registerPresentation({
         : React.createElement(Tree, {
             channel: addonAPI.getChannel(),
             sourceData,
-            storybookAPI,
+            goToPanel,
             active,
             brain
           })

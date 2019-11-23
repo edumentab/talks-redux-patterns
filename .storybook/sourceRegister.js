@@ -5,6 +5,7 @@ import registerPresentationPanel from './presentationPanel/presentationRegister'
 import registerTreePanel from './tree/treeRegister'
 import { initBrain } from '../.refac/initBrain'
 import sourceData from './sourceCodeUtils/_sourceCodes.json'
+import { navigate } from '@storybook/router'
 
 export const brain = initBrain(sourceData)
 
@@ -50,7 +51,12 @@ addonAPI.register('edumentab/sourcecode', storybookAPI => {
       })
     }
   })
-  registerPresentationPanel({ brain, sourceData, storybookAPI })
-  registerCodePanel({ brain, sourceData, storybookAPI })
-  registerTreePanel({ brain, sourceData, storybookAPI })
+  function goToPanel(panel) {
+    const currentPath = storybookAPI.getUrlState().path
+    const newPath = currentPath.replace(/^\/[^\/]*\//, '/' + panel + '/')
+    navigate(newPath)
+  }
+  registerPresentationPanel({ brain, sourceData, goToPanel })
+  registerCodePanel({ brain, sourceData, goToPanel })
+  registerTreePanel({ brain, sourceData, goToPanel })
 })

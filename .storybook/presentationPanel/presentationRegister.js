@@ -2,11 +2,7 @@ import addonAPI, { types } from '@storybook/addons'
 import { Panel } from './presentationPanel'
 import React from 'react'
 
-export default function registerPresentation({
-  brain,
-  storybookAPI,
-  sourceData
-}) {
+export default function registerPresentation({ brain, goToPanel, sourceData }) {
   const channel = addonAPI.getChannel()
   addonAPI.add('edumentab/presentation/panel', {
     type: types.TAB,
@@ -18,7 +14,7 @@ export default function registerPresentation({
       return active
         ? React.createElement(Panel, {
             channel: addonAPI.getChannel(),
-            storybookAPI,
+            goToPanel,
             brain,
             sourceData,
             active
