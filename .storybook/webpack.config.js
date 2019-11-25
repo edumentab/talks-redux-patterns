@@ -59,8 +59,8 @@ module.exports = ({ config }) => {
     }
   )
 
-  // add plugin that collects the source code
-  config.plugins.push(new SourcePlugin())
+  // // add plugin that collects the source code
+  // config.plugins.push(new SourcePlugin())
 
   config.mode = 'development'
 

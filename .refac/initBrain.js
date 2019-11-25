@@ -27,6 +27,10 @@ export function initBrain(sourceData) {
         }
       ],
       idx: 0
+    },
+    redux: {
+      actions: [],
+      state: {}
     }
   }
 
@@ -38,6 +42,18 @@ export function initBrain(sourceData) {
   }
 
   return {
+    resetRedux(init) {
+      state = produce(state, draft => {
+        draft.redux = { actions: [], state: init }
+      })
+    },
+    logAction(action, newState) {
+      state = produce(state, draft => {
+        draft.redux.actions.push(action)
+        draft.redux.state = newState
+      })
+      notify()
+    },
     getState() {
       return map(state)
     },

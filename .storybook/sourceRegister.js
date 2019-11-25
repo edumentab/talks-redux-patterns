@@ -3,13 +3,12 @@ import React from 'react'
 import registerCodePanel from './sourceCodeUtils/codeRegister'
 import registerPresentationPanel from './presentationPanel/presentationRegister'
 import registerTreePanel from './tree/treeRegister'
-import { initBrain } from '../.refac/initBrain'
 import sourceData from './sourceCodeUtils/_sourceCodes.json'
 import { navigate } from '@storybook/router'
-
-export const brain = initBrain(sourceData)
+import getClientBrain from './getClientBrain'
 
 addonAPI.register('edumentab/sourcecode', storybookAPI => {
+  const brain = getClientBrain()
   const channel = addonAPI.getChannel()
   // This emission was set up in the sourceDecorator
   channel.on('sourceCode/selectedVersion', newVersion => {
@@ -22,11 +21,12 @@ addonAPI.register('edumentab/sourcecode', storybookAPI => {
     }
   })
   brain.subscribe(brainState => {
-    const storyVersion = storybookAPI
+    const currentVersion = storybookAPI
       .getUrlState()
       .storyId.match(/sclpg--(.{3})/)[1] // TODO - dynamic
     const newVersion = brainState.code.version
-    if (storyVersion !== newVersion) {
+    if (currentVersion !== newVersion) {
+      window._refacVersion = newVersion // for use in store facade
       const newVersionName = sourceData.versionInfo[newVersion].name
         .toLowerCase()
         .replace(/ /g, '-')
