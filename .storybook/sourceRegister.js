@@ -3,12 +3,13 @@ import React from 'react'
 import registerCodePanel from './sourceCodeUtils/codeRegister'
 import registerPresentationPanel from './presentationPanel/presentationRegister'
 import registerTreePanel from './tree/treeRegister'
+import registerReduxPanel from './redux/reduxRegister'
 import sourceData from './sourceCodeUtils/_sourceCodes.json'
 import { navigate } from '@storybook/router'
 import getClientBrain from './getClientBrain'
 
 addonAPI.register('edumentab/sourcecode', storybookAPI => {
-  const brain = getClientBrain()
+  const brain = getClientBrain('central registry')
   const channel = addonAPI.getChannel()
   // This emission was set up in the sourceDecorator
   channel.on('sourceCode/selectedVersion', newVersion => {
@@ -37,13 +38,15 @@ addonAPI.register('edumentab/sourcecode', storybookAPI => {
         )
       })
     }
+    channel.emit('sourceCode/redux', brainState.redux)
   })
   function goToPanel(panel) {
     const currentPath = storybookAPI.getUrlState().path
     const newPath = currentPath.replace(/^\/[^\/]*\//, '/' + panel + '/')
     navigate(newPath)
   }
-  registerPresentationPanel({ brain, sourceData, goToPanel })
-  registerCodePanel({ brain, sourceData, goToPanel })
-  registerTreePanel({ brain, sourceData, goToPanel })
+  registerPresentationPanel({ brain, sourceData, goToPanel, channel })
+  registerCodePanel({ brain, sourceData, goToPanel, channel })
+  registerTreePanel({ brain, sourceData, goToPanel, channel })
+  registerReduxPanel({ brain, sourceData, goToPanel, channel })
 })

@@ -1,26 +1,23 @@
-const PERSIST_STORES = false
+import addonAPI from '@storybook/addons'
 
-export function storeFacade(brain) {
+export function storeFacade() {
+  const channel = addonAPI.getChannel()
   const oldDevTools = window.__REDUX_DEVTOOLS_EXTENSION__
   const storeStore = {}
   const facade = nextCreator => {
     const creator = oldDevTools()(nextCreator)
     return (reducer, initState) => {
-      const curVersion = brain.getState().code.version
-      brain.resetRedux(initState)
-      if (curVersion && storeStore[curVersion] && PERSIST_STORES) {
-        return storeStore[curVersion]
-      }
+      const rState = { state: initState, actions: [] }
+      channel.emit('reduxstore', rState)
       const store = creator(reducer, initState)
       const origDispatch = store.dispatch.bind(store)
       store.dispatch = action => {
         origDispatch(action)
         const newState = store.getState()
-        brain.logAction(action, newState)
-        console.log('DISPATCHED ACTION', action)
-        console.log('NEW STATE', newState)
+        rState.state = newState
+        rState.actions.push(action)
+        channel.emit('reduxstore', rState)
       }
-      if (curVersion) storeStore[curVersion] = store
       return store
     }
   }
