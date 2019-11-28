@@ -17,7 +17,7 @@ export default function registerPresentation({ brain, goToPanel, sourceData }) {
       if (!addedTitle) {
         document.body.insertAdjacentHTML(
           'beforeend',
-          '<div class="presentation-title" style="background-image: url(\'./pattern2.png\')" />'
+          '<div class="presentation-title" alt="click to begin!" title="click to begin!" style="background-image: url(\'./pattern2.png\')" />'
         )
         document
           .querySelector('.presentation-title')

@@ -50,7 +50,7 @@ export const ThemeSelector: FunctionComponent = () => {
 
   return (
     <Select
-      items={themesArray.filter(t => t.name.match(query))}
+      items={themesArray.filter(t => t.name.toLowerCase().match(query.toLowerCase()))}
       itemRenderer={renderItem}
       onItemSelect={theme => dispatch(setCurrentTheme(theme.id))}
       popoverProps={{ minimal: true }}
