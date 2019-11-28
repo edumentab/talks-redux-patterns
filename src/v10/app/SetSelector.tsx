@@ -58,7 +58,9 @@ export const SetSelector: FunctionComponent = () => {
 
   return (
     <Select
-      items={setsArray.filter(t => t.name.toLowerCase().match(query.toLowerCase()))}
+      items={setsArray.filter(t =>
+        t.name.toLowerCase().match(query.toLowerCase())
+      )}
       itemRenderer={renderItem}
       onItemSelect={set => dispatch(setCurrentSet(set.set_num))}
       popoverProps={{ minimal: true }}
