@@ -14,5 +14,6 @@ name: start
 
 - Tiny example
 - Sharp corners
-- Not much code comments (yet)
+- Poor error handling
+- Not much code comments
 - Unorthodoxness (sorry not sorry)

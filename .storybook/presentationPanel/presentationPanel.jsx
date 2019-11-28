@@ -25,14 +25,8 @@ export const Panel = props => {
     const fn = d => setCodeState(d.code)
     brain.subscribe(fn)
     return () => brain.unsubscribe(fn)
-  })
+  }, [brain])
 
-  // useEffect(() => {
-  //   document.body.addEventListener(
-  //     'keydown',
-  //     e => e.key === 'q' && toggleFullScreen()
-  //   )
-  // }, [])
   if (!codeState || !sourceData || !sourceData.presentation) return null
   const content =
     presentationState === 'splash'
@@ -89,14 +83,4 @@ export const Panel = props => {
       />
     </div>
   )
-}
-
-function toggleFullScreen() {
-  if (!document.fullscreenElement) {
-    document.body.requestFullscreen()
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen()
-    }
-  }
 }
