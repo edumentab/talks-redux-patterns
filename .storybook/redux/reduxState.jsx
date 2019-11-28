@@ -17,12 +17,7 @@ const ReduxStateInner = props => {
       channel.removeListener('reduxstore', stateCallback)
     }
   }, [channel, setReduxState])
-  return (
-    <>
-      <h3>State:</h3>
-      {reduxState && <Json json={reduxState.state} />}
-    </>
-  )
+  return <>{(reduxState && <Json json={reduxState.state} />) || null}</>
 }
 
 export const ReduxState = memo(ReduxStateInner)

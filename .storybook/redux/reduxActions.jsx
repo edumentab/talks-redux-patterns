@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useState } from 'react'
+import React, { useEffect, memo, useMemo, useState } from 'react'
 import { useAddonState } from '@storybook/api'
 import { Json } from '../../.refac/components/json'
 
@@ -17,20 +17,18 @@ const ReduxActionsInner = props => {
       channel.removeListener('reduxstore', actionCallback)
     }
   }, [channel, setReduxState])
-  return (
-    <>
-      <h3>Actions:</h3>
-      <ul>
-        {reduxState &&
-          reduxState.actions &&
-          reduxState.actions.map((a, n) => (
-            <li key={n}>
-              <Json json={a} />
-            </li>
-          ))}
-      </ul>
-    </>
+  const actionsObj = useMemo(
+    () =>
+      (reduxState.actions &&
+        reduxState.actions.reduce(
+          (memo, a) => ({ ...memo, [a.aId + ') ' + a.type]: a }),
+          {}
+        )) ||
+      {},
+    [reduxState.actions]
   )
+  const list = useMemo(() => <Json json={actionsObj} />, [actionsObj])
+  return list
 }
 
 export const ReduxActions = memo(ReduxActionsInner)

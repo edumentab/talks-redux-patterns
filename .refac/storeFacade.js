@@ -8,10 +8,15 @@ export function storeFacade() {
     const creator = oldDevTools()(nextCreator)
     return (reducer, initState) => {
       const rState = { state: initState, actions: [] }
+      let aId = 0
       channel.emit('reduxstore', rState)
       const store = creator(reducer, initState)
       const origDispatch = store.dispatch.bind(store)
       store.dispatch = action => {
+        Object.defineProperty(action, 'aId', {
+          value: ++aId,
+          enumerable: true // otherwise doesn't survive channel journey
+        })
         origDispatch(action)
         const newState = store.getState()
         rState.state = newState
