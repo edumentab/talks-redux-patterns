@@ -1,3 +1,7 @@
+/* REFAC|EDITCOMMENT
+Since the code for loading sets for a theme has been moved from the <span data-file-link="../../../../app/Theme.tsx"><code>Theme</code></span> component into a <span data-file-link="./setCurrentTheme">consequence of <code>setCurrentTheme</code></span>, that logic is now tested here instead of in <span data-file-link="../../../../app/Theme.test.tsx"><code>Theme.test</code></span>.
+*/
+
 import { fixtureTheme, fixtureSet } from '../../../../services/rebrickable'
 import {
   loadThemesSuccess,

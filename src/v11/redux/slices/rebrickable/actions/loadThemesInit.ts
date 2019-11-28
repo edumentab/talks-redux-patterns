@@ -1,5 +1,5 @@
 /* REFAC|EDITCOMMENT
-In this version we pass the consequence definitions directly to the <span data-file-link="../../../lib/factory"><code>factory</code></span> instead of making <span data-file-link="../../../makeStore"><code>makeProdStore</code></span> collect them in a `consGetter`.
+In this version we pass the <span data-file-link="../../../lib/types/consequence"><code>Consequence</code></span> definitions directly to the <span data-file-link="../../../lib/factory"><code>factory</code></span> instead of making <span data-file-link="../../../makeStore"><code>makeProdStore</code></span> collect them in a `consGetter` (which also makes for a small tweak in <span data-file-link="./loadThemesInit.test">our tests</span>).
 
 The same thing happened in <span data-file-link="./loadSetsInit"><code>loadSetsInit</code></span>.
 */

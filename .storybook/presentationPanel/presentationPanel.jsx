@@ -12,6 +12,7 @@ const lastPage = `<img src="/bye.gif" data-presentation-link="slides" />
 * [https://blog.krawaller.se/](https://blog.krawaller.se/)
 * [https://edument.se/](https://edument.se/)
 * [david@krawaller.se](mailto:david@krawaller.se)
+* [https://www.npmjs.com/package/conduxion](https://www.npmjs.com/package/conduxion) (these patterns as an npm package by [Hugo Bove](https://github.com/huboneo))
 `
 
 export const Panel = props => {

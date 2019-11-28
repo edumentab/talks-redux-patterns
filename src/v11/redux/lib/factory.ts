@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+In this version we can pass <span data-file-link="./types/consequence"><code>Consequence</code></span> to the <code>Factory</code>. This vastly simplifies things in <span data-file-link="../makeStore"><code>makeStore</code></span> and the `consGetter`.
+
+Also we have to accommodate for the fact that <span data-file-link="./types/action"><code>Action</code></span> now takes `Dependencies` as a fourth generic parameter. The same tweak was made in <span data-file-link="./types/consequence"><code>Consequence</code></span> and <span data-file-link="../types/appAction"><code>AppAction</code></span>.
+*/
+
 import { ActionCreator } from './types/creator'
 import {
   Action,

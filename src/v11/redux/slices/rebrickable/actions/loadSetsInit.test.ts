@@ -1,3 +1,9 @@
+/* REFAC|EDITCOMMENT
+Since we pass the <span data-file-link="../../../lib/types/consequence"><code>Consequence</code></span> definitions directly to the <span data-file-link="../../../lib/factory"><code>factory</code></span>, we can pick up <span data-file-link="./loadSetsInit"><code>loadSetsInit.consequence</code></span> from the <span data-file-link="../../../lib/types/action"><code>Action</code></span> instead of importing it.
+
+The same thing happened in <span data-file-link="./loadThemesInit.test"><code>loadThemesInit.test</code></span>.
+*/
+
 import {
   loadSetsError,
   loadSetsInit,
