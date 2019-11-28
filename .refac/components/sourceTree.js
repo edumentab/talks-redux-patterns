@@ -21,30 +21,6 @@ const SourceTree = ({ sourceData, brain, storybookAPI, goToPanel }) => {
     return () => brain.unsubscribe(fn)
   }, [brain])
 
-  // fix chevrons not being clickable (which is weird and annoying)
-  useEffect(() => {
-    const listener = e => {
-      if (document.body.closest) {
-        const chevron =
-          e.target.closest('[data-icon="chevron-right"]') ||
-          e.target.closest('[icon="chevron-right"]')
-        if (chevron) {
-          const content = chevron.closest('.bp3-tree-node-content')
-          if (content) {
-            const label = content.querySelector('.bp3-tree-node-label')
-            if (label) {
-              label.click()
-            }
-          }
-        }
-      }
-    }
-    document.body.addEventListener('click', listener)
-    return () => {
-      document.body.removeEventListener('click', listener)
-    }
-  }, [])
-
   const translateNode = useMemo(() => {
     const _translate = node => ({
       id: node.id,

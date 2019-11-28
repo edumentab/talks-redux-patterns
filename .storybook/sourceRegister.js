@@ -11,6 +11,23 @@ import getClientBrain from './getClientBrain'
 addonAPI.register('edumentab/sourcecode', storybookAPI => {
   const brain = getClientBrain('central registry')
   const channel = addonAPI.getChannel()
+  // fix chevrons not being clickable (which is weird and annoying)
+  document.body.addEventListener('click', e => {
+    if (document.body.closest) {
+      const chevron =
+        e.target.closest('[data-icon="chevron-right"]') ||
+        e.target.closest('[icon="chevron-right"]')
+      if (chevron) {
+        const content = chevron.closest('.bp3-tree-node-content')
+        if (content) {
+          const label = content.querySelector('.bp3-tree-node-label')
+          if (label) {
+            label.click()
+          }
+        }
+      }
+    }
+  })
   // This emission was set up in the sourceDecorator
   channel.on('sourceCode/selectedVersion', newVersion => {
     if (brain.getState().code.version !== newVersion) {

@@ -48,29 +48,5 @@ export const Json = props => {
   )
   const tree = useMemo(() => jsonObj2kids(json, expanded), [json, expanded])
 
-  // fix chevrons not being clickable (which is weird and annoying)
-  useEffect(() => {
-    const listener = e => {
-      if (document.body.closest) {
-        const chevron =
-          e.target.closest('[data-icon="chevron-right"]') ||
-          e.target.closest('[icon="chevron-right"]')
-        if (chevron) {
-          const content = chevron.closest('.bp3-tree-node-content')
-          if (content) {
-            const label = content.querySelector('.bp3-tree-node-label')
-            if (label) {
-              label.click()
-            }
-          }
-        }
-      }
-    }
-    document.body.addEventListener('click', listener)
-    return () => {
-      document.body.removeEventListener('click', listener)
-    }
-  }, [])
-
   return <Tree contents={tree} onNodeClick={nodeClickHandler} />
 }
