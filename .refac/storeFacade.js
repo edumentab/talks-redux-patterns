@@ -5,7 +5,7 @@ export function storeFacade() {
   const oldDevTools = window.__REDUX_DEVTOOLS_EXTENSION__
   const storeStore = {}
   const facade = nextCreator => {
-    const creator = oldDevTools()(nextCreator)
+    const creator = (oldDevTools && oldDevTools()(nextCreator)) || nextCreator
     return (reducer, initState) => {
       const rState = { state: initState, actions: [] }
       let aId = 0
