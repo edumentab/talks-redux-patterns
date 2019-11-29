@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Nunito Sans', -apple-system, '.SFNSText-Regular',
+          'San Francisco', BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue',
+          Helvetica, Arial, sans-serif;
+        line-height: 1.4em;
+      }
+      p:not(:first-of-type)::first-line {
+        text-indent: 20px;
+      }
+      .container {
+        min-width: 350px;
+        max-width: 500px;
+        background-color: white;
+        padding: 0 14px;
+      }
+      h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        background-image: url('./pattern2.png');
+        background-size: 50px;
+        text-shadow: 0 0 5px white;
+        font-size: 36px;
+      }
+      .edulogo {
+        max-width: 200px;
+        margin: 0 auto;
+        margin-top: 40px;
+        display: block;
+        text-decoration: none;
+      }
+    </style>
+    <div class="container">
+      <h1>Redux Patterns</h1>
+      <p>
+        Are you among those who find that Redux a bit scary? Or you've made your
+        peace with it, but find it a bit verbose and boilerplaty? Maybe you just
+        want to be a bit inspired regarding how to use it and what's possible?
+        If the answer to any of these questions is yes, then this workshop is
+        for you!
+      </p>
+
+      <p>
+        In the workshop we will explore a small example React application that
+        consumes a backend API and uses Redux for state management. At the
+        outset the setup is rather orthodox, which gives you a chance to get up
+        to speed with a normal Redux setup.
+      </p>
+
+      <p>
+        Then, as the workshop progresses, you will be taken through a series of
+        increasingly unorthodox refactors. Our hope is that this will both
+        provide you with new ideas, and make you more comfortable with Redux in
+        general!
+      </p>
+      <p>
+        While Redux is the focus, we'll also get the opportunity to talk about
+        TypeScript concepts (to the extent that the audience so wishes). There
+        will also be a fair bit of discussion around unit testing.
+      </p>
+      <p>
+        The workshop can be a simple 1-2 hour lecture, or be extended to include
+        code-along. If you have a Redux codebase ripe for improving and/or
+        experimenting, it could also be rewarding to end the workshop with a
+        refactoring session where we help you employ the discussed patterns.
+      </p>
+      <p>
+        If this sounds interesting then you can peek at the material
+        <a href="https://redux-patterns.netlify.com/" target="_blank">here</a>,
+        and contact us at <a href="mailto:info@edument.se">info@edument.se</a>!
+      </p>
+      <a href="https://edument.se/en" target="_blank"
+        ><img class="edulogo" src="edument.svg"
+      /></a>
+    </div>
+  </body>
+</html>

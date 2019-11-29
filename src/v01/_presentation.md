@@ -2,6 +2,11 @@
 name: start
 ---
 
+### Goals for this workshop
+
+- Demonstrate some patterns...
+- ...and make `Redux` less scary in the process
+
 ### In version 1 we already have...
 
 - Full app-redux split
@@ -10,10 +15,8 @@ name: start
 - [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action)
 - action creators
 
-### Sorry for
+### Notes
 
-- Tiny example
-- Sharp corners
-- Poor error handling
-- Not much code comments
+- Tiny example, doesn't really need Redux
+- Poor error handling in UI (sorry)
 - Unorthodoxness (sorry not sorry)

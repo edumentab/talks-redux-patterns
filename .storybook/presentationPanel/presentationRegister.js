@@ -2,6 +2,8 @@ import addonAPI, { types } from '@storybook/addons'
 import { Panel } from './presentationPanel'
 import React from 'react'
 
+const INITIAL_SCREEN = false
+
 let addedTitle = false
 let addedFullscreenListener = false
 
@@ -14,7 +16,7 @@ export default function registerPresentation({ brain, goToPanel, sourceData }) {
     match: ({ viewMode }) => viewMode === 'presentation',
     // eslint-disable-next-line react/display-name
     render: ({ active }) => {
-      if (!addedTitle) {
+      if (!addedTitle && INITIAL_SCREEN) {
         document.body.insertAdjacentHTML(
           'beforeend',
           '<div class="presentation-title" alt="click to begin!" title="click to begin!" style="background-image: url(\'./pattern2.png\')" />'
