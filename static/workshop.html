@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <title>Redux workshop</title>
   </head>
   <body>
     <style>
@@ -20,9 +21,14 @@
       p:not(:first-of-type)::first-line {
         text-indent: 20px;
       }
+      @media (min-width: 500px) {
+        .container {
+          width: auto;
+          max-width: 500px;
+        }
+      }
       .container {
-        min-width: 350px;
-        max-width: 500px;
+        width: 100%;
         background-color: white;
         padding: 0 14px;
       }
@@ -37,6 +43,10 @@
         font-size: 38px;
         -webkit-text-stroke: 1px white;
       }
+      h1 + em {
+        text-align: center;
+        display: block;
+      }
       .edulogo {
         max-width: 200px;
         margin: 0 auto;
@@ -44,49 +54,162 @@
         display: block;
         text-decoration: none;
       }
+      fieldset {
+        margin-top: 1em;
+        border-radius: 5px;
+        border-color: mediumpurple;
+        border-style: solid;
+      }
+      label {
+        display: block;
+        cursor: pointer;
+      }
+      .opts {
+        display: flex;
+        justify-content: space-between;
+      }
+      .opts > :first-child {
+        flex-grow: 1;
+      }
+      .who {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 48px;
+      }
+
+      .dev,
+      .hr,
+      .iamdeveloper .neither,
+      .iamhr .neither {
+        position: absolute;
+        visibility: hidden;
+      }
+      .iamdeveloper .dev,
+      .iamhr .hr {
+        position: initial;
+        visibility: visible;
+      }
     </style>
     <div class="container">
       <h1>Redux Patterns</h1>
-      <p>
-        Are you among those who find that Redux a bit scary? Or you've made your
-        peace with it, but find it a bit verbose and boilerplaty? Maybe you just
-        want to be a bit inspired regarding how to use it and what's possible?
-        If the answer to any of these questions is yes, then this workshop is
-        for you!
-      </p>
+      <em>A workshop to find out how deep the Redux 🐰🕳️ hole goes!</em>
 
-      <p>
-        In the workshop we will explore a small example React application that
-        consumes a backend API and uses Redux for state management. At the
-        outset the setup is rather orthodox, which gives you a chance to get up
-        to speed with a normal Redux setup.
-      </p>
+      <fieldset>
+        <legend>I am a...</legend>
+        <div class="opts">
+          <div>
+            <label>
+              <input type="radio" name="group" value="developer" />
+              Developer
+            </label>
+            <label>
+              <input type="radio" name="group" value="hr" /> Purchaser
+            </label>
+          </div>
+          <div class="who">
+            <div class="dev">😎</div>
+            <div class="hr">🤑</div>
+            <div class="neither">🙂</div>
+          </div>
+        </div>
+      </fieldset>
 
-      <p>
-        Then, as the workshop progresses, you will be taken through a series of
-        increasingly unorthodox refactors. Our hope is that this will both
-        provide you with new ideas, and make you more comfortable with Redux in
-        general!
-      </p>
-      <p>
-        While Redux is the focus, we'll also get the opportunity to talk about
-        TypeScript concepts (to the extent that the audience so wishes). There
-        will also be a fair bit of discussion around unit testing.
-      </p>
-      <p>
-        The workshop can be a simple 1-2 hour lecture, or be extended to include
-        code-along. If you have a Redux codebase ripe for improving and/or
-        experimenting, it could also be rewarding to end the workshop with a
-        refactoring session where we help you employ the discussed patterns.
-      </p>
-      <p>
-        If this sounds interesting then you can peek at the material
-        <a href="https://redux-patterns.netlify.com/" target="_blank">here</a>,
-        and contact us at <a href="mailto:info@edument.se">info@edument.se</a>!
-      </p>
+      <p class="neither">Select a role to learn more about the workshop!</p>
+
+      <div class="dev">
+        <p>
+          Is Redux slightly scary? Or you've wrapped your brain around it, but
+          think of it as verbose and boilerplaty? Maybe you just want to get
+          inspired on how to use it and what's possible? If the answer to any of
+          these questions is yes, then this workshop/lecture is for you!
+        </p>
+
+        <p>
+          Together we will explore the source code of a small example React
+          application that consumes a backend API and uses Redux for state
+          management. At the outset the setup is rather orthodox, which gives
+          you a chance to get up to speed with a normal Redux setup.
+        </p>
+
+        <p>
+          Then, as the workshop progresses, you will be taken through a series
+          of increasingly unorthodox refactors. Our hope is that this will both
+          provide you with new ideas and make you more comfortable with Redux in
+          general!
+        </p>
+        <p>
+          Special care will be given to the question of where to put our side
+          effect code. We'll dissect
+          <a href="https://github.com/reduxjs/redux-thunk" target="_blank"
+            >Redux Thunk</a
+          >
+          to see how it works, and then kick it out in favour of a better
+          pattern (without having to go 🍌 with
+          <a href="https://redux-observable.js.org/" target="_blank"
+            >Redux Observables</a
+          >
+          or
+          <a href="https://redux-saga.js.org/" target="_blank">Redux Sagas</a>.
+        </p>
+        <p>
+          While Redux is the focus, we'll also get the opportunity to talk about
+          TypeScript concepts (to the extent that the audience so wishes). There
+          will also be a fair bit of discussion around unit testing.
+        </p>
+        <p>
+          Sounds interesting? Tell whoever holds the 💰 to contact us at
+          <a
+            href="mailto:info@edument.se?subject=Redux Workshop"
+            target="_blank"
+            >info@edument.se</a
+          >! And, if you're curious, have a look at the material
+          <a
+            href="https://redux-patterns.netlify.com/?path=/presentation/sclpg--v01-start"
+            target="_blank"
+            >here</a
+          >.
+        </p>
+      </div>
+
+      <div class="hr">
+        <p>
+          This is an in-depth lecture/workshop for senior and knowledge-hungry
+          JavaScript developers. The primary audience is teams that already use
+          Redux and want to better themselves, but the contents can be tailored
+          to also give a Redux introduction if needed.
+        </p>
+        <p>
+          The minimal form is a ~2 hour lecture. To make for a more practical
+          experience the lecture can be followed by a refactoring session where
+          we help the team apply the patterns they've learned in their Redux
+          codebase. This can extend the workshop all the way up to a full day.
+        </p>
+        <p>
+          Not being as formal as one of our regular courses, the Redux workshop
+          works very well as an inspirational evening seminar, or as an
+          "exploration day" serving both as entertainment and competence
+          development.
+        </p>
+        <p>
+          If this sounds like a good fit for your team, please contact us at
+          <a href="mailto:info@edument.se?subject=Redux Workshop"
+            >info@edument.se</a
+          >!
+        </p>
+      </div>
+
       <a href="https://edument.se/en" target="_blank"
         ><img class="edulogo" src="edument.svg"
       /></a>
     </div>
+    <script>
+      document.querySelectorAll('[name="group"]').forEach(input =>
+        input.addEventListener('click', e => {
+          document.body.classList.remove('iamdeveloper', 'iamhr')
+          document.body.classList.add(`iam${e.target.getAttribute('value')}`)
+        })
+      )
+    </script>
   </body>
 </html>
