@@ -1,3 +1,4 @@
+const detypescriptify = require('./detypescriptify')
 const fs = require('fs')
 const fm = require('front-matter')
 const path = require('path')
@@ -33,17 +34,26 @@ function readSource(root) {
           res[minusRoot] = res[minusRoot] || {
             versions: {},
             name: minusRoot,
-            raw: []
+            raw: [],
+            parsed: []
           }
           const commMatch = file.match(findRefacComment)
           if (commMatch) {
             file = commMatch[2]
           }
-          file = file.replace(/^\W*/g, '')
+          file = file.replace(/^[ \n\r]*/g, '')
           if (file) {
             const idx = res[minusRoot].raw.indexOf(file)
             if (idx === -1) {
               res[minusRoot].raw.push(file)
+              if (p.match(/\.tsx?$/)) {
+                res[minusRoot].parsed.push(
+                  detypescriptify({
+                    code: file,
+                    filename: p
+                  })
+                )
+              }
               res[minusRoot].versions[version] = {
                 which: res[minusRoot].raw.length - 1
               }
@@ -67,8 +77,8 @@ function readSource(root) {
 
   for (const file in res) {
     const f = res[file]
-    const potentialTest =
-      file.match(/\.tsx?$/) && file.replace(/\.ts(x?)$/, '.test.ts$1')
+    const isTS = Boolean(file.match(/\.tsx?$/))
+    const potentialTest = isTS && file.replace(/\.ts(x?)$/, '.test.ts$1')
     if (res[potentialTest]) {
       f.testedIn = potentialTest
     }
