@@ -49,23 +49,19 @@
         width: 100%;
         background-color: white;
         padding: 0 14px;
+        position: relative;
       }
-      h1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100px;
-        background-image: url('./pattern2.png');
-        background-size: 50px;
-        text-shadow: 0 0 5px white;
-        font-size: 38px;
-        -webkit-text-stroke: 1px white;
+      img.book {
+        max-width: 400px;
+        display: block;
+        margin: 0 auto;
       }
-      h1 + em {
+      .subtitle {
         text-align: center;
+        margin-top: 1em;
         display: block;
       }
-      .edulogo {
+      img.edulogo {
         max-width: 200px;
         margin: 0 auto;
         margin-top: 40px;
@@ -110,8 +106,15 @@
       }
     </style>
     <div class="container">
-      <h1>Redux Patterns</h1>
-      <em>A workshop to find out how deep the Redux 🐰🕳️ hole goes!</em>
+      <img
+        class="book"
+        src="reduxbook.png"
+        title="Redux Patterns workshop"
+        alt="Redux Patterns workshop"
+      />
+      <em class="subtitle"
+        >A workshop to find out how deep the Redux 🐰🕳️ hole goes!</em
+      >
 
       <fieldset>
         <legend>I am a...</legend>
@@ -133,7 +136,9 @@
         </div>
       </fieldset>
 
-      <p class="neither">Select a role to learn more about the workshop!</p>
+      <p class="neither">
+        Select a role to learn more about the Redux Patterns workshop!
+      </p>
 
       <div class="dev">
         <p>
