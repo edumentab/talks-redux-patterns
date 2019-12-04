@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react'
-
+import React, { useCallback, Fragment } from 'react'
+import { useAddonState } from '@storybook/api'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import createElement from 'react-syntax-highlighter/dist/create-element'
@@ -7,12 +7,14 @@ import classNames from 'classnames'
 import { diffWords } from 'diff'
 
 const HighlighterInner = props => {
+  const [showParsed] = useAddonState('code-show-parsed', false)
   const { fileInfo, language = 'typescript', version, onLinkClick } = props
   const fileVersion = (fileInfo && fileInfo.versions[version]) || {}
   const code =
     ((fileInfo && fileInfo.raw) || [])[
       fileVersion.state === 'deleted' ? fileVersion.previous : fileVersion.which
     ] || ''
+  const nonTS = ((fileInfo && fileInfo.parsed) || [])[fileVersion.which]
   const diff =
     ['edited', 'pruned', 'grown', 'replaced'].includes(fileVersion.state) &&
     diffWords(fileInfo.raw[fileVersion.previous], code)
@@ -62,7 +64,7 @@ const HighlighterInner = props => {
             })
           }}
         >
-          {code}
+          {(showParsed && nonTS) || code}
         </SyntaxHighlighter>
       </div>
       {diff && (

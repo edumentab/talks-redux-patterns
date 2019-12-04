@@ -135,3 +135,22 @@
   overflow: auto;
   font-size: 0.8em;
 }
+
+.parsebtn {
+  padding: 0 5px;
+}
+
+.parsebtn img {
+  height: 20px;
+  width: 20px;
+  transition: transform 0.2s ease;
+}
+
+.parsebtn.js img.tsimg,
+.parsebtn.ts img.jsimg {
+  transform: scale(0.7, 0.7);
+}
+
+.parsebtn img.tsimg {
+  margin-right: 3px !important;
+}

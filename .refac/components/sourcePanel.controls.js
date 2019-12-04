@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import classNames from 'classnames'
+import { useAddonState } from '@storybook/api'
 
 import {
   MenuItem,
@@ -15,11 +16,15 @@ import { StateIcon } from './stateIcon'
 import { makeFileList } from '../makeFileList'
 
 const SourceCodePanelControls = props => {
+  const [showParsed, setShowParsed] = useAddonState('code-show-parsed', false)
   const { codeState, brain, sourceData, versions } = props
   const files = Object.values(sourceData.files)
   let { file: filePath, version } = codeState || {}
 
   const file = files.filter(f => f.name === filePath)[0]
+  const fileI = file && file.versions[version]
+  const code = fileI && file.raw[fileI.which]
+  const ts = fileI && file.parsed[fileI.which]
 
   const [query, setQuery] = useState('')
 
@@ -74,6 +79,11 @@ const SourceCodePanelControls = props => {
     [version, file]
   )
 
+  const handleParsedClick = useCallback(() => setShowParsed(!showParsed), [
+    showParsed,
+    setShowParsed
+  ])
+
   return (
     <ControlGroup>
       <Button
@@ -101,19 +111,18 @@ const SourceCodePanelControls = props => {
           <span>{filePath || 'Select a file'}</span>
         </Button>
       </Select>
-      {/* <Select
-        key="versions"
-        items={versions}
-        itemRenderer={renderVersionItem}
-        onItemSelect={brain.clickLink}
-        popoverProps={{ minimal: true }}
-        filterable={false}
-      >
-        <Button
-          text={version || 'Select a version'}
-          rightIcon="double-caret-vertical"
-        />
-      </Select> */}
+      {ts && ts !== code && (
+        <button
+          className={classNames(
+            'bp3-button parsebtn',
+            showParsed ? 'js' : 'ts'
+          )}
+          onClick={handleParsedClick}
+        >
+          <img className="tsimg" src="tslogo.png" />
+          <img className="jsimg" src="jslogo.png" />
+        </button>
+      )}
     </ControlGroup>
   )
 }
